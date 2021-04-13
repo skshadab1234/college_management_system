@@ -1,11 +1,11 @@
 <?php
 date_default_timezone_set("Asia/Calcutta");
 require 'session.php';
-
 if (!isset($_SESSION['STD_ID'])) {
   header("location:login");
 }
 $full_name_student = $student_login['firstname'].' '.$student_login['last_name'];
+
 ?>
 
 <!doctype html>
@@ -34,8 +34,8 @@ $full_name_student = $student_login['firstname'].' '.$student_login['last_name']
 
 <body>
     <div class="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar fixed-footer">
-        <div class="app-header header-shadow bg-premium-dark header-text-light">
-            <div class="app-header__logo">
+        <div class="app-header header-shadow "> <!-- bg-premium-dark header-text-light -->
+             <div class="app-header__logo">
                 <div class="logo-src" style="background:url(<?php echo FRONT_GLOBAL_IMAGE."logo.jpg"; ?>);background-size: cover;width: 43px;height: 50px"></div>
                 <div class="header__pane ml-auto">
                     <div>
@@ -79,9 +79,9 @@ $full_name_student = $student_login['firstname'].' '.$student_login['last_name']
                 <div class="app-header-right">
                     <div class="header-dots">
                     <div class="widget-content">
-                        <div class="widget-content-left  ml-3 header-user-info" style="color: rgba(255,255,255,0.8)">
+                        <div class="widget-content-left  ml-3 header-user-info" style="color: #313131"> <!-- rgba(255,255,255,0.8) -->
                             <div class="widget-heading" > <?= date('M d,Y') ?></div>
-                            <div class="widget-subheading" id="currentTime"></div>
+                            <div class="widget-subheading" id="currentTime" ></div>
                         </div>      
                     </div>
                                         
@@ -550,7 +550,7 @@ $full_name_student = $student_login['firstname'].' '.$student_login['last_name']
             </div>
         </div>     
           <div class="app-main">
-            <div class="app-sidebar sidebar-shadow bg-slick-carbon sidebar-text-light">
+            <div class="app-sidebar sidebar-shadow "> <!-- bg-slick-carbon sidebar-text-light -->
                 <div class="app-header__logo">
                     <div class="logo-src"></div>
                     <div class="header__pane ml-auto">
