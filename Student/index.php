@@ -1,7 +1,8 @@
 <?php
    require 'studets_resuse_files/header.php';
    $fees_details = student_fees_details($student_login['Admission_NO'])[0];
-   
+
+    
    ?>
 <style type="text/css">
    .live_style{
@@ -134,8 +135,7 @@
          </div>
       </div>
       <div class="row">
-         <div class="col-sm-12 col-lg-6">
-            <?php
+        <?php
                 $dayOfWeek = date('l'); 
                 if($dayOfWeek == 'Saturday' || $dayOfWeek == 'Sunday') { 
                     $display_none ='style="display:none"';    
@@ -143,14 +143,16 @@
                     $display_none = '';
                 }
             ?>
-            <div class="main-card mb-3 card" <?= $display_none ?>>
+         <div class="col-12 col-sm-12 col-lg-6" <?= $display_none ?>>
+            
+            <div class="main-card mb-3 card" >
                <div class="card-body">
                   <div class="row">
                       <div class="col-sm-6">
                           <h5 class="card-title">Today Section to attempt</h5>
                       </div>
                       <div class="col-sm-6">
-                         <h5 class="text-right"><?= date('M d,Y') ?></h5>
+                         <h5 class="card-title text-right" style="font-size: 18px;position: relative;top: -10px"><?= date('M d, Y') ?></h5>
                          <?php
                          $dayOfWeek = date('l'); 
                          if($dayOfWeek == 'Saturday' || $dayOfWeek == 'Sunday') { 
@@ -161,46 +163,62 @@
                   <div class="scroll-area">
                      <div class="scrollbar-container ps ps--active-y">
                         <div class="vertical-timeline vertical-timeline--animate vertical-timeline--one-column">
-                           <div class="vertical-timeline-item vertical-timeline-element">
-                              <div>
-                                 <!-- <span class="vertical-timeline-element-icon bounce-in">
-                                 <i class="badge badge-dot badge-dot-xl badge-danger live_style"> </i>
-                                 </span> -->
-                                 <div class="vertical-timeline-element-content bounce-in">
-                                    <h4 class="timeline-title">All Hands Meeting</h4>
-                                    <p>Lorem ipsum dolor sic amet, today at 
-                                       <a href="javascript:void(0);">12:00 PM</a>
-                                    </p>
+                           
+                           <?php
+                           $student_timetable = array_filter(get_timetable_for_specific_department($student_login['BRANCH'],$student_login['semester'],date("l")));
+
+                            foreach ($student_timetable as $key => $value) {
+                                $current_time = date('h:i a');
+                                $startTime = $value['Lecture_Start_at'];
+                                $EndTime = $value['Lecture_end_at'];
+                                $date1 = DateTime::createFromFormat('h:i a', $current_time);
+                                $date2 = DateTime::createFromFormat('h:i a', $startTime);
+                                $date3 = DateTime::createFromFormat('h:i a', $EndTime);
+                                if ($date1 > $date2 && $date1 < $date3)
+                                {
+                                   $check_the_session_icon = '<span class="vertical-timeline-element-icon bounce-in">
+                                         <i class="badge badge-dot badge-dot-xl badge-danger live_style "> </i>
+                                         </span>';
+                                    $rand = rand(111111,999999);
+                                   $subhead_message = '<p>Join now <a href="javascript:void(0)" id="redirecttolecture"" >Link goes here</a>
+                                   <input type="hidden" id="randomNumbers" value='.$rand.'> <br><input type="hidden" id="fid" value='.$value['Teacher_id'].'><input type="hidden" id="lecture_time" value='.$value['Lecture_Start_at'].'> <input type="hidden" id="lecture_end_time" value='.$value['Lecture_end_at'].'>
+                                   <textarea id="lecturename" style="display:none">'.$value['Lecture_Name'].'</textarea>';
+                                }else{
+
+
+                                    if ($date1 < $date2) {
+                                        $check_the_session_icon = '<span class="vertical-timeline-element-icon bounce-in">
+                                         <i class="badge badge-dot badge-dot-xl badge-warning"> </i>
+                                         </span>';   
+                                         $subhead_message = '';
+                                    }else{
+                                    // here we have to check wheher the student has attend lecture or not
+
+                                        $check_the_session_icon = '<span class="vertical-timeline-element-icon bounce-in">
+                                                <i class="metismenu-icon pe-7s-close-circle text-danger" style="font-size: 18px;background: #fff;"></i>
+                                            </span>';
+                                        $subhead_message = '<p class="text-danger">You are absent today for this lecture</p>';
+                                    }
                                     
-                                    <span class="vertical-timeline-element-date">10:30 PM</span>
-                                 </div>
-                              </div>
-                           </div>
-                           <hr>
-                           <div class="vertical-timeline-item vertical-timeline-element">
-                              <div style="position: relative;left: 0">
-<!--<span class="vertical-timeline-element-icon bounce-in">
-<i class="metismenu-icon pe-7s-check text-success" style="font-size: 18px;background: #fff;"></i>
-</span>    -->     <div class="vertical-timeline-element-content bounce-in">
-                                    <p>Another meeting today</p>
-                                    <p>Yet another one</p>
-                                    <span class="vertical-timeline-element-date">12:25 PM</span>
-                                 </div>
-                              </div>
-                           </div>
-                           <hr>
+                                    
+                                }
+
+                            ?>
+                            
                            <div class="vertical-timeline-item vertical-timeline-element">
                               <div>
-                                <!--  <span class="vertical-timeline-element-icon bounce-in">
-                                 <i class="metismenu-icon pe-7s-close-circle text-danger" style="font-size: 18px;background: #fff;"></i>
-                                 </span>
-                                 --> <div class="vertical-timeline-element-content bounce-in">
-                                    <p>Another meeting today</p>
-                                    <p>Yet another one</p>
-                                    <span class="vertical-timeline-element-date">12:25 PM</span>
+                                 <?= $check_the_session_icon ?>
+                                 <div class="vertical-timeline-element-content bounce-in">
+                                    <h4 class="timeline-title"><?= $value['Lecture_Name'] ?></h4>
+                                    <?= $subhead_message ?>
+                                    </p>
+                                    <span class="vertical-timeline-element-date"><?= ucwords($value['Lecture_Start_at']) ?></span>
                                  </div>
                               </div>
                            </div>
+                           <?php
+                           }
+                           ?>
                         </div>
                      </div>
                   </div>
@@ -254,80 +272,35 @@
                </div>
             </div>
          </div>
+
+         <div class="col-12 col-sm-12 col-lg-6">
+             sasas
+         </div>  
       </div>
-      <div class="app-wrapper-footer">
-         <div class="app-footer">
-            <div class="app-footer__inner">
-               <div class="app-footer-right">
-                  <ul class="header-megamenu nav">
-                     <li class="nav-item">
-                        <a data-placement="top" rel="popover-focus" data-offset="300" data-toggle="popover-custom" class="nav-link">
-                        Footer Menu
-                        <i class="fa fa-angle-up ml-2 opacity-8"></i>
-                        </a>
-                        <div class="rm-max-width rm-pointers">
-                           <div class="d-none popover-custom-content">
-                              <div class="dropdown-mega-menu dropdown-mega-menu-sm">
-                                 <div class="grid-menu grid-menu-2col">
-                                    <div class="no-gutters row">
-                                       <div class="col-sm-6 col-xl-6">
-                                          <ul class="nav flex-column">
-                                             <li class="nav-item-header nav-item">Overview</li>
-                                             <li class="nav-item">
-                                                <a class="nav-link">
-                                                <i class="nav-link-icon lnr-inbox"></i>
-                                                <span>Contacts</span>
-                                                </a>
-                                             </li>
-                                             <li class="nav-item">
-                                                <a class="nav-link">
-                                                   <i class="nav-link-icon lnr-book"></i>
-                                                   <span>Incidents</span>
-                                                   <div class="ml-auto badge badge-pill badge-danger">5</div>
-                                                </a>
-                                             </li>
-                                             <li class="nav-item">
-                                                <a class="nav-link">
-                                                <i class="nav-link-icon lnr-picture"></i>
-                                                <span>Companies</span>
-                                                </a>
-                                             </li>
-                                             <li class="nav-item">
-                                                <a disabled="" class="nav-link disabled">
-                                                <i class="nav-link-icon lnr-file-empty"></i>
-                                                <span>Dashboards</span>
-                                                </a>
-                                             </li>
-                                          </ul>
-                                       </div>
-                                       <div class="col-sm-6 col-xl-6">
-                                          <ul class="nav flex-column">
-                                             <li class="nav-item-header nav-item">Sales &amp; Marketing</li>
-                                             <li class="nav-item"><a class="nav-link">Queues</a></li>
-                                             <li class="nav-item"><a class="nav-link">Resource Groups</a></li>
-                                             <li class="nav-item">
-                                                <a class="nav-link">
-                                                   Goal Metrics
-                                                   <div class="ml-auto badge badge-warning">3</div>
-                                                </a>
-                                             </li>
-                                             <li class="nav-item"><a class="nav-link">Campaigns</a></li>
-                                          </ul>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </li>
-                  </ul>
-               </div>
-            </div>
-         </div>
-      </div>
-   </div>
-</div>
-<?php
+      
+      <script type="text/javascript">
+          $(document).ready( () =>{
+            $("#redirecttolecture").click(() => { 
+                var randomNumbers = $("#randomNumbers").val();
+                var subject_name  = $("#lecturename").val();
+                var fid = $("#fid").val();
+                var lecture_time = $("#lecture_time").val();
+                var lecture_end_time = $("#lecture_end_time").val();
+
+                $.ajax({
+                    url: 'attendance_check.php',
+                    method:'post',
+                    data: {randomNumbers:randomNumbers, subject_name:subject_name, fid:fid, lecture_time:lecture_time, lecture_end_time:lecture_end_time},
+                    success: function(data) {
+                        console.log(data);
+                    }
+                });
+
+            });
+          });
+      </script>
+<!-- https://meet.google.com/mhz-qxtk-tdb      -->
+    <?php
    require 'studets_resuse_files/footer.php';
    ?>
 

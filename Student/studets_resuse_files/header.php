@@ -1,5 +1,4 @@
 <?php
-date_default_timezone_set("Asia/Calcutta");
 require 'session.php';
 if (!isset($_SESSION['STD_ID'])) {
   header("location:login");
@@ -33,7 +32,7 @@ $full_name_student = $student_login['firstname'].' '.$student_login['last_name']
 
 
 <body>
-    <div class="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar fixed-footer">
+    <div class="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar">
         <div class="app-header header-shadow "> <!-- bg-premium-dark header-text-light -->
              <div class="app-header__logo">
                 <div class="logo-src" style="background:url(<?php echo FRONT_GLOBAL_IMAGE."logo.jpg"; ?>);background-size: cover;width: 43px;height: 50px"></div>
@@ -585,7 +584,7 @@ $full_name_student = $student_login['firstname'].' '.$student_login['last_name']
                     <div class="app-sidebar__inner">
                         <ul class="vertical-nav-menu">
                             <li class="app-sidebar__heading">Menu</li>
-                            <li  class="mt-3">
+                            <li  class="mt-3 mm-active">
                                 <a href="#">
                                     <i class="metismenu-icon pe-7s-rocket"></i>Dashboards
                                     <!-- <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i> -->
@@ -651,7 +650,7 @@ $full_name_student = $student_login['firstname'].' '.$student_login['last_name']
                             </li>
 
 
-                            <li  class="mm-active mt-3">
+                            <li  class=" mt-3">
                                 <a href="#">
                                     <i class="metismenu-icon pe-7s-date"></i>Events
                                     <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
@@ -663,7 +662,7 @@ $full_name_student = $student_login['firstname'].' '.$student_login['last_name']
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="dashboards-commerce.html"  class="mm-active">
+                                        <a href="dashboards-commerce.html"  >
                                             <i class="metismenu-icon"></i>Workshop
                                         </a>
                                     </li>
@@ -704,6 +703,8 @@ function timeTo12HrFormat(time)
     if (time_part_array[0] >= 12) {
         ampm = 'PM';
     }
+
+    
 
     if (time_part_array[1] < 10 ) {
         time_part_array[1]  = '0'+time_part_array[1];

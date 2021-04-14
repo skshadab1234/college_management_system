@@ -47,9 +47,9 @@ function student_fees_details($admission_no){
 		$paid_fees = $row['Paid_Fees'];
 
 		$paid_percentage = ($total_fees - $paid_fees) / $total_fees * 100;
-		$arr[0]['remain_fees_percentage'] = number_format($paid_percentage,2);
+		$arr[0]['remain_fees_percentage'] = number_format($paid_percentage);
 
-		if (50 < number_format($paid_percentage)) {
+		if (number_format($paid_percentage) > 50) {
 			$arr[0]['paid_percentage_color_impression'] = 'danger';
 		}else{
 			$arr[0]['paid_percentage_color_impression'] = 'success';
@@ -60,9 +60,9 @@ function student_fees_details($admission_no){
 		$remain_fees = $row['Balance_Fees'];
 
 		$remain_percentage = ($total_fees - $remain_fees) / $total_fees * 100;
-		$arr[0]['paid_fees_percentage'] = number_format($remain_percentage,2);
+		$arr[0]['paid_fees_percentage'] = number_format($remain_percentage);
 
-		if ($remain_percentage <= 50) {
+		if ( 50 < $remain_percentage) {
 			$arr[0]['remain_percentage_color_impression'] = 'success';
 		}else{
 			$arr[0]['remain_percentage_color_impression'] = 'danger';
@@ -72,4 +72,28 @@ function student_fees_details($admission_no){
 
 	}
 	return $arr;
+}
+
+
+function get_timetable_for_specific_department($department,$semester,$day){
+	global $con;
+	$arr[] = array();
+	$res=mysqli_query($con,"select * from timetable_all_dept where Department_Name='$department' && Department_Name='$department' && Semester_No='$semester' && Day_Name = '$day' ");
+	while ($row = mysqli_fetch_assoc($res)) {
+		if (mysqli_num_rows($res) > 1)  {
+			$arr[] = $row;
+		}
+	}
+
+	return $arr;
+}
+
+
+function get_faculty_details($fid){
+	global $con;
+
+	$res = mysqli_query($con, "SELECT * FROM `faculty_login` WHERE faculty_login_id = '$fid'");
+	$row = mysqli_fetch_assoc($res);
+
+	return $row;
 }
