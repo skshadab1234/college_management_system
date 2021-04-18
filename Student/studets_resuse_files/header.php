@@ -32,7 +32,7 @@ $full_name_student = $student_login['firstname'].' '.$student_login['last_name']
 
 
 <body>
-    <div class="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar">
+    <div class="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar fixed-footer">
         <div class="app-header header-shadow "> <!-- bg-premium-dark header-text-light -->
              <div class="app-header__logo">
                 <div class="logo-src" style="background:url(<?php echo FRONT_GLOBAL_IMAGE."logo.jpg"; ?>);background-size: cover;width: 43px;height: 50px"></div>

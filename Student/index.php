@@ -141,9 +141,9 @@
                     $display_none ='style="display:none"';    
                 }else{
                     $display_none = '';
-                }
+                }   
             ?>
-         <div class="col-12 col-sm-12 col-lg-6" <?= $display_none ?>>
+         <div class="col-12 col-sm-12 col-lg-6" >
             
             <div class="main-card mb-3 card" >
                <div class="card-body">
@@ -162,63 +162,7 @@
                   </div>
                   <div class="scroll-area">
                      <div class="scrollbar-container ps ps--active-y">
-                        <div class="vertical-timeline vertical-timeline--animate vertical-timeline--one-column">
-                           
-                           <?php
-                           $student_timetable = array_filter(get_timetable_for_specific_department($student_login['BRANCH'],$student_login['semester'],date("l")));
-
-                            foreach ($student_timetable as $key => $value) {
-                                $current_time = date('h:i a');
-                                $startTime = $value['Lecture_Start_at'];
-                                $EndTime = $value['Lecture_end_at'];
-                                $date1 = DateTime::createFromFormat('h:i a', $current_time);
-                                $date2 = DateTime::createFromFormat('h:i a', $startTime);
-                                $date3 = DateTime::createFromFormat('h:i a', $EndTime);
-                                if ($date1 > $date2 && $date1 < $date3)
-                                {
-                                   $check_the_session_icon = '<span class="vertical-timeline-element-icon bounce-in">
-                                         <i class="badge badge-dot badge-dot-xl badge-danger live_style "> </i>
-                                         </span>';
-                                    $rand = rand(111111,999999);
-                                   $subhead_message = '<p>Join now <a href="javascript:void(0)" id="redirecttolecture"" >Link goes here</a>
-                                   <input type="hidden" id="randomNumbers" value='.$rand.'> <br><input type="hidden" id="fid" value='.$value['Teacher_id'].'><input type="hidden" id="lecture_time" value='.$value['Lecture_Start_at'].'> <input type="hidden" id="lecture_end_time" value='.$value['Lecture_end_at'].'>
-                                   <textarea id="lecturename" style="display:none">'.$value['Lecture_Name'].'</textarea>';
-                                }else{
-
-
-                                    if ($date1 < $date2) {
-                                        $check_the_session_icon = '<span class="vertical-timeline-element-icon bounce-in">
-                                         <i class="badge badge-dot badge-dot-xl badge-warning"> </i>
-                                         </span>';   
-                                         $subhead_message = '';
-                                    }else{
-                                    // here we have to check wheher the student has attend lecture or not
-
-                                        $check_the_session_icon = '<span class="vertical-timeline-element-icon bounce-in">
-                                                <i class="metismenu-icon pe-7s-close-circle text-danger" style="font-size: 18px;background: #fff;"></i>
-                                            </span>';
-                                        $subhead_message = '<p class="text-danger">You are absent today for this lecture</p>';
-                                    }
-                                    
-                                    
-                                }
-
-                            ?>
-                            
-                           <div class="vertical-timeline-item vertical-timeline-element">
-                              <div>
-                                 <?= $check_the_session_icon ?>
-                                 <div class="vertical-timeline-element-content bounce-in">
-                                    <h4 class="timeline-title"><?= $value['Lecture_Name'] ?></h4>
-                                    <?= $subhead_message ?>
-                                    </p>
-                                    <span class="vertical-timeline-element-date"><?= ucwords($value['Lecture_Start_at']) ?></span>
-                                 </div>
-                              </div>
-                           </div>
-                           <?php
-                           }
-                           ?>
+                        <div class="vertical-timeline vertical-timeline--animate vertical-timeline--one-column" id="today_time_table">
                         </div>
                      </div>
                   </div>
@@ -274,33 +218,46 @@
          </div>
 
          <div class="col-12 col-sm-12 col-lg-6">
-             sasas
+              <div class="main-card mb-3 card" >
+               <div class="card-body">
+                  <div class="row">
+                      <div class="col-sm-6">
+                          <h5 class="card-title">Today Section to attempt</h5>
+                      </div>
+                      <div class="col-sm-6">
+                         <h5 class="card-title text-right" style="font-size: 18px;position: relative;top: -10px"><?= date('M d, Y') ?></h5>
+                         <?php
+                         $dayOfWeek = date('l'); 
+                         if($dayOfWeek == 'Saturday' || $dayOfWeek == 'Sunday') { 
+                            }
+                            ?>
+                      </div>
+                  </div>
+                </div>
+            </div>
          </div>  
       </div>
       
+
       <script type="text/javascript">
           $(document).ready( () =>{
-            $("#redirecttolecture").click(() => { 
-                var randomNumbers = $("#randomNumbers").val();
-                var subject_name  = $("#lecturename").val();
-                var fid = $("#fid").val();
-                var lecture_time = $("#lecture_time").val();
-                var lecture_end_time = $("#lecture_end_time").val();
+            timetable = 'timetable';
 
+             setInterval( () => {
                 $.ajax({
-                    url: 'attendance_check.php',
+                    url: 'ajax_request.php',
                     method:'post',
-                    data: {randomNumbers:randomNumbers, subject_name:subject_name, fid:fid, lecture_time:lecture_time, lecture_end_time:lecture_end_time},
+                    data: {timetable:timetable},
                     success: function(data) {
-                        console.log(data);
+                        $('#today_time_table').html(data);
                     }
                 });
+            },1000)
 
-            });
+
           });
       </script>
 <!-- https://meet.google.com/mhz-qxtk-tdb      -->
     <?php
    require 'studets_resuse_files/footer.php';
    ?>
-

@@ -97,3 +97,12 @@ function get_faculty_details($fid){
 
 	return $row;
 }
+
+function numberofStudentJoined($lectname,$lectDate,$lectTime){
+	global $con;
+
+	$res = mysqli_query($con, "SELECT COUNT(*) AS numberofStudentJoined, Status FROM `student_attendance` WHERE  Lecture_Name = '$lectname' && Lecture_Date = '$lectDate' && Lecture_Time = '$lectTime' && Status = '1'");
+	$row = mysqli_fetch_assoc($res);
+
+	return $row;
+}
