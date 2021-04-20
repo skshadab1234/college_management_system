@@ -25,7 +25,18 @@
         $noentry_endtime = date('h:i a', $noentry_endtime);
         
         if ($current_time > $noentry_endtime) {
-          $subhead_message = 'You are late for lecture';
+          if ($date1 > $date2) {
+            $resultant  = mysqli_query($con, "Select * from student_attendance where Students_Admit_No = ".$student_login['Admission_NO']."  &&  Status = '1'");
+
+            $row = mysqli_fetch_assoc($resultant);
+            
+            if ($row['Students_Admit_No'] == $student_login['Admission_NO'] && $row['Lecture_Time'] == $final_time && $row['Lecture_Date'] == date('Y-m-d')) {
+               $subhead_message = '<p class="text-success">You are present today for this lecture</p>'; 
+            }else{
+                $subhead_message = '<p class="text-danger">You are Late to Join</p>';
+            }
+
+          }
         }
         else{
 
@@ -42,7 +53,7 @@
            $rand = rand(111111,999999);
             $subhead_message ='<p>'.$displayJoinedUsers.' - '.'<a href="javascript:void(0)" id="redirecttolecture"" >Click to Join</a>
            <input type="hidden" id="randomNumbers" value='.$rand.'> <br><input type="hidden" id="fid" value='.$value['Teacher_id'].'><input type="hidden" id="lecture_time" value='.$value['Lecture_Start_at'].'> <input type="hidden" id="lecture_end_time" value='.$value['Lecture_end_at'].'>
-           <textarea id="lecturename" style="display:none">'.$value['Lecture_Name'].'</textarea><input type="hidden" id="lecture_link" value= '.$value['lecture_join_link'].'>';
+           <textarea id="lecturename" style="display:none">'.$value['Lecture_Name'].'</textarea> <textarea id="subject_name" style="display:none">'.$value['subject_name'].'</textarea><input type="hidden" id="lecture_link" value= '.$value['lecture_join_link'].'>';
         }
 
 
@@ -59,11 +70,12 @@
             
               // here we have to check wheher the student has attend lecture or not
 
-            $resultant  = mysqli_query($con, "Select * from student_attendance where Students_Admit_No = ".$student_login['Admission_NO']."  && Lecture_Name = '".$value['Lecture_Name']."' &&  Status = '1'");
+            $resultant  = mysqli_query($con, "Select * from student_attendance where Students_Admit_No = ".$student_login['Admission_NO']."  && Lecture_Name = '".$value['Lecture_Name']."' &&  Lecture_Time = '".$final_time."' &&  Status = '1'");
 
           $row = mysqli_fetch_assoc($resultant);
+          
            
-          if ($row['Students_Admit_No'] == $student_login['Admission_NO'] ) {
+          if ($row['Students_Admit_No'] == $student_login['Admission_NO']  && $row['Lecture_Time'] == $final_time && $row['Lecture_Date'] == date('Y-m-d')) {
             $check_the_session_icon = '<span class="vertical-timeline-element-icon ">
                       <i class="metismenu-icon pe-7s-check text-success" style="font-size: 18px;background: #fff;"></i>
                   </span>';
@@ -94,7 +106,7 @@ $html .= '<div class="vertical-timeline-item vertical-timeline-element">
     <div>
        '.$check_the_session_icon.'
        <div class="vertical-timeline-element-content ">
-          <h4 class="timeline-title">'.$value['Lecture_Name'].'</h4>
+          <h4 class="timeline-title">'.$value['subject_name'].'</h4>
           '.$subhead_message.'
           </p>
           <span class="vertical-timeline-element-date">'.date('h:i a',strtotime($value['Lecture_Start_at'])).'</span>
@@ -111,7 +123,8 @@ echo $html;
    $("#redirecttolecture").click(() => { 
                 
                 var randomNumbers = $("#randomNumbers").val();
-                var subject_name  = $("#lecturename").val();
+                var lecturename  = $("#lecturename").val();
+                var subject_name  = $("#subject_name").val();
                 var fid = $("#fid").val();
                 var lecture_time = $("#lecture_time").val();
                 var lecture_end_time = $("#lecture_end_time").val();
@@ -122,7 +135,7 @@ echo $html;
                     $.ajax({
                       url: 'attendance_check.php',
                       method:'post',
-                      data: {randomNumbers:randomNumbers, subject_name:subject_name, fid:fid, lecture_time:lecture_time, lecture_end_time:lecture_end_time},
+                      data: {randomNumbers:randomNumbers, lecturename:lecturename, fid:fid, lecture_time:lecture_time, lecture_end_time:lecture_end_time},
                       success: function(data) {
                           var result = $.parseJSON(data);
                           if (result.status == "success_inserted") {

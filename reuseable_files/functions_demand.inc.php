@@ -75,10 +75,10 @@ function student_fees_details($admission_no){
 }
 
 
-function get_timetable_for_specific_department($department,$semester,$day){
+function get_timetable_for_specific_department($branch,$semester,$day){
 	global $con;
 	$arr[] = array();
-	$res=mysqli_query($con,"select * from timetable_all_dept where Department_Name='$department' && Department_Name='$department' && Semester_No='$semester' && Day_Name = '$day' ");
+	$res=mysqli_query($con,"select * from timetable_all_dept LEFT JOIN subject on timetable_all_dept.Lecture_Name = subject.id where Department_Name='$branch' && Semester_No='$semester' && Day_Name = '$day' ");
 	while ($row = mysqli_fetch_assoc($res)) {
 		if (mysqli_num_rows($res) > 1)  {
 			$arr[] = $row;
@@ -105,4 +105,35 @@ function numberofStudentJoined($lectname,$lectDate,$lectTime){
 	$row = mysqli_fetch_assoc($res);
 
 	return $row;
+}
+
+function SubjectQuzForToday($today_date){
+	global $con;
+	$arr[] = array();
+	$res=mysqli_query($con,"SELECT * FROM `quiz_question` LEFT JOIN faculty_login on quiz_question.faculty_created_id = faculty_login.faculty_login_id  where  quiz_date = '$today_date' && quiz_question.status = '1' GROUP BY subject_name");
+	while ($row = mysqli_fetch_assoc($res)) {
+			$arr[] = $row;
+	}
+
+	return $arr;
+}
+
+function numberofquestonpersubjectQuiz($subject_name,$quiz_date){
+	global $con;
+	$res = mysqli_query($con, "SELECT COUNT(*) AS numberofquestonpersubjectQuiz FROM `quiz_question` WHERE  subject_name = '$subject_name' && quiz_date = '$quiz_date'  && status = '1'");
+	$row = mysqli_fetch_assoc($res);
+
+	return $row;
+}
+
+function getQuizQuestionBySubjectName($subject_name,$today_date){
+	global $con;
+	$arr[] = array();
+
+	$res=mysqli_query($con,"SELECT * FROM `quiz_question`  where subject_name = '$subject_name' && quiz_date = '$today_date' && quiz_question.status = '1'");
+	while ($row = mysqli_fetch_assoc($res)) {
+			$arr[] = $row;
+	}
+
+	return $arr;
 }

@@ -1,8 +1,8 @@
 <?php 
 require 'session.php';
-if (isset($_POST['randomNumbers']) && isset($_POST['subject_name'])) {
+if (isset($_POST['randomNumbers']) && isset($_POST['lecturename'])) {
 	$randomNumbers = get_safe_value($_POST['randomNumbers']);
-	$subject_name = get_safe_value($_POST['subject_name']);
+	$subject_name = get_safe_value($_POST['lecturename']);
 	$lecture_time = get_safe_value($_POST['lecture_time']);
 	$lecture_time1 = date('h:i', strtotime($lecture_time));
 	$lecture_end_time = get_safe_value($_POST['lecture_end_time']);

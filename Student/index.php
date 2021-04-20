@@ -4,38 +4,7 @@
 
     
    ?>
-<style type="text/css">
-   .live_style{
-   transition: .2s ease-in-out;
-   -webkit-animation: live 1.4s infinite ease-in-out;
-   animation: live 1.4s infinite ease-in-out;
-   -webkit-animation-fill-mode: both;
-   animation-fill-mode: both;
-   position: absolute;
-   }
-   
 
-@-webkit-keyframes live {
-  0%, 80%, 100% { -webkit-transform: scale(0.8) }
-  40% { -webkit-transform: scale(1.0) }
-}
-@keyframes live {
-  0%, 80%, 100% { 
-    transform: scale(0.8);
-    -webkit-transform: scale(0.8);
-  } 40% { 
-    transform: scale(1.0);
-    -webkit-transform: scale(1.0);
-  }
-}
-
-.indicators_icon_title{
-    position: absolute;
-    top: -2px;
-    font-size: 14px;
-    font-weight: 700;
-}
-</style>
 <!-- main section -->
 <div class="app-main__outer">
 <div class="app-main__inner">
@@ -143,7 +112,7 @@
                     $display_none = '';
                 }   
             ?>
-         <div class="col-12 col-sm-12 col-lg-6" >
+         <div class="col-12 col-sm-12 col-lg-6" <?= $display_none ?> >
             
             <div class="main-card mb-3 card" >
                <div class="card-body">
@@ -217,15 +186,15 @@
             </div>
          </div>
 
-         <div class="col-12 col-sm-12 col-lg-6">
-              <div class="main-card mb-3 card" >
-               <div class="card-body">
+         <div class="col-12 col-sm-12 col-lg-6" >
+             <div class="main-card mb-3 card">
+
+              <div class="card-body">
                   <div class="row">
                       <div class="col-sm-6">
-                          <h5 class="card-title">Today Section to attempt</h5>
+                          <h5 class="card-title">Today Quiz</h5>
                       </div>
                       <div class="col-sm-6">
-                         <h5 class="card-title text-right" style="font-size: 18px;position: relative;top: -10px"><?= date('M d, Y') ?></h5>
                          <?php
                          $dayOfWeek = date('l'); 
                          if($dayOfWeek == 'Saturday' || $dayOfWeek == 'Sunday') { 
@@ -233,8 +202,47 @@
                             ?>
                       </div>
                   </div>
-                </div>
-            </div>
+                     <div class="scrollbar-container ps ps--active-y">
+                        <ul class="todo-list-wrapper list-group list-group-flush">
+                              <?php
+                                $total_quiz_today = array_filter(SubjectQuzForToday(date('Y-m-d')));
+
+                                foreach ($total_quiz_today as $key => $value) {
+                                  $numberofquestonpersubjectQuiz =  numberofquestonpersubjectQuiz($value['subject_name'],date('Y-m-d'));
+                                  ?>
+                                  <li class="list-group-item">
+                                    <div class="widget-content p-0">
+                                        <div class="widget-content-wrapper">
+                                            <div class="widget-content-left mr-2">
+                                            </div>
+                                            <div class="widget-content-left mr-3">
+                                                <div class="widget-content-left">
+                                                    <img width="42" class="rounded" src="<?= $value['faculty_image'] ?>" alt="">
+                                                </div>
+                                            </div>
+                                            <div class="widget-content-left">
+                                                <div class="widget-heading"><?= $value['subject_name'].' - '.$numberofquestonpersubjectQuiz['numberofquestonpersubjectQuiz'].' Questions' ?></div>
+                                                <div class="widget-subheading"><?= $value['quiz_topic'] ?></div>
+                                            </div>
+                                            <div class="widget-content-right">
+                                                <a href="<?= FRONT_SITE_PATH_STUDENT.'quiz_today'.PHP_EXT.'?quiz_id='.urlencode($value['subject_name']).'&date='.$value['quiz_date'].'&topic='.urlencode($value['quiz_topic']).'&startTime='.$value['quiz_start_time'] ?>">
+                                                  <button class="border-0 btn-transition btn btn-outline-primary ">
+                                                      View
+                                                  </button>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                  <?php
+                                }
+                              ?>
+                              
+                          </ul>
+                        </div>
+                     </div>
+                  </div>
+
          </div>  
       </div>
       
@@ -253,8 +261,6 @@
                     }
                 });
             },1000)
-
-
           });
       </script>
 <!-- https://meet.google.com/mhz-qxtk-tdb      -->

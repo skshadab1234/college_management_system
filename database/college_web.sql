@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 18, 2021 at 07:14 PM
+-- Generation Time: Apr 20, 2021 at 07:50 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -25,6 +25,27 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `branch`
+--
+
+CREATE TABLE `branch` (
+  `id` int(11) NOT NULL,
+  `branch_name` varchar(255) NOT NULL,
+  `status` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `branch`
+--
+
+INSERT INTO `branch` (`id`, `branch_name`, `status`) VALUES
+(1, 'Computer', 1),
+(2, 'Mechanical', 1),
+(3, 'Civil', 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `faculty_login`
 --
 
@@ -37,9 +58,11 @@ CREATE TABLE `faculty_login` (
   `faculty_alias` varchar(5) NOT NULL,
   `faculty_email` varchar(255) NOT NULL,
   `mb_number` varchar(10) NOT NULL,
+  `faculty_image` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `dob` date NOT NULL,
   `desgination` varchar(255) NOT NULL,
+  `branch_id` int(11) NOT NULL,
   `salary` int(11) NOT NULL,
   `joining_date` date NOT NULL,
   `leaving_date` date NOT NULL,
@@ -50,8 +73,87 @@ CREATE TABLE `faculty_login` (
 -- Dumping data for table `faculty_login`
 --
 
-INSERT INTO `faculty_login` (`id`, `faculty_login_id`, `first_name`, `middle_name`, `last_name`, `faculty_alias`, `faculty_email`, `mb_number`, `password`, `dob`, `desgination`, `salary`, `joining_date`, `leaving_date`, `status`) VALUES
-(1, 'SK5252', 'Shadab', 'Alam', 'Khan', 'SK', 'skshadab@gmal.com', '9167582452', 'shadabkhan', '2017-02-07', 'Head of Department', 20000, '2021-04-09', '2021-04-23', 1);
+INSERT INTO `faculty_login` (`id`, `faculty_login_id`, `first_name`, `middle_name`, `last_name`, `faculty_alias`, `faculty_email`, `mb_number`, `faculty_image`, `password`, `dob`, `desgination`, `branch_id`, `salary`, `joining_date`, `leaving_date`, `status`) VALUES
+(1, 'SK5252', 'Shadab', 'Alam', 'Khan', 'SK', 'skshadab@gmal.com', '9167582452', 'http://csmit.in/images/ce/faculty/1.jpg', 'shadabkhan', '2017-02-07', 'Programmer', 1, 20000, '2021-04-09', '2021-04-23', 1),
+(2, 'SK5253', 'Mahesh', 'Thakur', '', 'MK', 'mahesh.csmit@gmail.com', '1234567890', 'http://csmit.in/images/ce/faculty/2.jpg', '', '1991-03-08', 'Structure Exper Analysis', 1, 50000, '2021-04-19', '0000-00-00', 1),
+(3, 'SK5254', 'Gajana', 'Patel', 'Usman', 'GP', 'gajana@gmail.com', '5254526352', '', '', '1992-04-19', 'Data Scientist', 1, 100000, '2021-04-19', '0000-00-00', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `quiz_choices`
+--
+
+CREATE TABLE `quiz_choices` (
+  `id` int(11) NOT NULL,
+  `question_id` int(11) NOT NULL,
+  `correct_answer` varchar(255) NOT NULL,
+  `choices` varchar(500) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `quiz_choices`
+--
+
+INSERT INTO `quiz_choices` (`id`, `question_id`, `correct_answer`, `choices`) VALUES
+(1, 1, 'Container of objects of similar types', 'Container of objects of similar types'),
+(4, 1, 'Container of objects of similar types', 'A data structure that shows a hierarchical behavior'),
+(5, 1, 'Container of objects of similar types', 'Container of objects of mixed types\r\n'),
+(6, 1, 'Container of objects of similar types', 'All of the mentioned'),
+(7, 2, 'Recursion', 'CPU Resource Allocation'),
+(8, 2, 'Recursion', 'Breadth First Traversal'),
+(9, 2, 'Recursion', 'Recursion'),
+(10, 2, 'Recursion', 'None of the above'),
+(11, 3, 'False', 'True'),
+(12, 3, 'False', 'False');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `quiz_question`
+--
+
+CREATE TABLE `quiz_question` (
+  `quiz_question_id` int(11) NOT NULL,
+  `question_name` varchar(255) NOT NULL,
+  `faculty_created_id` varchar(255) NOT NULL,
+  `subject_name` varchar(255) NOT NULL,
+  `quiz_topic` varchar(255) NOT NULL,
+  `question_marks` int(11) NOT NULL,
+  `quiz_date` varchar(255) NOT NULL,
+  `quiz_start_time` varchar(100) NOT NULL,
+  `status` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `quiz_question`
+--
+
+INSERT INTO `quiz_question` (`quiz_question_id`, `question_name`, `faculty_created_id`, `subject_name`, `quiz_topic`, `question_marks`, `quiz_date`, `quiz_start_time`, `status`) VALUES
+(1, 'Which of these best describes an array?', 'SK5252', 'Data Structure', 'Basic of data structure', 2, '2021-04-20', '2021-04-19 6:00 pm', 1),
+(2, 'Stack is used for', 'SK5252', 'Data Structure', 'Basic of data structure', 2, '2021-04-20', '2021-04-19 6:00 pm', 1),
+(3, 'Postfix expression is just a reverse of prefix expression.', 'SK5252', 'Data Structure', 'Basic of data structure', 2, '2021-04-20', '2021-04-19 6:00 pm', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `quiz_student_answer`
+--
+
+CREATE TABLE `quiz_student_answer` (
+  `id` int(11) NOT NULL,
+  `quiz_student_Admit_No` int(11) NOT NULL,
+  `quiz_question_id` int(11) NOT NULL,
+  `quiz_student_answer` varchar(255) NOT NULL,
+  `marks_get` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `quiz_student_answer`
+--
+
+INSERT INTO `quiz_student_answer` (`id`, `quiz_student_Admit_No`, `quiz_question_id`, `quiz_student_answer`, `marks_get`) VALUES
+(1, 1993, 1, 'Queue', 2);
 
 -- --------------------------------------------------------
 
@@ -75,9 +177,9 @@ CREATE TABLE `student_attendance` (
 --
 
 INSERT INTO `student_attendance` (`id`, `Students_Admit_No`, `Lecture_Date`, `Lecture_Time`, `Lecture_Name`, `Teacher_id`, `Status`, `Joining_Time`) VALUES
-(49, 1993, '2021-04-18', '07:00 - 08:00', 'Digital Logic & Communication Applications', 'SK5252', 1, '2021-04-18 10:06:40'),
-(50, 1993, '2021-04-18', '06:30 - 07:00', 'Data_Structure', 'SK5252', 1, '2021-04-18 10:06:40'),
-(51, 1993, '2021-04-18', '10:41 - 10:44', 'Computer Grphics', 'SK5252', 1, '2021-04-18 10:43:04');
+(54, 1993, '2021-04-19', '10:00 - 10:45', '5', 'SK5252', 1, '2021-04-19 10:01:52'),
+(55, 1993, '2021-04-19', '11:30 - 12:15', '2', 'SK5252', 1, '2021-04-19 11:31:31'),
+(57, 1993, '2021-04-19', '12:15 - 01:00', '1', 'SK5252', 1, '2021-04-19 02:03:59');
 
 -- --------------------------------------------------------
 
@@ -139,8 +241,47 @@ CREATE TABLE `student_login` (
 --
 
 INSERT INTO `student_login` (`id`, `Admission_NO`, `firstname`, `last_name`, `password`, `picture_link`, `STUDENT_DOB`, `MOTHERNAME`, `PLACEOFBIRTH`, `GENDER`, `ADDRESS`, `FATHERMOBILEPHONE`, `MOTHERMOBILEPHONE`, `FATHERPROFESSION`, `MOTHERPROFESSION`, `FATHERNAME`, `enroll_no`, `DEPARTMENT`, `BRANCH`, `semester`, `added_on`) VALUES
-(18, 1993, 'Khan', 'Shadab', '$2y$10$x7SFdvfvxdjodIkjcmVqiexounArLxHIPw7sGRL6dy9i9iL08Iiz2', 'https://pbs.twimg.com/profile_images/932986247642939392/CDq_0Vcw_400x400.jpg', '2000-04-30', 'Jasimunnisa', 'Mumbai', 'Male', 'Sayeed Manzil, 104, KAUSA MUMBRA', '9175485871', '8545758545', 'businessman', 'housewife', 'Jamal Ahmed Khan', 'CSN1221', 'Computer Engineering', 'Computer ', 3, '2021-04-14 00:00:00'),
-(19, 1994, 'Khan', 'Mehtab', '$2y$10$x7SFdvfvxdjodIkjcmVqiexounArLxHIPw7sGRL6dy9i9iL08Iiz2', 'https://teemusk.com/wp-content/uploads/2020/07/portrait.jpg', '2000-04-30', 'Jasimunnisa', 'Mumbai', 'Male', 'Sayeed Manzil, 104, KAUSA MUMBRA', '9175485871', '8545758545', 'businessman', 'housewife', 'Jamal Ahmed Khan', 'CSN1222', 'Computer Engineering', 'Computer ', 3, '0000-00-00 00:00:00');
+(18, 1993, 'Khan', 'Shadab', '$2y$10$x7SFdvfvxdjodIkjcmVqiexounArLxHIPw7sGRL6dy9i9iL08Iiz2', 'https://pbs.twimg.com/profile_images/932986247642939392/CDq_0Vcw_400x400.jpg', '2000-04-30', 'Jasimunnisa', 'Mumbai', 'Male', 'Sayeed Manzil, 104, KAUSA MUMBRA', '9175485871', '8545758545', 'businessman', 'housewife', 'Jamal Ahmed Khan', 'CSN1221', 'Computer Engineering', '1', 3, '2021-04-14 00:00:00'),
+(19, 1994, 'Khan', 'Mehtab', '$2y$10$x7SFdvfvxdjodIkjcmVqiexounArLxHIPw7sGRL6dy9i9iL08Iiz2', 'https://teemusk.com/wp-content/uploads/2020/07/portrait.jpg', '2000-04-30', 'Jasimunnisa', 'Mumbai', 'Male', 'Sayeed Manzil, 104, KAUSA MUMBRA', '9175485871', '8545758545', 'businessman', 'housewife', 'Jamal Ahmed Khan', 'CSN1222', 'Computer Engineering', '1', 3, '0000-00-00 00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `subject`
+--
+
+CREATE TABLE `subject` (
+  `id` int(11) NOT NULL,
+  `subject_name` varchar(255) NOT NULL,
+  `subject_alias` varchar(10) NOT NULL,
+  `semester` int(11) NOT NULL,
+  `branch_id` int(11) NOT NULL,
+  `scheme` varchar(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `subject`
+--
+
+INSERT INTO `subject` (`id`, `subject_name`, `subject_alias`, `semester`, `branch_id`, `scheme`) VALUES
+(1, 'Data Structure', 'DSA', 3, 1, 'C'),
+(2, 'EM-III', 'EM-III', 3, 1, 'C'),
+(3, 'Discrete Structure & Graph Theory', 'DSGT', 3, 1, 'C'),
+(4, 'Digital Logic & Communication Application', 'DLCA', 3, 1, 'C'),
+(5, 'Computer Graphics', 'CG', 3, 1, 'C');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `subject_assign_faculty`
+--
+
+CREATE TABLE `subject_assign_faculty` (
+  `id` int(11) NOT NULL,
+  `faculty_id` varchar(255) NOT NULL,
+  `subject_id` int(11) NOT NULL,
+  `status` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -166,50 +307,64 @@ CREATE TABLE `timetable_all_dept` (
 --
 
 INSERT INTO `timetable_all_dept` (`id`, `Department_Name`, `Semester_No`, `Day_Name`, `Lecture_Start_at`, `Lecture_end_at`, `Lecture_Name`, `Teacher_id`, `lecture_join_link`, `status`) VALUES
-(1, 'Computer', 3, 'Monday', '12:15 am', '1:00 pm', 'Data_Structure', 'SK5252', '', 1),
-(2, 'Computer', 3, 'Monday', '11:30 am', '12:15 am', 'Digital Logic & Communication Applications', 'SK5252', '', 1),
-(3, 'Computer', 3, 'Monday', '10:45 am', '11:30 am', 'Discrete Structure & Graph Theory', 'SK5252', '', 1),
-(4, 'Computer', 3, 'Monday', '10:00 am', '10:45 am', 'Computer Grphics', 'SK5252', '', 1),
-(5, 'Computer', 3, 'Monday', '9:00 am', '10:00 am', 'Em-III', 'SK5252', '', 1),
-(6, 'Computer', 3, 'Tuesday', '12:15 pm', '1:00 pm', 'Data_Structure', 'SK5252', '', 1),
-(7, 'Computer', 3, 'Tuesday', '11:30 am', '12:15 pm', 'Computer Grphics', 'SK5252', '', 1),
-(8, 'Computer', 3, 'Tuesday', '10:00 am', '10:45 am', 'Discrete Structure & Graph Theory', 'SK5252', '', 1),
-(9, 'Computer', 3, 'Tuesday', '10:45 am', '11:30 am', 'Digital Logic & Communication Applications', 'SK5252', '', 1),
-(10, 'Computer', 3, 'Tuesday', '9:15 am', '10:00 am', 'Em-III', 'SK5252', '', 1),
-(11, 'Computer', 3, 'Wednesday', '12:15 am', '1:00 pm', 'Data_Structure', 'SK5252', '', 1),
-(12, 'Computer', 3, 'Wednesday', '11:30 am', '12:15 pm', 'Em-III', 'SK5252', '', 1),
-(13, 'Computer', 3, 'Wednesday', '10:45 am', '11:30 am', 'Digital Logic & Communication Applications', 'SK5252', '', 1),
-(14, 'Computer', 3, 'Wednesday', '10:00 am', '10:45 am', 'Computer Grphics', 'SK5252', '', 1),
-(15, 'Computer', 3, 'Wednesday', '10:00 pm', '11:00 pm', 'Discrete Structure & Graph Theory', 'SK5252', '', 1),
-(16, 'Computer', 3, 'Thursday', '10:00 pm', '11:00 pm', 'Data_Structure', 'SK5252', '', 1),
-(17, 'Computer', 3, 'Thursday', '9:00 pm', '10:00 pm', 'Em-III', 'SK5252', '', 1),
-(18, 'Computer', 3, 'Thursday', '8:00 pm', '9:00 pm', 'Computer Grphics', 'SK5252', '', 1),
-(19, 'Computer', 3, 'Thursday', '7:00 pm', '8:00 pm', 'Discrete Structure & Graph Theory', 'SK5252', '', 1),
-(20, 'Computer', 3, 'Thursday', '6:00 pm', '7:00 pm', 'Digital Logic & Communication Applications', 'SK5252', '', 1),
-(21, 'Computer', 3, 'Friday', '11:35 pm', '11:58 pm', 'Em-III', 'SK5252', '', 1),
-(22, 'Computer', 3, 'Friday', '11:11 pm', '11:35 pm', 'Data_Structure', 'SK5252', '', 1),
-(23, 'Computer', 3, 'Friday', '10:45 am', '11:30 am', 'Digital Logic & Communication Applications', 'SK5252', '', 1),
-(24, 'Computer', 3, 'Friday', '10:00 am', '10:45 am', 'Discrete Structure & Graph Theory', 'SK5252', '', 1),
-(25, 'Computer', 3, 'Friday', '9:15 am', '10:00 am', 'Computer Grphics', 'SK5252', '', 1),
-(26, 'Computer', 3, 'Saturday', '1:00 pm', '2:00 pm', 'Em-III', 'SK5252', '', 1),
-(27, 'Computer', 3, 'Saturday', '5:00 pm', '6:00 pm', 'Data_Structure', 'SK5252', '', 1),
-(28, 'Computer', 3, 'Saturday', '6:00 pm', '7:00 pm', 'Digital Logic & Communication Applications', 'SK5252', '', 1),
-(29, 'Computer', 3, 'Saturday', '10:40 pm', '11:45 pm', 'Discrete Structure & Graph Theory', 'SK5252', '', 1),
-(30, 'Computer', 3, 'Saturday', '11:45 pm', '11:59 pm', 'Computer Grphics', 'SK5252', '', 1),
-(32, 'Computer', 3, 'Sunday', '5:10 pm', '6:00 pm', 'Em-III', 'SK5252', 'https://meet.google.com/hzo-jdqz-xcu?pli=1', 1),
-(33, 'Computer', 3, 'Sunday', '6:35 pm', '7:00 pm', 'Data_Structure', 'SK5252', '', 1),
-(34, 'Computer', 3, 'Sunday', '7:00 pm', '8:00 pm', 'Digital Logic & Communication Applications', 'SK5252', '', 1),
-(35, 'Computer', 3, 'Sunday', '10:05 pm', '10:42 pm', 'Discrete Structure & Graph Theory', 'SK5252', 'https://meet.google.com/hzo-jdqz-xcu?pli=2', 1),
-(36, 'Computer', 3, 'Sunday', '10:41 pm', '10:44 pm', 'Computer Grphics', 'SK5252', '', 1);
+(1, '1', 3, 'Monday', '12:15 pm', '1:00 pm', '1', 'SK5252', '', 1),
+(2, '1', 3, 'Monday', '11:30 am', '12:15 pm', '2', 'SK5252', '', 1),
+(3, '1', 3, 'Monday', '10:45 am', '11:30 am', '3', 'SK5252', '', 1),
+(4, '1', 3, 'Monday', '10:00 am', '10:45 am', '5', 'SK5252', '', 1),
+(5, '1', 3, 'Monday', '9:15 am', '10:00 am', '4', 'SK5252', '', 1),
+(6, '1', 3, 'Tuesday', '12:15 pm', '1:00 pm', '1', 'SK5252', '', 1),
+(7, '1', 3, 'Tuesday', '11:30 am', '12:15 pm', '5', 'SK5252', '', 1),
+(8, '1', 3, 'Tuesday', '10:00 am', '10:45 am', '3', 'SK5252', '', 1),
+(9, '1', 3, 'Tuesday', '10:45 am', '11:30 am', '4', 'SK5252', '', 1),
+(10, '1', 3, 'Tuesday', '9:15 am', '10:00 am', '2', 'SK5252', '', 1),
+(11, '1', 3, 'Wednesday', '12:15 pm', '1:00 pm', '1', 'SK5252', '', 1),
+(12, '1', 3, 'Wednesday', '11:30 am', '12:15 pm', '2', 'SK5252', '', 1),
+(13, '1', 3, 'Wednesday', '10:45 am', '11:30 am', '4', 'SK5252', '', 1),
+(14, '1', 3, 'Wednesday', '10:00 am', '10:45 am', '5', 'SK5252', '', 1),
+(15, '1', 3, 'Wednesday', '9:15 am', '10:00 am', '3', 'SK5252', '', 1),
+(16, '1', 3, 'Thursday', '12:15 pm', '1:00 pm', '1', 'SK5252', '', 1),
+(17, '1', 3, 'Thursday', '11:30 am', '12:15 pm', '2', 'SK5252', '', 1),
+(18, '1', 3, 'Thursday', '10:45 am', '11:30 am', '5', 'SK5252', '', 1),
+(19, '1', 3, 'Thursday', '10:00 am', '10:45 am', '4', 'SK5252', '', 1),
+(20, '1', 3, 'Thursday', '9:15 am', '10:00 am', '3', 'SK5252', '', 1),
+(21, '1', 3, 'Friday', '11:35 pm', '11:58 pm', '2', 'SK5252', '', 1),
+(22, '1', 3, 'Friday', '11:11 pm', '11:35 pm', '1', 'SK5252', '', 1),
+(23, '1', 3, 'Friday', '10:45 am', '11:30 am', '4', 'SK5252', '', 1),
+(24, '1', 3, 'Friday', '10:00 am', '10:45 am', '3', 'SK5252', '', 1),
+(25, '1', 3, 'Friday', '9:15 am', '10:00 am', '5', 'SK5252', '', 1);
 
 --
 -- Indexes for dumped tables
 --
 
 --
+-- Indexes for table `branch`
+--
+ALTER TABLE `branch`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `faculty_login`
 --
 ALTER TABLE `faculty_login`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `quiz_choices`
+--
+ALTER TABLE `quiz_choices`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `quiz_question`
+--
+ALTER TABLE `quiz_question`
+  ADD PRIMARY KEY (`quiz_question_id`);
+
+--
+-- Indexes for table `quiz_student_answer`
+--
+ALTER TABLE `quiz_student_answer`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -231,6 +386,18 @@ ALTER TABLE `student_login`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `subject`
+--
+ALTER TABLE `subject`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `subject_assign_faculty`
+--
+ALTER TABLE `subject_assign_faculty`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `timetable_all_dept`
 --
 ALTER TABLE `timetable_all_dept`
@@ -241,16 +408,40 @@ ALTER TABLE `timetable_all_dept`
 --
 
 --
+-- AUTO_INCREMENT for table `branch`
+--
+ALTER TABLE `branch`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `faculty_login`
 --
 ALTER TABLE `faculty_login`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `quiz_choices`
+--
+ALTER TABLE `quiz_choices`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT for table `quiz_question`
+--
+ALTER TABLE `quiz_question`
+  MODIFY `quiz_question_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `quiz_student_answer`
+--
+ALTER TABLE `quiz_student_answer`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `student_attendance`
 --
 ALTER TABLE `student_attendance`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- AUTO_INCREMENT for table `student_fees_details`
@@ -265,10 +456,22 @@ ALTER TABLE `student_login`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
+-- AUTO_INCREMENT for table `subject`
+--
+ALTER TABLE `subject`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `subject_assign_faculty`
+--
+ALTER TABLE `subject_assign_faculty`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `timetable_all_dept`
 --
 ALTER TABLE `timetable_all_dept`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
