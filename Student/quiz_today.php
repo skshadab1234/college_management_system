@@ -1,14 +1,14 @@
 <?php
+require 'studets_resuse_files/header.php';
 
-   require 'studets_resuse_files/header.php';
+if (isset($_GET['quiz_id']) && $_GET['quiz_id'] != '' && isset($_GET['date']) && $_GET['date'] != '' && isset($_GET['topic']) && $_GET['topic'] != '' && isset($_GET['startTime']) && $_GET['startTime'] != '')
+{
+    $subject_name = get_safe_value($_GET['quiz_id']);
+    $date = get_safe_value($_GET['date']);
+    $topic = get_safe_value($_GET['topic']);
+    $startTime = get_safe_value($_GET['startTime']);
+}
 
-   if (isset($_GET['quiz_id']) && $_GET['quiz_id'] != '' && isset($_GET['date']) && $_GET['date'] != '' && isset($_GET['topic']) && $_GET['topic'] != '' && isset($_GET['startTime']) && $_GET['startTime'] != '') {
-   		$subject_name = get_safe_value($_GET['quiz_id']);
-   		$date = get_safe_value($_GET['date']);
-   		$topic = get_safe_value($_GET['topic']);
-   		$startTime = get_safe_value($_GET['startTime']);
-   }
-   
 ?>
 
 <style type="text/css">
@@ -29,8 +29,7 @@
 .quiz-container {
 	background: var(--color-white);
 	width: 100%;
-	margin: 1rem auto;
-	max-width: 48rem;
+	margin: 1rem;
 	border-radius: 4px;
 }
 
@@ -108,92 +107,243 @@ input[type="radio"] {
 	    		<div class="container-fluid">
 	    			<div class="row">
 		    			<div class="col-sm-8 col-md-8 text-left">
-				    		<h5 class="card-title"><?= $subject_name.' ('.$topic.')' ?></h5>
+				    		<h5 class="card-title"><?=$subject_name . ' (' . $topic . ')' ?></h5>
 		    			</div>
 		    			<div class="col-sm-4 col-md-4 text-right">
-				    		<h5 class="card-title" >Start Time : <?= date('h:i a', strtotime($startTime)) ?></h5>
+				    		<h5 class="card-title" >Start Time : <?=date('h:i a', strtotime($startTime)) ?></h5>
 		    			</div>
 		    		</div>
 	    		</div>
 	    	</div>
               <div class="card-body">
 
-             <section class="quiz-container" style="">
-
-				<?php
-					$current_time = date("Y-m-d h:i a");
-					$quiz_start_time = '2021-04-20 9:00 am';
-					
-
-					if ($date == date('Y-m-d')) {
-						// date('h:i a', strtotime($startTime))
-		               if (strtotime($current_time) >= strtotime($quiz_start_time)){
-		                  ?>
-		                  <!-- Quiz form -->
-					      <form class="quiz-form" autocomplete="off" method="post" action="" id="quizformSubmit">
-					         <?php
-					                     for($i=0;$i<=numberofquestonpersubjectQuiz($subject_name,$date)['numberofquestonpersubjectQuiz'];$i++){
-					                     $l = 1;
-					                     
-					                     $ansid = $i;
-
-					                     $sql1 = "SELECT *,quiz_question.id as question_id_today FROM `quiz_question`  where subject_name = '$subject_name' && quiz_date = '$date' && quiz_question.status = '1' && quiz_question_id = '$i'";
-
-					                        $result1 = mysqli_query($con, $sql1);
-					                           if (mysqli_num_rows($result1) > 0) {
-					                                       while($row1 = mysqli_fetch_assoc($result1)) {
-					                        ?>          
-					                     <p class="card-header">  <?php echo "Q".$i ." : ". $row1['question_name']; ?> </p>
-
-					                  <br>
-					                    
-					                     <?php
-					                        $sql = "SELECT * FROM `quiz_choices` WHERE `question_id` = ".$row1['question_id_today']."";
-					                           $result = mysqli_query($con, $sql);
-					                              if (mysqli_num_rows($result) > 0) {
-					                                          while($row = mysqli_fetch_assoc($result)) {
-					                                             
-					                           ?> 
-					                      
-					                      <div class="form-check">
-											<input type="hidden"  name="subject_name" value="<?= $subject_name ?>">
-						                  <input type="radio" id="<?php echo $ansid.$row['choices']; ?>" name="quizcheck[<?php echo $row1['question_id_today']; ?>]"  value="<?php echo $row['choices']; ?>" required >
-						                  <label for="<?php echo $ansid.$row['choices']; ?>"><?php echo $row['choices']; ?> </label>
-						               </div>     
-					                     <?php
-					                        
-					                        } } 
-					                        $ansid = $ansid + $l;
-					                        } }
-					                    }
-					                        
-					                     ?>
-					            <button type="submit" name="submit">Show results</button>
-					      </form>
-			      		<!-- end quiz -->
-		                  <?php
-		               }else{
-		                  ?>
-		                  <div class="container-fluid text-center">
-		                           <h3 class="text-center" >Quiz will start at <?= $quiz_start_time ?></h3>
-		                  </div>
-		                  <?php
-		               }
-
-					}elseif ($date > date('Y-m-d')) {
-						echo "not created for ".$date;
-					}elseif ($date < date("Y-m-d")) {
-						?>
-
-						<!-- ye date nikal chuki hai means quiz time end up -->
-							<!-- Quiz form -->
-							
-		      		<!-- end quiz -->
+             <section class="quiz-container">
+             	<div class="row ">
+       				<div class="col-sm-12 col-md-12 col-lg-8">
+       					      		
 						<?php
-					}
+						$current_time = date("Y-m-d h:i a");
+						$quiz_start_time = $date;
 
+						if ($date == date('Y-m-d'))
+						{
+						    // date('h:i a', strtotime($startTime))
+						    if (strtotime($current_time) >= strtotime($quiz_start_time))
+						    {
+									$quiz_sql = "SELECT * FROM `quiz_student_answer` WHERE quiz_student_Admit_No = ".$student_login['Admission_NO']."  && quiz_date = '$date' && subject_name = '$subject_name'";
+										 	$quiz_answer = mysqli_query($con, $quiz_sql);
+										 	$quiz_answer_row = mysqli_fetch_assoc($quiz_answer);
 
-				?>
+												if (mysqli_num_rows($quiz_answer) > 0) {
+													?>
+
+		<div class="mr-3" style="border:1px solid #ddd;padding: 10px;width: 250px;">
+			<?php
+			$marks_get = marks_get($student_login['Admission_NO'],$subject_name,$date);
+			?>
+			<h5 style="color: #d1d1d1;font-size: 1rem">Total Score :</h5>
+			<h1 style="color: <?= $marks_get['color'] ?>"><?= $marks_get['value'].' / '.totalmarksQuestion($subject_name,$date); ?></h1>
+
+			<p class="alert alert-<?= $marks_get['message_color']  ?>"><?= $marks_get['message']  ?></p>
+		</div>
+													<?php
+													$question_echo = "SELECT *,quiz_question.id as question_id_today FROM `quiz_question`  where subject_name = '$subject_name' && quiz_date = '$date' && quiz_question.status = '1'";
+								$question_echo_res = mysqli_query($con,$question_echo);
+
+								if (mysqli_num_rows($question_echo_res)) {
+									foreach ($question_echo_res as $key => $question_echo_value) {
+									
+										 $l = 1;
+
+							            $ansid = $key +1;
+										?>
+
+										<!-- queston printed -->
+									    
+									    <p class="card-header"><?php echo "Q" . $ansid . " : " . $question_echo_value['question_name']; ?> </p><br>
+										<?php
+										 $sql = "SELECT * FROM `quiz_choices` WHERE `question_id` = " . $question_echo_value['id'] . "";
+										 $quiz_choices = mysqli_query($con, $sql);
+										 foreach ($quiz_choices as $key => $quiz_choices_value) {
+										 	$quiz_sql = "SELECT * FROM `quiz_student_answer` WHERE quiz_student_Admit_No = ".$student_login['Admission_NO']." && quiz_question_id = ".$question_echo_value['id']." && quiz_date = '$date' && subject_name = '$subject_name'";
+										 	$quiz_answer = mysqli_query($con, $quiz_sql);
+										 	$quiz_answer_row = mysqli_fetch_assoc($quiz_answer);
+
+												if (mysqli_num_rows($quiz_answer) > 0) {
+													if ($quiz_choices_value['correct_answer'] == $quiz_choices_value['choices']) {
+													$color = 'green';
+													$checked = 'checked';
+													}elseif ($quiz_answer_row['quiz_student_answer'] == $quiz_choices_value['choices']) {
+								                		$color = 'red';	
+								                		$checked = 'checked';
+								                	}else{
+								                		$color = '';
+								                		$checked = '';
+								                	}
+												}else{
+													$color = '';
+													$checked = '';
+												}
+										 	?>
+										 		<div class="form-check">
+								                  <input type="radio" disabled="" <?= $checked ?>>
+								                  <label style="color: <?= $color ?>"><?php echo $quiz_choices_value['choices']; ?> </label>
+								               </div>  
+										 	<?php
+										 }
+										$ansid = $ansid + $l;
+									}
+
+								}else{
+
+									?>
+									    <p class="card-header"> No Quiz Found</p><br>
+									<?php
+								}
+												}else{
+													?>
+													    <!-- Quiz form -->
+											      <form class="quiz-form" autocomplete="off" method="post" action="" id="quizformSubmit">
+											         <?php
+						        for ($i = 0;$i <= numberofquestonpersubjectQuiz($subject_name, $date) ['numberofquestonpersubjectQuiz'];$i++)
+						        {
+						            $l = 1;
+
+						            $ansid = $i;
+
+						            $sql1 = "SELECT *,quiz_question.id as question_id_today FROM `quiz_question`  where subject_name = '$subject_name' && quiz_date = '$date' && quiz_question.status = '1' && quiz_question_id = '$i'";
+
+						            $result1 = mysqli_query($con, $sql1);
+						            if (mysqli_num_rows($result1) > 0)
+						            {
+						                while ($row1 = mysqli_fetch_assoc($result1))
+						                {
+						?>          
+											                     <p class="card-header">  <?php echo "Q" . $i . " : " . $row1['question_name']; ?> </p>
+
+											                  <br>
+											                    
+											                     <?php
+						                    $sql = "SELECT * FROM `quiz_choices` WHERE `question_id` = " . $row1['question_id_today'] . "";
+						                    $result = mysqli_query($con, $sql);
+						                    if (mysqli_num_rows($result) > 0)
+						                    {
+						                        while ($row = mysqli_fetch_assoc($result))
+						                        {
+
+						?> 
+											                      
+											                      <div class="form-check">
+																	<input type="hidden"  name="subject_name" value="<?=$subject_name
+						?>">
+												                  <input type="radio" id="<?php echo $ansid . $row['choices']; ?>" name="quizcheck[<?php echo $row1['question_id_today']; ?>]"  value="<?php echo $row['choices']; ?>" required >
+												                  <label for="<?php echo $ansid . $row['choices']; ?>"><?php echo $row['choices']; ?> </label>
+												               </div>     
+											                     <?php
+						                        }
+						                    }
+						                    $ansid = $ansid + $l;
+						                }
+						            }
+						        }
+
+						?>
+											            <button type="submit" name="submit">Show results</button>
+											      </form>
+									      		<!-- end quiz -->
+								                  <?php
+												}	
+						    }
+						    else
+						    {
+						?>
+								                  <div class="container-fluid text-center">
+								                           <h3 class="text-center" >Quiz will start at <?=$quiz_start_time ?></h3>
+								                  </div>
+								                  <?php
+						    }
+
+						}
+						elseif ($date > date('Y-m-d'))
+						{
+						    echo "not created for " . $date;
+						}
+						elseif ($date < date("Y-m-d"))
+						{
+
+												// <!-- ye date nikal chuki hai means quiz time end up -->
+												// 	<!-- Quiz form -->
+								$question_echo = "SELECT *,quiz_question.id as question_id_today FROM `quiz_question`  where subject_name = '$subject_name' && quiz_date = '$date' && quiz_question.status = '1'";
+								$question_echo_res = mysqli_query($con,$question_echo);
+
+								if (mysqli_num_rows($question_echo_res)) {
+									?>
+										<div class="mr-3" style="border:1px solid #ddd;padding: 10px;width: 250px;">
+											<?php
+											$marks_get = marks_get($student_login['Admission_NO'],$subject_name,$date);
+											?>
+											<h5 style="color: #d1d1d1;font-size: 1rem">Total Score :</h5>
+											<h1 style="color: <?= $marks_get['color'] ?>"><?= $marks_get['value'].' / '.totalmarksQuestion($subject_name,$date); ?></h1>
+
+											<p class="alert alert-<?= $marks_get['message_color']  ?>"><?= $marks_get['message']  ?></p>
+										</div>
+									<?php
+									foreach ($question_echo_res as $key => $question_echo_value) {
+									
+										 $l = 1;
+
+							            $ansid = $key +1;
+										?>
+
+										<!-- queston printed -->
+									    
+									    <p class="card-header"><?php echo "Q" . $ansid . " : " . $question_echo_value['question_name']; ?> </p><br>
+										<?php
+										 $sql = "SELECT * FROM `quiz_choices` WHERE `question_id` = " . $question_echo_value['id'] . "";
+										 $quiz_choices = mysqli_query($con, $sql);
+										 foreach ($quiz_choices as $key => $quiz_choices_value) {
+										 	$quiz_sql = "SELECT * FROM `quiz_student_answer` WHERE quiz_student_Admit_No = ".$student_login['Admission_NO']." && quiz_question_id = ".$question_echo_value['id']." && quiz_date = '$date' && subject_name = '$subject_name'";
+										 	$quiz_answer = mysqli_query($con, $quiz_sql);
+										 	$quiz_answer_row = mysqli_fetch_assoc($quiz_answer);
+
+												if (mysqli_num_rows($quiz_answer) > 0) {
+													if ($quiz_choices_value['correct_answer'] == $quiz_choices_value['choices']) {
+													$color = 'green';
+													$checked = 'checked';
+													}elseif ($quiz_answer_row['quiz_student_answer'] == $quiz_choices_value['choices']) {
+								                		$color = 'red';	
+								                		$checked = 'checked';
+								                	}else{
+								                		$color = '';
+								                		$checked = '';
+								                	}
+												}else{
+													$color = '';
+													$checked = '';
+												}
+										 	?>
+										 		<div class="form-check">
+								                  <input type="radio" disabled="" <?= $checked ?>>
+								                  <label style="color: <?= $color ?>"><?php echo $quiz_choices_value['choices']; ?> </label>
+								               </div>  
+										 	<?php
+										 }
+										$ansid = $ansid + $l;
+									}
+
+								}else{
+
+									?>
+									    <p class="card-header"> No Quiz Found</p><br>
+									<?php
+								}
+
+						}
+						?>
+       				</div>	
+       				
+             	</div>
+
 			</section>
 
               </div>

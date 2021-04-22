@@ -206,7 +206,9 @@
                         <ul class="todo-list-wrapper list-group list-group-flush">
                               <?php
                                 $total_quiz_today = array_filter(SubjectQuzForToday(date('Y-m-d')));
-
+                                  
+                                if (count($total_quiz_today) > 0) {
+                                  
                                 foreach ($total_quiz_today as $key => $value) {
                                   $numberofquestonpersubjectQuiz =  numberofquestonpersubjectQuiz($value['subject_name'],date('Y-m-d'));
                                   ?>
@@ -236,6 +238,11 @@
                                 </li>
                                   <?php
                                 }
+                               }else{
+                                ?>
+                                  <h5 class="card-title text-center">No Quiz Found</h5>
+                                <?php
+                               } 
                               ?>
                               
                           </ul>

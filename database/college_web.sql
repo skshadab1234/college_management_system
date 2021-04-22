@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 20, 2021 at 07:50 AM
+-- Generation Time: Apr 22, 2021 at 03:09 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -96,16 +96,54 @@ CREATE TABLE `quiz_choices` (
 --
 
 INSERT INTO `quiz_choices` (`id`, `question_id`, `correct_answer`, `choices`) VALUES
-(1, 1, 'Container of objects of similar types', 'Container of objects of similar types'),
-(4, 1, 'Container of objects of similar types', 'A data structure that shows a hierarchical behavior'),
-(5, 1, 'Container of objects of similar types', 'Container of objects of mixed types\r\n'),
-(6, 1, 'Container of objects of similar types', 'All of the mentioned'),
-(7, 2, 'Recursion', 'CPU Resource Allocation'),
-(8, 2, 'Recursion', 'Breadth First Traversal'),
-(9, 2, 'Recursion', 'Recursion'),
-(10, 2, 'Recursion', 'None of the above'),
-(11, 3, 'False', 'True'),
-(12, 3, 'False', 'False');
+(1, 1, 'recursive', 'illegal call'),
+(2, 1, 'recursive', 'reverse polish'),
+(3, 1, 'recursive', 'recursive'),
+(4, 1, 'recursive', 'none of the above\r\n'),
+(5, 2, '2k+1 ? 1', '2k ? 1'),
+(6, 2, '2k+1 ? 1', '2k+1 ? 1'),
+(7, 2, '2k+1 ? 1', '2k-1 ? 1'),
+(8, 2, '2k+1 ? 1', '2k+2 ? 1'),
+(9, 3, '2', '5'),
+(10, 3, '2', '4'),
+(11, 3, '2', '3'),
+(12, 3, '2', '2'),
+(13, 4, 'Binary Search', 'Binary Search'),
+(14, 4, 'Binary Search', 'Interpolation Search'),
+(15, 4, 'Binary Search', 'Linear Search'),
+(16, 4, 'Binary Search', 'All of the above'),
+(17, 5, 'a step by step procedure to solve problem.', 'a piece of code to be executed'),
+(18, 5, 'a step by step procedure to solve problem.', 'a loosely written code to make final code.'),
+(19, 5, 'a step by step procedure to solve problem.', 'a step by step procedure to solve problem.'),
+(20, 5, 'a step by step procedure to solve problem.', 'all of the above.'),
+(21, 6, 'Selection Sort', 'Selection Sort'),
+(22, 6, 'Selection Sort', 'Bubble Sort'),
+(23, 6, 'Selection Sort', 'Merge Sort'),
+(24, 6, 'Selection Sort', 'Insertion Sort'),
+(25, 7, 'two pointers are maintained to store next and previous nodes.', 'a pointer is maintained to store both next and previous nodes.'),
+(26, 7, 'two pointers are maintained to store next and previous nodes.', 'two pointers are maintained to store next and previous nodes.'),
+(27, 7, 'two pointers are maintained to store next and previous nodes.', 'a pointer to self is maintained for each node.'),
+(28, 7, 'two pointers are maintained to store next and previous nodes.', 'none of the above.'),
+(29, 8, 'complete binary tree', 'complete binary tree'),
+(30, 8, 'complete binary tree', 'spanning tree'),
+(31, 8, 'complete binary tree', 'sparse tree'),
+(32, 8, 'complete binary tree', 'binary search tree'),
+(33, 9, 'we will get the same spanning tree', 'we will get a different spanning tree'),
+(34, 9, 'we will get the same spanning tree', 'we will get the same spanning tree'),
+(35, 9, 'we will get the same spanning tree', 'spanning will have less edges.'),
+(36, 9, 'we will get the same spanning tree', 'spanning will not cover all vertices.'),
+(37, 10, 'all other factors like CPU speed are constant and have no effect on implementation', 'the algorithm has been tested before in real environment'),
+(38, 10, 'all other factors like CPU speed are constant and have no effect on implementation', 'all other factors like CPU speed are constant and have no effect on implementation'),
+(39, 10, 'all other factors like CPU speed are constant and have no effect on implementation', 'the algorithm needs not to be practical.'),
+(40, 10, 'all other factors like CPU speed are constant and have no effect on implementation', 'none of the above'),
+(41, 11, 'we will get the same spanning tree', 'we will get a different spanning tree'),
+(42, 11, 'we will get the same spanning tree', 'we will get the same spanning tree'),
+(43, 11, 'we will get the same spanning tree', 'spanning will have less edges.'),
+(44, 11, 'we will get the same spanning tree', 'spanning will not cover all vertices.'),
+(45, 12, 'all other factors like CPU speed are constant and have no effect on implementation', 'the algorithm has been tested before in real environment'),
+(46, 12, 'all other factors like CPU speed are constant and have no effect on implementation', 'all other factors like CPU speed are constant and have no effect on implementation'),
+(47, 12, 'all other factors like CPU speed are constant and have no effect on implementation', 'the algorithm needs not to be practical.'),
+(48, 12, 'all other factors like CPU speed are constant and have no effect on implementation', 'none of the above');
 
 -- --------------------------------------------------------
 
@@ -114,6 +152,7 @@ INSERT INTO `quiz_choices` (`id`, `question_id`, `correct_answer`, `choices`) VA
 --
 
 CREATE TABLE `quiz_question` (
+  `id` int(11) NOT NULL,
   `quiz_question_id` int(11) NOT NULL,
   `question_name` varchar(255) NOT NULL,
   `faculty_created_id` varchar(255) NOT NULL,
@@ -129,10 +168,19 @@ CREATE TABLE `quiz_question` (
 -- Dumping data for table `quiz_question`
 --
 
-INSERT INTO `quiz_question` (`quiz_question_id`, `question_name`, `faculty_created_id`, `subject_name`, `quiz_topic`, `question_marks`, `quiz_date`, `quiz_start_time`, `status`) VALUES
-(1, 'Which of these best describes an array?', 'SK5252', 'Data Structure', 'Basic of data structure', 2, '2021-04-20', '2021-04-19 6:00 pm', 1),
-(2, 'Stack is used for', 'SK5252', 'Data Structure', 'Basic of data structure', 2, '2021-04-20', '2021-04-19 6:00 pm', 1),
-(3, 'Postfix expression is just a reverse of prefix expression.', 'SK5252', 'Data Structure', 'Basic of data structure', 2, '2021-04-20', '2021-04-19 6:00 pm', 1);
+INSERT INTO `quiz_question` (`id`, `quiz_question_id`, `question_name`, `faculty_created_id`, `subject_name`, `quiz_topic`, `question_marks`, `quiz_date`, `quiz_start_time`, `status`) VALUES
+(1, 1, 'A procedure that calls itself is called', 'SK5252', 'Data Structure', 'Basic od DS', 2, '2021-04-21', '2021-04-21 06:00 pm', 1),
+(2, 2, 'Maximum number of nodes in a binary tree with height k, where root is height 0, is', 'SK5252', 'Data Structure', 'Basic od DS', 2, '2021-04-21', '2021-04-21 06:00 pm', 1),
+(3, 3, 'Minimum number of queues required for priority queue implementation?', 'SK5252', 'Data Structure', 'Basic od DS', 2, '2021-04-21', '2021-04-21 06:00 pm', 1),
+(4, 4, 'Which of the following searching techniques do not require the data to be in sorted form', 'SK5252', 'Data Structure', 'Basic od DS', 2, '2021-04-21', '2021-04-21 06:00 pm', 1),
+(5, 5, 'An algorithm is', 'SK5252', 'Data Structure', 'Basic od DS', 2, '2021-04-21', '2021-04-21 06:00 pm', 1),
+(6, 6, 'Which of the below mentioned sorting algorithms are not stable?', 'SK5252', 'Data Structure', 'Basic od DS', 2, '2021-04-21', '2021-04-21 06:00 pm', 1),
+(7, 7, 'In doubly linked lists', 'SK5252', 'Data Structure', 'Basic od DS', 2, '2021-04-21', '2021-04-21 06:00 pm', 1),
+(8, 8, 'Heap is an example of', 'SK5252', 'Data Structure', 'Basic od DS', 2, '2021-04-21', '2021-04-21 06:00 pm', 1),
+(9, 9, ' If we choose Prim\'s Algorithm for uniquely weighted spanning tree instead of Kruskal\'s Algorithm, then', 'SK5252', 'Data Structure', 'Basic od DS', 2, '2021-04-21', '2021-04-21 06:00 pm', 1),
+(10, 10, 'Apriori analysis of an algorithm assumes that ?', 'SK5252', 'Data Structure', 'Basic of DS', 2, '2021-04-21', '2021-04-21 06:00 pm', 1),
+(11, 1, ' If we choose Prim\'s Algorithm for uniquely weighted spanning tree instead of Kruskal\'s Algorithm, then', 'SK5252', 'Data Structure', 'Basic od DS', 2, '2021-04-22', '2021-04-21 06:00 pm', 1),
+(12, 2, 'Apriori analysis of an algorithm assumes that ?', 'SK5252', 'Data Structure', 'Basic of DS', 2, '2021-04-22', '2021-04-21 06:00 pm', 1);
 
 -- --------------------------------------------------------
 
@@ -145,15 +193,30 @@ CREATE TABLE `quiz_student_answer` (
   `quiz_student_Admit_No` int(11) NOT NULL,
   `quiz_question_id` int(11) NOT NULL,
   `quiz_student_answer` varchar(255) NOT NULL,
-  `marks_get` int(11) NOT NULL
+  `marks_get` int(11) NOT NULL,
+  `quiz_date` date NOT NULL,
+  `subject_name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `quiz_student_answer`
 --
 
-INSERT INTO `quiz_student_answer` (`id`, `quiz_student_Admit_No`, `quiz_question_id`, `quiz_student_answer`, `marks_get`) VALUES
-(1, 1993, 1, 'Queue', 2);
+INSERT INTO `quiz_student_answer` (`id`, `quiz_student_Admit_No`, `quiz_question_id`, `quiz_student_answer`, `marks_get`, `quiz_date`, `subject_name`) VALUES
+(1, 1993, 1, 'recursive', 2, '2021-04-21', 'Data Structure'),
+(2, 1993, 2, '2k+1 ? 1', 2, '2021-04-21', 'Data Structure'),
+(3, 1993, 3, '2', 2, '2021-04-21', 'Data Structure'),
+(4, 1993, 4, 'Binary Search', 2, '2021-04-21', 'Data Structure'),
+(5, 1993, 5, 'a step by step procedure to solve problem.', 2, '2021-04-21', 'Data Structure'),
+(6, 1993, 6, 'Selection Sort', 2, '2021-04-21', 'Data Structure'),
+(7, 1993, 7, 'two pointers are maintained to store next and previous nodes.', 2, '2021-04-21', 'Data Structure'),
+(8, 1993, 8, 'spanning tree', 2, '2021-04-21', 'Data Structure'),
+(9, 1993, 9, 'we will get the same spanning tree', 2, '2021-04-21', 'Data Structure'),
+(10, 1993, 10, 'all other factors like CPU speed are constant and have no effect on implementation', 2, '2021-04-21', 'Data Structure'),
+(18, 1993, 11, 'we will get the same spanning tree', 2, '2021-04-22', 'Data Structure'),
+(19, 1993, 12, 'all other factors like CPU speed are constant and have no effect on implementation', 2, '2021-04-22', 'Data Structure'),
+(26, 1994, 11, 'we will get the same spanning tree', 2, '2021-04-22', 'Data Structure'),
+(27, 1994, 12, 'all other factors like CPU speed are constant and have no effect on implementation', 2, '2021-04-22', 'Data Structure');
 
 -- --------------------------------------------------------
 
@@ -179,7 +242,9 @@ CREATE TABLE `student_attendance` (
 INSERT INTO `student_attendance` (`id`, `Students_Admit_No`, `Lecture_Date`, `Lecture_Time`, `Lecture_Name`, `Teacher_id`, `Status`, `Joining_Time`) VALUES
 (54, 1993, '2021-04-19', '10:00 - 10:45', '5', 'SK5252', 1, '2021-04-19 10:01:52'),
 (55, 1993, '2021-04-19', '11:30 - 12:15', '2', 'SK5252', 1, '2021-04-19 11:31:31'),
-(57, 1993, '2021-04-19', '12:15 - 01:00', '1', 'SK5252', 1, '2021-04-19 02:03:59');
+(57, 1993, '2021-04-19', '12:15 - 01:00', '1', 'SK5252', 1, '2021-04-19 02:03:59'),
+(58, 1993, '2021-04-20', '12:15 - 01:00', '1', 'SK5252', 1, '2021-04-20 12:16:04'),
+(59, 1993, '2021-04-21', '09:15 - 10:00', '3', 'SK5252', 1, '2021-04-21 09:22:34');
 
 -- --------------------------------------------------------
 
@@ -359,7 +424,7 @@ ALTER TABLE `quiz_choices`
 -- Indexes for table `quiz_question`
 --
 ALTER TABLE `quiz_question`
-  ADD PRIMARY KEY (`quiz_question_id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `quiz_student_answer`
@@ -423,25 +488,25 @@ ALTER TABLE `faculty_login`
 -- AUTO_INCREMENT for table `quiz_choices`
 --
 ALTER TABLE `quiz_choices`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT for table `quiz_question`
 --
 ALTER TABLE `quiz_question`
-  MODIFY `quiz_question_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `quiz_student_answer`
 --
 ALTER TABLE `quiz_student_answer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `student_attendance`
 --
 ALTER TABLE `student_attendance`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- AUTO_INCREMENT for table `student_fees_details`

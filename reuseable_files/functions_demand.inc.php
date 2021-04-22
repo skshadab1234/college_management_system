@@ -137,3 +137,35 @@ function getQuizQuestionBySubjectName($subject_name,$today_date){
 
 	return $arr;
 }
+
+
+function totalmarksQuestion($subject_name,$date){
+	global $con;
+
+	$res = mysqli_query($con, "SELECT SUM(question_marks) as totalmarksQuestion FROM `quiz_question` WHERE subject_name ='$subject_name' && quiz_date = '$date'");
+	$row = mysqli_fetch_assoc($res);
+	return $row['totalmarksQuestion'];
+}
+
+function marks_get($student_id,$subject_name,$date){
+	global $con;
+$arr[] = array();
+	$res = mysqli_query($con, "SELECT SUM(marks_get) as marks_get FROM `quiz_student_answer` WHERE quiz_student_Admit_No  = ".$student_id." && subject_name ='$subject_name' && quiz_date = '$date'");
+	$row = mysqli_fetch_assoc($res);
+	if ($row['marks_get'] == Null) {
+		$arr['color'] = 'red';
+		$arr['value'] = '0';				
+	}else{
+		$arr['color'] = '';
+		$arr['value'] = $row['marks_get'];
+	}
+
+	if ($row['marks_get'] > $row['marks_get'] / 2) {
+		$arr['message'] = "Excellent";	
+		$arr['message_color'] = 'success';
+	}else{
+		$arr['message'] = "Need Some Practice";	
+		$arr['message_color'] = 'danger';
+	}
+	return $arr;
+}
