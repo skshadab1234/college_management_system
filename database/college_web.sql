@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 23, 2021 at 07:09 AM
+-- Generation Time: Apr 29, 2021 at 06:25 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -66,6 +66,8 @@ CREATE TABLE `faculty_login` (
   `salary` int(11) NOT NULL,
   `joining_date` date NOT NULL,
   `leaving_date` date NOT NULL,
+  `reset_password_code_faculty` int(20) NOT NULL,
+  `new_login_faculty` int(11) NOT NULL DEFAULT '0',
   `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -73,10 +75,70 @@ CREATE TABLE `faculty_login` (
 -- Dumping data for table `faculty_login`
 --
 
-INSERT INTO `faculty_login` (`id`, `faculty_login_id`, `first_name`, `middle_name`, `last_name`, `faculty_alias`, `faculty_email`, `mb_number`, `faculty_image`, `password`, `dob`, `desgination`, `branch_id`, `salary`, `joining_date`, `leaving_date`, `status`) VALUES
-(1, 'SK5252', 'Shadab', 'Alam', 'Khan', 'SK', 'skshadab@gmal.com', '9167582452', 'http://csmit.in/images/ce/faculty/1.jpg', 'shadabkhan', '2017-02-07', 'Programmer', 1, 20000, '2021-04-09', '2021-04-23', 1),
-(2, 'SK5253', 'Mahesh', 'Thakur', '', 'MK', 'mahesh.csmit@gmail.com', '1234567890', 'http://csmit.in/images/ce/faculty/2.jpg', '', '1991-03-08', 'Structure Exper Analysis', 1, 50000, '2021-04-19', '0000-00-00', 1),
-(3, 'SK5254', 'Gajana', 'Patel', 'Usman', 'GP', 'gajana@gmail.com', '5254526352', '', '', '1992-04-19', 'Data Scientist', 1, 100000, '2021-04-19', '0000-00-00', 1);
+INSERT INTO `faculty_login` (`id`, `faculty_login_id`, `first_name`, `middle_name`, `last_name`, `faculty_alias`, `faculty_email`, `mb_number`, `faculty_image`, `password`, `dob`, `desgination`, `branch_id`, `salary`, `joining_date`, `leaving_date`, `reset_password_code_faculty`, `new_login_faculty`, `status`) VALUES
+(1, 'SK5252', 'Shadab', 'Alam', 'Khan', 'SK', 'KS579265@gmail.com', '9167582452', 'http://csmit.in/images/ce/faculty/1.jpg', '$2y$10$nO0t4uMMSehuov2zoQbUcOck146KYGQ8b4MX8A2g6oGf/.K3JJ.OO', '2017-02-07', 'Programmer', 1, 20000, '2021-04-09', '2021-04-23', 6701321, 1, 1),
+(2, 'SK5253', 'Mahesh', 'Thakur', '', 'MK', 'mahesh.csmit@gmail.com', '1234567890', 'http://csmit.in/images/ce/faculty/2.jpg', '$2y$10$J4OQxGoHqTLkRHwgdrbMDuk8uEVYpHMHYSSoP0Ggkqe5T0s/GboJS', '1991-03-08', 'Structure Exper Analysis', 1, 50000, '2021-04-19', '0000-00-00', 0, 1, 1),
+(3, 'SK5254', 'Gajana', 'Patel', 'Usman', 'GP', 'gajana@gmail.com', '5254526352', '', 'shadabkhan', '1992-04-19', 'Data Scientist', 1, 100000, '2021-04-19', '0000-00-00', 0, 0, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `notice_board`
+--
+
+CREATE TABLE `notice_board` (
+  `id` int(11) NOT NULL,
+  `notice_admit_no` int(11) NOT NULL,
+  `notice_title` varchar(255) NOT NULL,
+  `notice_short_desc` varchar(255) NOT NULL,
+  `notice_links` varchar(255) NOT NULL,
+  `notice_date` varchar(255) NOT NULL,
+  `notice_time` varchar(255) NOT NULL,
+  `notice_status` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `notice_board`
+--
+
+INSERT INTO `notice_board` (`id`, `notice_admit_no`, `notice_title`, `notice_short_desc`, `notice_links`, `notice_date`, `notice_time`, `notice_status`) VALUES
+(1, 1993, 'Requested to update a profle', 'We take upto 2 working days to update your profile.', ' ', '2021-04-29', '05:23 pm', 1),
+(2, 1993, 'Requested to update a profle', 'We take upto 2 working days to update your profile.', ' ', '2021-04-29', '06:07 pm', 1),
+(3, 1993, 'Requested to update a profle', 'We take upto 2 working days to update your profile.', ' ', '2021-04-29', '06:11 pm', 1),
+(4, 1993, 'Requested to update a profle', 'We take upto 2 working days to update your profile.', ' ', '2021-04-29', '06:12 pm', 1),
+(5, 1993, 'Requested to update a profle', 'We take upto 2 working days to update your profile. <br> Requested at 2021-04-29', ' ', '2021-04-29', '06:24 pm', 1),
+(6, 1993, 'Requested to update a profle', 'We take upto 2 working days to update your profile. <br> Requested at 2021-04-29', ' ', '2021-04-29', '06:35 pm', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `profle_update_request`
+--
+
+CREATE TABLE `profle_update_request` (
+  `id` int(11) NOT NULL,
+  `admit_no` int(11) NOT NULL,
+  `description` text NOT NULL,
+  `admin_response` varchar(255) NOT NULL,
+  `request_added_on` datetime NOT NULL,
+  `request_updated_on` varchar(255) NOT NULL,
+  `status` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `profle_update_request`
+--
+
+INSERT INTO `profle_update_request` (`id`, `admit_no`, `description`, `admin_response`, `request_added_on`, `request_updated_on`, `status`) VALUES
+(1, 1993, 'hello sir my lastname is khan and firstname is Shadab Alam. Please Update it fast', '', '2021-04-29 15:31:33', '', 0),
+(2, 1993, 'Check my name it is Shadab Khan Not Khan Shadab', '', '2021-04-29 06:07:00', '', 0),
+(3, 1993, 'Update My Mail id Change it to skshadabbkhojo@gmail.com', '', '2021-04-29 06:11:00', '', 0),
+(4, 1993, 'Update My Mail id Change it to skshadabbkhojo@gmail.com', '', '2021-04-29 06:12:00', '', 0),
+(5, 1993, 'f there is any mistake in your profile then only send message. Don\'t Send message without any issue Strickly Warning.', '', '2021-04-29 06:20:00', '', 0),
+(6, 1993, 'hello sir my lastname is khan and firstname is Shadab Alam. Please Update it fast', '', '2021-04-29 06:22:00', '', 0),
+(7, 1993, 'hello sir my lastname is khan and firstname is Shadab Alam. Please Update it fast', '', '2021-04-29 06:23:00', '', 0),
+(8, 1993, 'hello sir my lastname is khan and firstname is Shadab Alam. Please Update it fast', '', '2021-04-29 06:24:00', '', 0),
+(9, 1993, 'If there is any mistake in your profile then only send message. Don\'t Send message without any issue Strickly Warning.', '', '2021-04-29 06:35:00', '', 0);
 
 -- --------------------------------------------------------
 
@@ -135,15 +197,7 @@ INSERT INTO `quiz_choices` (`id`, `question_id`, `correct_answer`, `choices`) VA
 (37, 10, 'all other factors like CPU speed are constant and have no effect on implementation', 'the algorithm has been tested before in real environment'),
 (38, 10, 'all other factors like CPU speed are constant and have no effect on implementation', 'all other factors like CPU speed are constant and have no effect on implementation'),
 (39, 10, 'all other factors like CPU speed are constant and have no effect on implementation', 'the algorithm needs not to be practical.'),
-(40, 10, 'all other factors like CPU speed are constant and have no effect on implementation', 'none of the above'),
-(41, 11, 'we will get the same spanning tree', 'we will get a different spanning tree'),
-(42, 11, 'we will get the same spanning tree', 'we will get the same spanning tree'),
-(43, 11, 'we will get the same spanning tree', 'spanning will have less edges.'),
-(44, 11, 'we will get the same spanning tree', 'spanning will not cover all vertices.'),
-(45, 12, 'all other factors like CPU speed are constant and have no effect on implementation', 'the algorithm has been tested before in real environment'),
-(46, 12, 'all other factors like CPU speed are constant and have no effect on implementation', 'all other factors like CPU speed are constant and have no effect on implementation'),
-(47, 12, 'all other factors like CPU speed are constant and have no effect on implementation', 'the algorithm needs not to be practical.'),
-(48, 12, 'all other factors like CPU speed are constant and have no effect on implementation', 'none of the above');
+(40, 10, 'all other factors like CPU speed are constant and have no effect on implementation', 'none of the above');
 
 -- --------------------------------------------------------
 
@@ -178,10 +232,8 @@ INSERT INTO `quiz_question` (`id`, `quiz_question_id`, `question_name`, `faculty
 (6, 6, 'Which of the below mentioned sorting algorithms are not stable?', 'SK5252', 'Data Structure', 1, 'Basic of DS', 2, '2021-04-21', '2021-04-21 06:00 pm', 1),
 (7, 7, 'In doubly linked lists', 'SK5252', 'Data Structure', 1, 'Basic of DS', 2, '2021-04-21', '2021-04-21 06:00 pm', 1),
 (8, 8, 'Heap is an example of', 'SK5252', 'Data Structure', 1, 'Basic of DS', 2, '2021-04-21', '2021-04-21 06:00 pm', 1),
-(9, 9, ' If we choose Prim\'s Algorithm for uniquely weighted spanning tree instead of Kruskal\'s Algorithm, then', 'SK5252', 'Data Structure', 1, 'Basic of DS', 2, '2021-04-21', '2021-04-21 06:00 pm', 1),
-(10, 10, 'Apriori analysis of an algorithm assumes that ?', 'SK5252', 'Data Structure', 1, 'Basic of DS', 2, '2021-04-21', '2021-04-21 06:00 pm', 1),
-(11, 1, ' If we choose Prim\'s Algorithm for uniquely weighted spanning tree instead of Kruskal\'s Algorithm, then', 'SK5252', 'Data Structure', 1, 'Basic of DS', 2, '2021-04-22', '2021-04-21 06:00 pm', 1),
-(12, 2, 'Apriori analysis of an algorithm assumes that ?', 'SK5252', 'Data Structure', 1, 'Basic of DS', 2, '2021-04-22', '2021-04-21 06:00 pm', 1);
+(9, 1, ' If we choose Prim\'s Algorithm for uniquely weighted spanning tree instead of Kruskal\'s Algorithm, then', 'SK5252', 'Data Structure', 1, 'Basic of DS', 2, '2021-04-24', '2021-04-21 06:00 pm', 1),
+(10, 2, 'Apriori analysis of an algorithm assumes that ?', 'SK5252', 'Data Structure', 1, 'Basic of DS', 2, '2021-04-24', '2021-04-21 06:00 pm', 1);
 
 -- --------------------------------------------------------
 
@@ -211,13 +263,10 @@ INSERT INTO `quiz_student_answer` (`id`, `quiz_student_Admit_No`, `quiz_question
 (5, 1993, 5, 'a step by step procedure to solve problem.', 2, '2021-04-21', 'Data Structure'),
 (6, 1993, 6, 'Selection Sort', 2, '2021-04-21', 'Data Structure'),
 (7, 1993, 7, 'two pointers are maintained to store next and previous nodes.', 2, '2021-04-21', 'Data Structure'),
-(8, 1993, 8, 'spanning tree', 2, '2021-04-21', 'Data Structure'),
-(9, 1993, 9, 'we will get the same spanning tree', 2, '2021-04-21', 'Data Structure'),
-(10, 1993, 10, 'all other factors like CPU speed are constant and have no effect on implementation', 2, '2021-04-21', 'Data Structure'),
-(18, 1993, 11, 'we will get the same spanning tree', 2, '2021-04-22', 'Data Structure'),
-(19, 1993, 12, 'all other factors like CPU speed are constant and have no effect on implementation', 2, '2021-04-22', 'Data Structure'),
 (26, 1994, 11, 'we will get the same spanning tree', 2, '2021-04-22', 'Data Structure'),
-(27, 1994, 12, 'all other factors like CPU speed are constant and have no effect on implementation', 2, '2021-04-22', 'Data Structure');
+(27, 1994, 12, 'all other factors like CPU speed are constant and have no effect on implementation', 2, '2021-04-22', 'Data Structure'),
+(32, 1993, 9, 'we will get a different spanning tree', 0, '2021-04-24', 'Data Structure'),
+(33, 1993, 10, 'all other factors like CPU speed are constant and have no effect on implementation', 2, '2021-04-24', 'Data Structure');
 
 -- --------------------------------------------------------
 
@@ -285,9 +334,11 @@ CREATE TABLE `student_login` (
   `Admission_NO` int(11) NOT NULL,
   `firstname` varchar(255) NOT NULL,
   `last_name` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL,
+  `student_email` varchar(255) NOT NULL,
+  `student_password` varchar(255) NOT NULL,
   `picture_link` varchar(255) NOT NULL,
   `STUDENT_DOB` date NOT NULL,
+  `student_phone` varchar(11) NOT NULL,
   `MOTHERNAME` varchar(255) NOT NULL,
   `PLACEOFBIRTH` varchar(255) NOT NULL,
   `GENDER` varchar(255) NOT NULL,
@@ -301,16 +352,19 @@ CREATE TABLE `student_login` (
   `DEPARTMENT` varchar(255) NOT NULL,
   `BRANCH` varchar(255) NOT NULL,
   `semester` int(1) NOT NULL DEFAULT '0',
-  `added_on` datetime NOT NULL
+  `reset_password_code` varchar(255) NOT NULL,
+  `added_on` datetime NOT NULL,
+  `online_status` varchar(255) NOT NULL,
+  `new_login` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `student_login`
 --
 
-INSERT INTO `student_login` (`id`, `Admission_NO`, `firstname`, `last_name`, `password`, `picture_link`, `STUDENT_DOB`, `MOTHERNAME`, `PLACEOFBIRTH`, `GENDER`, `ADDRESS`, `FATHERMOBILEPHONE`, `MOTHERMOBILEPHONE`, `FATHERPROFESSION`, `MOTHERPROFESSION`, `FATHERNAME`, `enroll_no`, `DEPARTMENT`, `BRANCH`, `semester`, `added_on`) VALUES
-(18, 1993, 'Khan', 'Shadab', '$2y$10$x7SFdvfvxdjodIkjcmVqiexounArLxHIPw7sGRL6dy9i9iL08Iiz2', 'https://pbs.twimg.com/profile_images/932986247642939392/CDq_0Vcw_400x400.jpg', '2000-04-30', 'Jasimunnisa', 'Mumbai', 'Male', 'Sayeed Manzil, 104, KAUSA MUMBRA', '9175485871', '8545758545', 'businessman', 'housewife', 'Jamal Ahmed Khan', 'CSN1221', 'Computer Engineering', '1', 3, '2021-04-14 00:00:00'),
-(19, 1994, 'Khan', 'Mehtab', '$2y$10$x7SFdvfvxdjodIkjcmVqiexounArLxHIPw7sGRL6dy9i9iL08Iiz2', 'https://teemusk.com/wp-content/uploads/2020/07/portrait.jpg', '2000-04-30', 'Jasimunnisa', 'Mumbai', 'Male', 'Sayeed Manzil, 104, KAUSA MUMBRA', '9175485871', '8545758545', 'businessman', 'housewife', 'Jamal Ahmed Khan', 'CSN1222', 'Mechanical Engineering', '2', 3, '0000-00-00 00:00:00');
+INSERT INTO `student_login` (`id`, `Admission_NO`, `firstname`, `last_name`, `student_email`, `student_password`, `picture_link`, `STUDENT_DOB`, `student_phone`, `MOTHERNAME`, `PLACEOFBIRTH`, `GENDER`, `ADDRESS`, `FATHERMOBILEPHONE`, `MOTHERMOBILEPHONE`, `FATHERPROFESSION`, `MOTHERPROFESSION`, `FATHERNAME`, `enroll_no`, `DEPARTMENT`, `BRANCH`, `semester`, `reset_password_code`, `added_on`, `online_status`, `new_login`) VALUES
+(18, 1993, 'Khan', 'Shadab', 'ks615044@gmail.com', '$2y$10$slgMdmxOaQfXbO0bGxAPn.TiuEyMLyijHRLFOMvUIbIXWPWt80u0.', 'https://pbs.twimg.com/profile_images/932986247642939392/CDq_0Vcw_400x400.jpg', '2000-04-30', '9152458575', 'Jasimunnisa', 'Mumbai', 'Male', 'Sayeed Manzil, 104, KAUSA MUMBRA', '9175485871', '8545758545', 'businessman', 'housewife', 'Jamal Ahmed Khan', 'CSN1221', 'Computer Engineering', '1', 3, '4782026', '2021-04-14 00:00:00', '', 1),
+(19, 1994, 'Khan', 'Cruz', 'cruz.jk@gmail.com', '$2y$10$slgMdmxOaQfXbO0bGxAPn.TiuEyMLyijHRLFOMvUIbIXWPWt80u0.', 'https://teemusk.com/wp-content/uploads/2020/07/portrait.jpg', '1995-04-30', '8545758245', 'Jasimunnisa', 'Mumbai', 'Male', 'Sayeed Manzil, 104, KAUSA MUMBRA', '9175485871', '8545758545', 'businessman', 'housewife', 'Jamal Ahmed Khan', 'CSN1222', 'Mechanical Engineering', '2', 3, '2726136', '2021-04-12 09:00:00', '', 1);
 
 -- --------------------------------------------------------
 
@@ -324,6 +378,7 @@ CREATE TABLE `subject` (
   `subject_alias` varchar(10) NOT NULL,
   `semester` int(11) NOT NULL,
   `branch_id` int(11) NOT NULL,
+  `subject_code` varchar(20) NOT NULL,
   `scheme` varchar(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -331,14 +386,14 @@ CREATE TABLE `subject` (
 -- Dumping data for table `subject`
 --
 
-INSERT INTO `subject` (`id`, `subject_name`, `subject_alias`, `semester`, `branch_id`, `scheme`) VALUES
-(1, 'Data Structure', 'DSA', 3, 1, 'C'),
-(2, 'EM-III', 'EM-III', 3, 1, 'C'),
-(3, 'Discrete Structure & Graph Theory', 'DSGT', 3, 1, 'C'),
-(4, 'Digital Logic & Communication Application', 'DLCA', 3, 1, 'C'),
-(5, 'Computer Graphics', 'CG', 3, 1, 'C'),
-(6, 'Math III (Probability & Statistics)', 'EM-III', 3, 2, 'A'),
-(7, 'Introduction to Material Science and\r\nEngineering', 'IMSE', 3, 2, 'A');
+INSERT INTO `subject` (`id`, `subject_name`, `subject_alias`, `semester`, `branch_id`, `subject_code`, `scheme`) VALUES
+(1, 'Data Structure', 'DSA', 3, 1, 'CSC301', 'C'),
+(2, 'EM-III', 'EM-III', 3, 1, 'CSC302', 'C'),
+(3, 'Discrete Structure & Graph Theory', 'DSGT', 3, 1, 'CSC303', 'C'),
+(4, 'Digital Logic & Communication Application', 'DLCA', 3, 1, 'CSC304', 'C'),
+(5, 'Computer Graphics', 'CG', 3, 1, 'CSC305', 'C'),
+(6, 'Math III (Probability & Statistics)', 'EM-III', 3, 2, 'MSC301', 'A'),
+(7, 'Introduction to Material Science and\r\nEngineering', 'IMSE', 3, 2, 'MSC302', 'A');
 
 -- --------------------------------------------------------
 
@@ -377,31 +432,31 @@ CREATE TABLE `timetable_all_dept` (
 --
 
 INSERT INTO `timetable_all_dept` (`id`, `Department_Name`, `Semester_No`, `Day_Name`, `Lecture_Start_at`, `Lecture_end_at`, `Lecture_Name`, `Teacher_id`, `lecture_join_link`, `status`) VALUES
-(1, '1', 3, 'Monday', '12:15 pm', '1:00 pm', '1', 'SK5252', '', 1),
-(2, '1', 3, 'Monday', '11:30 am', '12:15 pm', '2', 'SK5252', '', 1),
-(3, '1', 3, 'Monday', '10:45 am', '11:30 am', '3', 'SK5252', '', 1),
-(4, '1', 3, 'Monday', '10:00 am', '10:45 am', '5', 'SK5252', '', 1),
-(5, '1', 3, 'Monday', '9:15 am', '10:00 am', '4', 'SK5252', '', 1),
-(6, '1', 3, 'Tuesday', '12:15 pm', '1:00 pm', '1', 'SK5252', '', 1),
-(7, '1', 3, 'Tuesday', '11:30 am', '12:15 pm', '5', 'SK5252', '', 1),
-(8, '1', 3, 'Tuesday', '10:00 am', '10:45 am', '3', 'SK5252', '', 1),
-(9, '1', 3, 'Tuesday', '10:45 am', '11:30 am', '4', 'SK5252', '', 1),
-(10, '1', 3, 'Tuesday', '9:15 am', '10:00 am', '2', 'SK5252', '', 1),
-(11, '1', 3, 'Wednesday', '12:15 pm', '1:00 pm', '1', 'SK5252', '', 1),
-(12, '1', 3, 'Wednesday', '11:30 am', '12:15 pm', '2', 'SK5252', '', 1),
+(1, '1', 3, 'Monday', '9:15 am', '10:00 am', '1', 'SK5252', '', 1),
+(2, '1', 3, 'Monday', '10:00 am', '10:45 am', '2', 'SK5253', '', 1),
+(3, '1', 3, 'Monday', '10:45 am', '11:30 am', '3', 'SK5254', '', 1),
+(4, '1', 3, 'Monday', '11:30 am', '12:15 pm', '5', 'SK5252', '', 1),
+(5, '1', 3, 'Monday', '12:15 pm', '1:00 pm', '4', 'SK5252', '', 1),
+(6, '1', 3, 'Tuesday', '9:15 am', '10:00 am', '1', 'SK5252', '', 1),
+(7, '1', 3, 'Tuesday', '10:00 am', '10:45 am', '5', 'SK5252', '', 1),
+(8, '1', 3, 'Tuesday', '10:45 am', '11:30 am', '3', 'SK5252', '', 1),
+(9, '1', 3, 'Tuesday', '11:30 am', '12:15 pm', '4', 'SK5252', '', 1),
+(10, '1', 3, 'Tuesday', '12:15 pm', '1:00 pm', '2', 'SK5252', '', 1),
+(11, '1', 3, 'Wednesday', '9:15 am', '10:00 am', '1', 'SK5252', '', 1),
+(12, '1', 3, 'Wednesday', '10:00 am', '10:45 am', '2', 'SK5252', '', 1),
 (13, '1', 3, 'Wednesday', '10:45 am', '11:30 am', '4', 'SK5252', '', 1),
-(14, '1', 3, 'Wednesday', '10:00 am', '10:45 am', '5', 'SK5252', '', 1),
-(15, '1', 3, 'Wednesday', '9:15 am', '10:00 am', '3', 'SK5252', '', 1),
-(16, '1', 3, 'Thursday', '12:15 pm', '1:00 pm', '1', 'SK5252', '', 1),
-(17, '1', 3, 'Thursday', '11:30 am', '12:15 pm', '2', 'SK5252', '', 1),
+(14, '1', 3, 'Wednesday', '11:30 am', '12:15 pm', '5', 'SK5252', '', 1),
+(15, '1', 3, 'Wednesday', '12:15 pm', '1:00 pm', '3', 'SK5252', '', 1),
+(16, '1', 3, 'Thursday', '9:15 am', '10:00 am', '1', 'SK5252', '', 1),
+(17, '1', 3, 'Thursday', '10:00 am', '10:45 am', '2', 'SK5252', '', 1),
 (18, '1', 3, 'Thursday', '10:45 am', '11:30 am', '5', 'SK5252', '', 1),
-(19, '1', 3, 'Thursday', '10:00 am', '10:45 am', '4', 'SK5252', '', 1),
-(20, '1', 3, 'Thursday', '9:15 am', '10:00 am', '3', 'SK5252', '', 1),
-(21, '1', 3, 'Friday', '11:35 pm', '11:58 pm', '2', 'SK5252', '', 1),
-(22, '1', 3, 'Friday', '11:11 pm', '11:35 pm', '1', 'SK5252', '', 1),
+(19, '1', 3, 'Thursday', '11:30 am', '12:15 pm', '4', 'SK5252', '', 1),
+(20, '1', 3, 'Thursday', '12:15 pm', '1:00 pm', '3', 'SK5252', '', 1),
+(21, '1', 3, 'Friday', '9:15 am', '10:00 am', '2', 'SK5252', '', 1),
+(22, '1', 3, 'Friday', '10:00 am', '10:45 am', '1', 'SK5252', '', 1),
 (23, '1', 3, 'Friday', '10:45 am', '11:30 am', '4', 'SK5252', '', 1),
-(24, '1', 3, 'Friday', '10:00 am', '10:45 am', '3', 'SK5252', '', 1),
-(25, '1', 3, 'Friday', '9:15 am', '10:00 am', '5', 'SK5252', '', 1),
+(24, '1', 3, 'Friday', '11:30 am', '12:15 pm', '5', 'SK5252', '', 1),
+(25, '1', 3, 'Friday', '12:15 pm', '1:00 pm', '3', 'SK5252', '', 1),
 (26, '2', 3, 'Thursday', '9:15 am', '10:45am', '6', 'SK5253', '', 1),
 (27, '2', 3, 'Thursday', '10:45 am', '11:45 am', '7', 'SK5252', '', 1);
 
@@ -419,6 +474,18 @@ ALTER TABLE `branch`
 -- Indexes for table `faculty_login`
 --
 ALTER TABLE `faculty_login`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `notice_board`
+--
+ALTER TABLE `notice_board`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `profle_update_request`
+--
+ALTER TABLE `profle_update_request`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -492,22 +559,34 @@ ALTER TABLE `faculty_login`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `notice_board`
+--
+ALTER TABLE `notice_board`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `profle_update_request`
+--
+ALTER TABLE `profle_update_request`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
 -- AUTO_INCREMENT for table `quiz_choices`
 --
 ALTER TABLE `quiz_choices`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `quiz_question`
 --
 ALTER TABLE `quiz_question`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `quiz_student_answer`
 --
 ALTER TABLE `quiz_student_answer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `student_attendance`
