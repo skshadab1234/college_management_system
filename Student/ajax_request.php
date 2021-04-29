@@ -26,13 +26,14 @@
         
         if ($current_time > $noentry_endtime) {
           if ($date1 > $date2) {
-            $resultant  = mysqli_query($con, "Select * from student_attendance where Students_Admit_No = ".$student_login['Admission_NO']."  &&  Status = '1'");
+            $resultant  = mysqli_query($con, "Select * from student_attendance where Students_Admit_No = ".$student_login['Admission_NO']."  &&  Lecture_Date = '".date('Y-m-d')."' && Lecture_Time = '$final_time' && Status = '1'");
 
             $row = mysqli_fetch_assoc($resultant);
-            
             if ($row['Students_Admit_No'] == $student_login['Admission_NO'] && $row['Lecture_Time'] == $final_time && $row['Lecture_Date'] == date('Y-m-d')) {
+
                $subhead_message = '<p class="text-success">You are present today for this lecture</p>'; 
             }else{
+
                 $subhead_message = '<p class="text-danger">You are Late to Join</p>';
             }
 
@@ -115,11 +116,8 @@ $html .= '<div class="vertical-timeline-item vertical-timeline-element">
  </div>';
  
  }
-
-echo $html; 
- }
- ?>
-<script type="text/javascript">
+?>
+ <script type="text/javascript">
    $("#redirecttolecture").click(() => { 
                 
                 var randomNumbers = $("#randomNumbers").val();
@@ -171,3 +169,42 @@ echo $html;
                 
             });
 </script>
+ 
+<?php
+echo $html; 
+
+ }elseif (isset($_POST['notification'])) {
+      $notification =  array_filter(notification($student_login['Admission_NO'],'limit 5'));
+      $icon_color = array('success','danger','info','primary','secondary','dark');
+      $html = '';
+      $Admission_NO = $student_login['Admission_NO'];
+
+      $sql = mysqli_query($con,"SELECT * FROM `notice_board` WHERE notice_admit_no='$Admission_NO' && notice_status=0");
+      $row = mysqli_fetch_assoc($sql);
+      
+      if (mysqli_num_rows($sql) > 0) {
+        $add_indicator= '<span class="badge badge-dot badge-dot-sm badge-danger">Notifications</span>';
+      }else{
+        $add_indicator = '';
+      }
+      foreach ($notification as $key => $value) {
+        
+           $html.=   '<div class="vertical-timeline-item dot-'.$icon_color[$key].' vertical-timeline-element">
+                        <div><span class="vertical-timeline-element-icon bounce-in"></span>
+                            <a href="'.$value['notice_links'].'">
+                                <div class="vertical-timeline-element-content bounce-in">
+                                    <h4 class="timeline-title">'.$value['notice_title'].'</h4>
+                                    <p>'.$value['notice_short_desc'].'</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>';
+      $arr = array('data'=>$html,'indicator'=>$add_indicator);
+      }
+  echo json_encode($arr);
+ }elseif (isset($_POST['notification_seen'])) {
+  $Admission_NO = $student_login['Admission_NO'];
+   mysqli_query($con,"UPDATE notice_board SET notice_status=1 WHERE notice_admit_no='$Admission_NO'");
+ }
+ 
+ ?>

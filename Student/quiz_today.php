@@ -123,7 +123,7 @@ input[type="radio"] {
        					      		
 						<?php
 						$current_time = date("Y-m-d h:i a");
-						$quiz_start_time = $date;
+						$quiz_start_time = '2021-04-24 09:00 am';
 
 						if ($date == date('Y-m-d'))
 						{
@@ -149,7 +149,6 @@ input[type="radio"] {
 													<?php
 													$question_echo = "SELECT *,quiz_question.id as question_id_today FROM `quiz_question`  where subject_name = '$subject_name' && quiz_date = '$date' && quiz_question.status = '1'";
 								$question_echo_res = mysqli_query($con,$question_echo);
-
 								if (mysqli_num_rows($question_echo_res)) {
 									foreach ($question_echo_res as $key => $question_echo_value) {
 									
@@ -211,7 +210,7 @@ input[type="radio"] {
 
 						            $ansid = $i;
 
-						            $sql1 = "SELECT *,quiz_question.id as question_id_today FROM `quiz_question`  where subject_name = '$subject_name' && quiz_date = '$date' && quiz_question.status = '1' && quiz_question_id = '$i'";
+						            $sql1 = "SELECT *,quiz_question.id as question_id_today FROM `quiz_question`  where subject_name = '$subject_name' && quiz_date = '$date' && quiz_question.status = '1' && quiz_question_id='$i'";
 
 						            $result1 = mysqli_query($con, $sql1);
 						            if (mysqli_num_rows($result1) > 0)

@@ -3,14 +3,14 @@ define('SITE_NAME','AV_Instrumentation_Pvt_Ltd');
 define('FRONT_SITE_NAME','AV instrumentation Pvt Ltd');
 
 define('FRONT_SITE_PATH','http://localhost/shadab/college_project/');
-define('SERVER_IMAGE',$_SERVER['DOCUMENT_ROOT']."/shadab/college_project/");
+define('SERVER_IMAGE',$_SERVER['DOCUMENT_ROOT']."/");
 
 
-define('FRONT_SITE_PATH_STUDENT','http://localhost/shadab/college_project/Student/');
-define('SERVER_IMAGE_STUDENT',$_SERVER['DOCUMENT_ROOT']."/shadab/college_project/Student/");
+define('FRONT_SITE_PATH_STUDENT',FRONT_SITE_PATH.'Student/');
+define('SERVER_IMAGE_STUDENT',SERVER_IMAGE.'/Student/');
 
-define('FRONT_SITE_PATH_FACULTY','http://localhost/shadab/college_project/Teacher/');
-define('SERVER_IMAGE_FACULTY',$_SERVER['DOCUMENT_ROOT']."/shadab/college_project/Teacher/");
+define('FRONT_SITE_PATH_TEACHER',FRONT_SITE_PATH.'Teacher/');
+define('SERVER_IMAGE_TEACHER',SERVER_IMAGE.'/Teacher/');
 
 
 define('PHP_EXT','');

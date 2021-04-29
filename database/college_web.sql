@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 22, 2021 at 03:09 PM
+-- Generation Time: Apr 23, 2021 at 07:09 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -157,6 +157,7 @@ CREATE TABLE `quiz_question` (
   `question_name` varchar(255) NOT NULL,
   `faculty_created_id` varchar(255) NOT NULL,
   `subject_name` varchar(255) NOT NULL,
+  `quiz_branch_id` int(11) NOT NULL,
   `quiz_topic` varchar(255) NOT NULL,
   `question_marks` int(11) NOT NULL,
   `quiz_date` varchar(255) NOT NULL,
@@ -168,19 +169,19 @@ CREATE TABLE `quiz_question` (
 -- Dumping data for table `quiz_question`
 --
 
-INSERT INTO `quiz_question` (`id`, `quiz_question_id`, `question_name`, `faculty_created_id`, `subject_name`, `quiz_topic`, `question_marks`, `quiz_date`, `quiz_start_time`, `status`) VALUES
-(1, 1, 'A procedure that calls itself is called', 'SK5252', 'Data Structure', 'Basic od DS', 2, '2021-04-21', '2021-04-21 06:00 pm', 1),
-(2, 2, 'Maximum number of nodes in a binary tree with height k, where root is height 0, is', 'SK5252', 'Data Structure', 'Basic od DS', 2, '2021-04-21', '2021-04-21 06:00 pm', 1),
-(3, 3, 'Minimum number of queues required for priority queue implementation?', 'SK5252', 'Data Structure', 'Basic od DS', 2, '2021-04-21', '2021-04-21 06:00 pm', 1),
-(4, 4, 'Which of the following searching techniques do not require the data to be in sorted form', 'SK5252', 'Data Structure', 'Basic od DS', 2, '2021-04-21', '2021-04-21 06:00 pm', 1),
-(5, 5, 'An algorithm is', 'SK5252', 'Data Structure', 'Basic od DS', 2, '2021-04-21', '2021-04-21 06:00 pm', 1),
-(6, 6, 'Which of the below mentioned sorting algorithms are not stable?', 'SK5252', 'Data Structure', 'Basic od DS', 2, '2021-04-21', '2021-04-21 06:00 pm', 1),
-(7, 7, 'In doubly linked lists', 'SK5252', 'Data Structure', 'Basic od DS', 2, '2021-04-21', '2021-04-21 06:00 pm', 1),
-(8, 8, 'Heap is an example of', 'SK5252', 'Data Structure', 'Basic od DS', 2, '2021-04-21', '2021-04-21 06:00 pm', 1),
-(9, 9, ' If we choose Prim\'s Algorithm for uniquely weighted spanning tree instead of Kruskal\'s Algorithm, then', 'SK5252', 'Data Structure', 'Basic od DS', 2, '2021-04-21', '2021-04-21 06:00 pm', 1),
-(10, 10, 'Apriori analysis of an algorithm assumes that ?', 'SK5252', 'Data Structure', 'Basic of DS', 2, '2021-04-21', '2021-04-21 06:00 pm', 1),
-(11, 1, ' If we choose Prim\'s Algorithm for uniquely weighted spanning tree instead of Kruskal\'s Algorithm, then', 'SK5252', 'Data Structure', 'Basic od DS', 2, '2021-04-22', '2021-04-21 06:00 pm', 1),
-(12, 2, 'Apriori analysis of an algorithm assumes that ?', 'SK5252', 'Data Structure', 'Basic of DS', 2, '2021-04-22', '2021-04-21 06:00 pm', 1);
+INSERT INTO `quiz_question` (`id`, `quiz_question_id`, `question_name`, `faculty_created_id`, `subject_name`, `quiz_branch_id`, `quiz_topic`, `question_marks`, `quiz_date`, `quiz_start_time`, `status`) VALUES
+(1, 1, 'A procedure that calls itself is called', 'SK5252', 'Data Structure', 1, 'Basic of DS', 2, '2021-04-21', '2021-04-21 06:00 pm', 1),
+(2, 2, 'Maximum number of nodes in a binary tree with height k, where root is height 0, is', 'SK5252', 'Data Structure', 1, 'Basic of DS', 2, '2021-04-21', '2021-04-21 06:00 pm', 1),
+(3, 3, 'Minimum number of queues required for priority queue implementation?', 'SK5252', 'Data Structure', 1, 'Basic of DS', 2, '2021-04-21', '2021-04-21 06:00 pm', 1),
+(4, 4, 'Which of the following searching techniques do not require the data to be in sorted form', 'SK5252', 'Data Structure', 1, 'Basic of DS', 2, '2021-04-21', '2021-04-21 06:00 pm', 1),
+(5, 5, 'An algorithm is', 'SK5252', 'Data Structure', 1, 'Basic of DS', 2, '2021-04-21', '2021-04-21 06:00 pm', 1),
+(6, 6, 'Which of the below mentioned sorting algorithms are not stable?', 'SK5252', 'Data Structure', 1, 'Basic of DS', 2, '2021-04-21', '2021-04-21 06:00 pm', 1),
+(7, 7, 'In doubly linked lists', 'SK5252', 'Data Structure', 1, 'Basic of DS', 2, '2021-04-21', '2021-04-21 06:00 pm', 1),
+(8, 8, 'Heap is an example of', 'SK5252', 'Data Structure', 1, 'Basic of DS', 2, '2021-04-21', '2021-04-21 06:00 pm', 1),
+(9, 9, ' If we choose Prim\'s Algorithm for uniquely weighted spanning tree instead of Kruskal\'s Algorithm, then', 'SK5252', 'Data Structure', 1, 'Basic of DS', 2, '2021-04-21', '2021-04-21 06:00 pm', 1),
+(10, 10, 'Apriori analysis of an algorithm assumes that ?', 'SK5252', 'Data Structure', 1, 'Basic of DS', 2, '2021-04-21', '2021-04-21 06:00 pm', 1),
+(11, 1, ' If we choose Prim\'s Algorithm for uniquely weighted spanning tree instead of Kruskal\'s Algorithm, then', 'SK5252', 'Data Structure', 1, 'Basic of DS', 2, '2021-04-22', '2021-04-21 06:00 pm', 1),
+(12, 2, 'Apriori analysis of an algorithm assumes that ?', 'SK5252', 'Data Structure', 1, 'Basic of DS', 2, '2021-04-22', '2021-04-21 06:00 pm', 1);
 
 -- --------------------------------------------------------
 
@@ -244,7 +245,9 @@ INSERT INTO `student_attendance` (`id`, `Students_Admit_No`, `Lecture_Date`, `Le
 (55, 1993, '2021-04-19', '11:30 - 12:15', '2', 'SK5252', 1, '2021-04-19 11:31:31'),
 (57, 1993, '2021-04-19', '12:15 - 01:00', '1', 'SK5252', 1, '2021-04-19 02:03:59'),
 (58, 1993, '2021-04-20', '12:15 - 01:00', '1', 'SK5252', 1, '2021-04-20 12:16:04'),
-(59, 1993, '2021-04-21', '09:15 - 10:00', '3', 'SK5252', 1, '2021-04-21 09:22:34');
+(59, 1993, '2021-04-21', '09:15 - 10:00', '3', 'SK5252', 1, '2021-04-21 09:22:34'),
+(62, 1993, '2021-04-23', '09:15 - 10:00', '5', 'SK5252', 1, '2021-04-23 09:55:41'),
+(63, 1993, '2021-04-23', '10:00 - 10:45', '3', 'SK5252', 1, '2021-04-23 10:07:32');
 
 -- --------------------------------------------------------
 
@@ -307,7 +310,7 @@ CREATE TABLE `student_login` (
 
 INSERT INTO `student_login` (`id`, `Admission_NO`, `firstname`, `last_name`, `password`, `picture_link`, `STUDENT_DOB`, `MOTHERNAME`, `PLACEOFBIRTH`, `GENDER`, `ADDRESS`, `FATHERMOBILEPHONE`, `MOTHERMOBILEPHONE`, `FATHERPROFESSION`, `MOTHERPROFESSION`, `FATHERNAME`, `enroll_no`, `DEPARTMENT`, `BRANCH`, `semester`, `added_on`) VALUES
 (18, 1993, 'Khan', 'Shadab', '$2y$10$x7SFdvfvxdjodIkjcmVqiexounArLxHIPw7sGRL6dy9i9iL08Iiz2', 'https://pbs.twimg.com/profile_images/932986247642939392/CDq_0Vcw_400x400.jpg', '2000-04-30', 'Jasimunnisa', 'Mumbai', 'Male', 'Sayeed Manzil, 104, KAUSA MUMBRA', '9175485871', '8545758545', 'businessman', 'housewife', 'Jamal Ahmed Khan', 'CSN1221', 'Computer Engineering', '1', 3, '2021-04-14 00:00:00'),
-(19, 1994, 'Khan', 'Mehtab', '$2y$10$x7SFdvfvxdjodIkjcmVqiexounArLxHIPw7sGRL6dy9i9iL08Iiz2', 'https://teemusk.com/wp-content/uploads/2020/07/portrait.jpg', '2000-04-30', 'Jasimunnisa', 'Mumbai', 'Male', 'Sayeed Manzil, 104, KAUSA MUMBRA', '9175485871', '8545758545', 'businessman', 'housewife', 'Jamal Ahmed Khan', 'CSN1222', 'Computer Engineering', '1', 3, '0000-00-00 00:00:00');
+(19, 1994, 'Khan', 'Mehtab', '$2y$10$x7SFdvfvxdjodIkjcmVqiexounArLxHIPw7sGRL6dy9i9iL08Iiz2', 'https://teemusk.com/wp-content/uploads/2020/07/portrait.jpg', '2000-04-30', 'Jasimunnisa', 'Mumbai', 'Male', 'Sayeed Manzil, 104, KAUSA MUMBRA', '9175485871', '8545758545', 'businessman', 'housewife', 'Jamal Ahmed Khan', 'CSN1222', 'Mechanical Engineering', '2', 3, '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -333,7 +336,9 @@ INSERT INTO `subject` (`id`, `subject_name`, `subject_alias`, `semester`, `branc
 (2, 'EM-III', 'EM-III', 3, 1, 'C'),
 (3, 'Discrete Structure & Graph Theory', 'DSGT', 3, 1, 'C'),
 (4, 'Digital Logic & Communication Application', 'DLCA', 3, 1, 'C'),
-(5, 'Computer Graphics', 'CG', 3, 1, 'C');
+(5, 'Computer Graphics', 'CG', 3, 1, 'C'),
+(6, 'Math III (Probability & Statistics)', 'EM-III', 3, 2, 'A'),
+(7, 'Introduction to Material Science and\r\nEngineering', 'IMSE', 3, 2, 'A');
 
 -- --------------------------------------------------------
 
@@ -396,7 +401,9 @@ INSERT INTO `timetable_all_dept` (`id`, `Department_Name`, `Semester_No`, `Day_N
 (22, '1', 3, 'Friday', '11:11 pm', '11:35 pm', '1', 'SK5252', '', 1),
 (23, '1', 3, 'Friday', '10:45 am', '11:30 am', '4', 'SK5252', '', 1),
 (24, '1', 3, 'Friday', '10:00 am', '10:45 am', '3', 'SK5252', '', 1),
-(25, '1', 3, 'Friday', '9:15 am', '10:00 am', '5', 'SK5252', '', 1);
+(25, '1', 3, 'Friday', '9:15 am', '10:00 am', '5', 'SK5252', '', 1),
+(26, '2', 3, 'Thursday', '9:15 am', '10:45am', '6', 'SK5253', '', 1),
+(27, '2', 3, 'Thursday', '10:45 am', '11:45 am', '7', 'SK5252', '', 1);
 
 --
 -- Indexes for dumped tables
@@ -506,7 +513,7 @@ ALTER TABLE `quiz_student_answer`
 -- AUTO_INCREMENT for table `student_attendance`
 --
 ALTER TABLE `student_attendance`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT for table `student_fees_details`
@@ -524,7 +531,7 @@ ALTER TABLE `student_login`
 -- AUTO_INCREMENT for table `subject`
 --
 ALTER TABLE `subject`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `subject_assign_faculty`
@@ -536,7 +543,7 @@ ALTER TABLE `subject_assign_faculty`
 -- AUTO_INCREMENT for table `timetable_all_dept`
 --
 ALTER TABLE `timetable_all_dept`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

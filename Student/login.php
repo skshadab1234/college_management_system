@@ -35,7 +35,7 @@ Signup Form</div>
       <input type="password" placeholder="Password" id="password" required>
     </div>
     <div class="pass-link">
-      <a href="#">Forgot password?</a></div>
+      <a href="forgot-password"<?= PHP_EXT ?>>Forgot password?</a></div>
     <div class="field btn">
     <div class="btn-layer">
     </div>

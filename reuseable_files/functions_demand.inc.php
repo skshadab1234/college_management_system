@@ -32,6 +32,32 @@ function redirect($link){
 	die();
 }
 
+function send_email($email,$html,$subject,$user_msg){
+	$mail=new PHPMailer(true);
+	$mail->isSMTP();
+	$mail->Host="smtp.gmail.com";
+	$mail->Port=587;
+	$mail->SMTPSecure="tls";
+	$mail->SMTPAuth=true;
+	$mail->Username="ksfjjks@gmail.com";
+	$mail->Password="adsenseaccount";
+	$mail->setFrom("ksfjjks@gmail.com");
+	$mail->addAddress($email);
+	$mail->IsHTML(true);
+	$mail->Subject=$subject;
+	$mail->Body=$html;
+	$mail->SMTPOptions=array('ssl'=>array(
+		'verify_peer'=>false,
+		'verify_peer_name'=>false,
+		'allow_self_signed'=>false
+	));
+	 if($mail->send()){
+        $arr = array("status"=>'success','msg'=>$user_msg);
+     }else{
+        $arr = array('status'=>'error','msg'=>'echo "Please Try again later. Our System facing some problems. we appologize for this mistake";');
+     }
+     return $arr;
+}
 
 function student_fees_details($admission_no){
 	global $con;
@@ -78,7 +104,7 @@ function student_fees_details($admission_no){
 function get_timetable_for_specific_department($branch,$semester,$day){
 	global $con;
 	$arr[] = array();
-	$res=mysqli_query($con,"select * from timetable_all_dept LEFT JOIN subject on timetable_all_dept.Lecture_Name = subject.id where Department_Name='$branch' && Semester_No='$semester' && Day_Name = '$day' ");
+	$res=mysqli_query($con,"select * from timetable_all_dept LEFT JOIN subject on timetable_all_dept.Lecture_Name = subject.id where Department_Name='$branch' && Semester_No='$semester' && Day_Name = '$day' && status = 1");
 	while ($row = mysqli_fetch_assoc($res)) {
 		if (mysqli_num_rows($res) > 1)  {
 			$arr[] = $row;
@@ -107,10 +133,10 @@ function numberofStudentJoined($lectname,$lectDate,$lectTime){
 	return $row;
 }
 
-function SubjectQuzForToday($today_date){
+function SubjectQuzForToday($today_date,$branch_id){
 	global $con;
 	$arr[] = array();
-	$res=mysqli_query($con,"SELECT * FROM `quiz_question` LEFT JOIN faculty_login on quiz_question.faculty_created_id = faculty_login.faculty_login_id  where  quiz_date = '$today_date' && quiz_question.status = '1' GROUP BY subject_name");
+	$res=mysqli_query($con,"SELECT * FROM `quiz_question` LEFT JOIN faculty_login on quiz_question.faculty_created_id = faculty_login.faculty_login_id  where  quiz_date = '$today_date'  && quiz_branch_id = '$branch_id' && quiz_question.status = '1' GROUP BY subject_name");
 	while ($row = mysqli_fetch_assoc($res)) {
 			$arr[] = $row;
 	}
@@ -168,4 +194,59 @@ $arr[] = array();
 		$arr['message_color'] = 'danger';
 	}
 	return $arr;
+}
+
+
+function TimeTable($branch_id,$Semester_No,$lecture_start,$lecture_end)
+{
+	global $con;
+	$arr[] = array();
+
+	$res=mysqli_query($con,"SELECT * FROM `timetable_all_dept` LEFT JOIN subject ON timetable_all_dept.Lecture_Name = subject.id WHERE Department_Name = '$branch_id' && Semester_No = '$Semester_No'  && Lecture_Start_at = '$lecture_start' && Lecture_end_at = '$lecture_end'");
+	
+	while ($row = mysqli_fetch_assoc($res)) {
+			$arr[] = $row;
+	}
+
+	return $arr;	
+
+}
+
+
+function ageCalculator($dob){
+    if(!empty($dob)){
+        $birthdate = new DateTime($dob);
+        $today   = new DateTime('today');
+        $age = $birthdate->diff($today)->y;
+        return $age;
+    }else{
+        return 0;
+    }
+}
+
+function profilerequestByadmitno($admit_no)
+{
+	global $con;
+	$arr[] = array();
+	$res=mysqli_query($con,"SELECT * FROM `profle_update_request` WHERE admit_no = '$admit_no'");
+	
+	while ($row = mysqli_fetch_assoc($res)) {
+			$arr[] = $row;
+	}
+
+	return $arr;	
+}	
+
+
+function notification($admit_no,$limit= '')
+{
+	global $con;
+	$arr[] = array();
+	$res=mysqli_query($con,"SELECT * FROM `notice_board` WHERE notice_admit_no = '$admit_no' ORDER BY id DESC $limit");
+	
+	while ($row = mysqli_fetch_assoc($res)) {
+			$arr[] = $row;
+	}
+
+	return $arr;	
 }

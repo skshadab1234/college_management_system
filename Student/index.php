@@ -205,7 +205,7 @@
                      <div class="scrollbar-container ps ps--active-y">
                         <ul class="todo-list-wrapper list-group list-group-flush">
                               <?php
-                                $total_quiz_today = array_filter(SubjectQuzForToday(date('Y-m-d')));
+                                $total_quiz_today = array_filter(SubjectQuzForToday(date('Y-m-d'),$student_login['BRANCH']));
                                   
                                 if (count($total_quiz_today) > 0) {
                                   

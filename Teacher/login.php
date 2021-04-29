@@ -21,8 +21,6 @@ if (isset($_SESSION['FAC_ID'])) {
       <div class="title-text">
         <div class="title login">
 Faculty Login</div>
-<div class="title signup">
-Signup Form</div>
 </div>
 <div class="form-container">
 
@@ -35,7 +33,7 @@ Signup Form</div>
       <input type="password" placeholder="Password" id="password" required>
     </div>
     <div class="pass-link">
-      <a href="#">Forgot password?</a></div>
+      <a href="forgot-password-faculty"<?= PHP_EXT ?>>Forgot password?</a></div>
     <div class="field btn">
     <div class="btn-layer">
     </div>
@@ -73,7 +71,6 @@ Signup Form</div>
                     password:password,
                 },
                 success:function(data){
-                  alert(data);
                     jQuery('#submit_form').attr('disabled',false);
                     jQuery('.loader').hide();
                     jQuery('#submit_form').html('next');

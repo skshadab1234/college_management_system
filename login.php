@@ -1,15 +1,12 @@
 <?php
     require_once "session.php";
-        if (isset($_SESSION['STD_ID'])) {
-          header('Location: Student/index.php');
-          exit();
-        }elseif(isset($_SESSION['FAC_ID'])){
-          header('Location: Teacher/index.php');
-          exit();
-        }
-
-    
-    
+    if (isset($_SESSION['STD_ID'])) {
+      header('Location: Student/index.php');
+      exit();
+    }elseif(isset($_SESSION['FAC_ID'])){
+      header('Location: Teacher/index.php');
+      exit();
+    }  
 ?>
 <!DOCTYPE html>
 <html>
