@@ -79,9 +79,18 @@ Faculty Login</div>
                         Swal.fire({
                           icon: 'error',
                           title: 'Oops...',
-                          text: 'Enter Correct Credentials',
+                          text: 'Password is incorrect',
                         })
                     }
+
+                    if (result.status == 'login_error') {
+                        Swal.fire({
+                          icon: 'error',
+                          title: 'Oops...',
+                          text: 'Logid id you have enter is incorrect',
+                        })
+                    }
+
                     if (result.status == 'success') {
                         Swal.fire({
                           position: 'top-end',

@@ -1,24 +1,10 @@
 <?php
 require 'session.php';
+if (!isset($_SESSION['ADMINID'])) {
+  header("location:login");
+}
+?>
 
-if (isset($_GET['email_id']) && isset($_GET['reset-code'])) {
-  $email_id = get_safe_value($_GET['email_id']);
-  $reset_code = get_safe_value($_GET['reset-code']);
-
-  $sql = "SELECT * FROM student_login where student_email = '$email_id' && reset_password_code  = '$reset_code'";
-  $res = mysqli_query($con,$sql);
-  $row = mysqli_fetch_asscoc($res);
-  }elseif (isset($_GET['changepassword']) && $_GET['changepassword'] != '' && $_GET['changepassword'] == $student_login['student_email']) {
-    $email_id = get_safe_value($_GET['changepassword']);
-  }
-  else{
-    header("location:login");
-  }
-
-$res = mysqli_query($con,$sql);
-
-if (mysqli_num_rows($res)) {
-  ?>
     <!DOCTYPE html>
 
 <!-- Created By CodingNepal -->
@@ -29,7 +15,7 @@ if (mysqli_num_rows($res)) {
     <!-- <title>Login & Signup Form | CodingNepal</title> -->
     <link rel="stylesheet" href="assets/css/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Change Password</title>
+    <title><?= $admin_login['fullname'] .' - Update Password'?></title>
   </head>
   <body>
     
@@ -37,23 +23,27 @@ if (mysqli_num_rows($res)) {
       <div class="title-text">
         <div class="title login">
 Change Password</div>
-<div class="title signup">
-Signup Form</div>
+
 </div>
 <div class="form-container">
 
 <div class="form-inner">
   <form class="login" method="post" id="changepassword">
     <div class="field">
-      <input type="password" placeholder="New Password" name="newpass_student" id="newpass" required>
+      <input type="email" value="<?= $admin_login['admin_email'] ?>" name="email_id_admin" id="email_id" required>
     </div>
+
     <div class="field">
-      <input type="text" placeholder="Confirm Password" name="crmpass_student" id="crmpass" required>
+      <input type="password" placeholder="New Password" name="newpass_admin" id="newpass" required>
+    </div>
+    
+    <div class="field">
+      <input type="text" placeholder="Confirm Password" name="crmpass_admin" id="crmpass" required>
     </div>
     <div class="field btn">
     <div class="btn-layer">
     </div>
-    <input type="hidden" name="email_id" value="<?= $email_id ?>">
+    <input type="hidden" name="login_attempted" value="1">
     <input type="submit" value="Send" id="changepassword_submit">
   </div>
   </form>
@@ -117,8 +107,3 @@ Signup Form</div>
   </body>
 </html>
   
-  <?php
-}else{
-  header("location:login.php");
-}
-?>

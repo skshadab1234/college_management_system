@@ -1,0 +1,13 @@
+<?php
+require 'admin_resuse_files/header.php';
+?>
+
+
+<div class="app-main__outer">
+<div class="app-main__inner">
+
+ 
+<?php
+require 'admin_resuse_files/footer.php';
+?>
+	

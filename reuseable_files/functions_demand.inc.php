@@ -250,3 +250,98 @@ function notification($admit_no,$limit= '')
 
 	return $arr;	
 }
+
+function times_ago($timestamp){
+  $time_ago = strtotime($timestamp);
+  $current_time = time();
+  $time_differnece = $current_time - $time_ago;
+
+     // For seconds
+     $seconds = $time_differnece;
+      // For Minute
+      $minute = round($seconds / 60); 
+  
+      // For Hour
+       $hour = round($seconds / 3600);
+
+      // For Day
+       $day = round($seconds / 86400);
+
+    // For Week
+       $week = round($seconds / 604800);
+
+    // For Month
+       $month = round($seconds / 2629440);
+
+    // For Year
+       $year = round($seconds / 31553280);
+
+
+     if ($seconds <= 60) {
+         return "(Just Now)";
+       }  
+     elseif ($minute <= 60) {
+         if ($minute ==  1) {
+           return "(One Minute ago)";
+         }
+         else{
+          return "($minute minutes ago)";
+         }
+       }  
+     elseif ($hour <= 24) {
+         if ($hour == 1) {
+           return "(an hour ago)";
+         }
+         else{
+          return "($hour hrs ago)";
+         }
+       }
+       elseif ($day <= 30) {
+           if ($day == 1) {
+             return "(Yesterday)";
+           }
+           else{
+            return "($day days ago)";
+           }
+         }
+
+         elseif ($week <= 4.3) {
+           if ($day == 1) {
+             return "(a week ago)";
+           }
+           else{
+            return "($week weeks ago)";
+           }
+         }
+       elseif ($month <= 12) {
+             if ($month == 1) {
+               return "(a month ago)";
+             }
+             else{
+              return "($month months ago)";
+             }
+           }
+       else{
+        if ($year == 1) {
+          return "(a year ago)";
+        }else{
+          return "($year years ago)";
+        }
+       }        
+}
+
+function getNotice($status,$optional='')
+{
+	global $con;
+	$arr[] = array();
+	$res=mysqli_query($con,"SELECT * FROM `college_notice` LEFT JOIN branch ON college_notice.branch_id = branch.id WHERE college_notice_status = '$status' $optional");
+	
+	if (mysqli_num_rows($res) > 0) {
+		while ($row = mysqli_fetch_assoc($res)) {
+				$arr[] = $row;
+		}
+
+	}
+	return $arr;	
+
+}

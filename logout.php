@@ -14,4 +14,11 @@
 		session_destroy();
 		header("location:login.php");		
 	}
+
+	
+	if (isset($_SESSION['ADMINID'])) {
+		unset($_SESSION['ADMINID']);
+		session_destroy();
+		header("location:login.php");		
+	}
 ?>

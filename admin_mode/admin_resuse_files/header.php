@@ -1,32 +1,12 @@
 <?php
 require 'session.php';
-if (!isset($_SESSION['STD_ID'])) {
+if (!isset($_SESSION['ADMINID'])) {
   header("location:login");
 }
-$full_name_student = $student_login['firstname'].' '.$student_login['last_name'];
 
-if ($student_login['new_login'] == 0) {
+if ($admin_login['new_login_admin'] == 0) {
     header("location:update_password.php");
 }
-
-$page_url =  'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
-
-if ($page_url == FRONT_SITE_PATH_STUDENT.'timetable.php' || $page_url == FRONT_SITE_PATH_STUDENT.'notice.php') {
-    $open_menu = 'mm-active';
-}
-
-if ($page_url == FRONT_SITE_PATH_STUDENT.'timetable.php') {
-    $active = 'mm-active';
-}elseif ($page_url == FRONT_SITE_PATH_STUDENT || $page_url == FRONT_SITE_PATH_STUDENT.'index.php') {
-      $dash_active = 'mm-active';
-}elseif ($page_url == FRONT_SITE_PATH_STUDENT.'notice.php') {
-      $noticeactive = 'mm-active';
-}elseif ($page_url == FRONT_SITE_PATH_STUDENT.'chat.php') {
-      $chatactive = 'mm-active';
-      $opacity =  '1';
-      $chathide_component = 'display:none';
-}
-
 ?>
 
 <!doctype html>
@@ -42,7 +22,7 @@ if ($page_url == FRONT_SITE_PATH_STUDENT.'timetable.php') {
         content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
     <meta name="description" content="This is an example dashboard created using build-in elements and components.">
 
-    <!-- Disable tap highlight on IE -->	
+    <!-- Disable tap highlight on IE -->    
     <meta name="msapplication-tap-highlight" content="no">
 
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
@@ -50,27 +30,40 @@ if ($page_url == FRONT_SITE_PATH_STUDENT.'timetable.php') {
 <link rel="stylesheet" type="text/css" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
 <link href="<?php echo FRONT_SITE_PATH ?>assets/css/main.d810cf0ae7f39f28f336.css" rel="stylesheet"></head>
-<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-
-<style>
+<style type="text/css">
     a{
-        color: #000;
-        text-decoration: none;
+        text-decoration: none
     }
     a:hover{
-        color: #000;
         text-decoration: none;
     }
+    .app-header__logo .logo-src{
+        height: 47px;
+        left: 0;
+    }
+    .logo-src a{
+        padding: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 18px;
+        color: #007bff;
+        font-weight: 700;
+        font-family: sans-serif;
+    }
 </style>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
+
 <body>
     <div class="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar fixed-footer">
         <div class="app-header header-shadow "> <!-- bg-premium-dark header-text-light -->
              <div class="app-header__logo">
                 <!-- style="background:url(<?php echo FRONT_GLOBAL_IMAGE."logo.jpg"; ?>);background-size: cover;width: 43px;height: 50px" -->
                 <div class="logo-src" >
-                    <a href="index">LOGO</a>
+                    <a href="index">Admin</a>
                 </div>
-                <div class="header__pane ml-auto" style="<?= $chathide_component ?>">
+                <div class="header__pane ml-auto">
                     <div>
                         <button type="button" class="hamburger close-sidebar-btn hamburger--elastic" data-class="closed-sidebar">
                             <span class="hamburger-box">
@@ -126,13 +119,12 @@ if ($page_url == FRONT_SITE_PATH_STUDENT.'timetable.php') {
                                 </span>
                             </button>
                         <div class="dropdown">
-                            <button type="button" id="ToggleNotification" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown"
+                            <button type="button" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown"
                                 class="p-0 mr-2 btn btn-link">
                                 <span class="icon-wrapper icon-wrapper-alt rounded-circle">
                                     <span class="icon-wrapper-bg bg-danger"></span>
                                     <i class="icon text-danger icon-anim-pulse ion-android-notifications"></i>
-                                    <div id="addindicator"></div>
-                                    <!-- <span class="badge badge-dot badge-dot-sm badge-danger">Notifications</span> -->
+                                    <span class="badge badge-dot badge-dot-sm badge-danger">Notifications</span>
                                 </span>
                             </button>
                             <div tabindex="-1" role="menu" aria-hidden="true"
@@ -142,6 +134,7 @@ if ($page_url == FRONT_SITE_PATH_STUDENT.'timetable.php') {
                                         <div class="menu-header-image opacity-1" style="background-image: url(<?= FRONT_GLOBAL_IMAGE.'city3.jpg' ?>);"></div>
                                         <div class="menu-header-content text-dark">
                                             <h5 class="menu-header-title">Notifications</h5>
+                                            <h6 class="menu-header-subtitle">You have <b>21</b> unread messages</h6>
                                         </div>
                                     </div>
                                 </div>
@@ -152,8 +145,135 @@ if ($page_url == FRONT_SITE_PATH_STUDENT.'timetable.php') {
                                             <div class="scrollbar-container">
                                                 <div class="p-3">
                                                     <div class="notifications-box">
-                                                        <div class="vertical-time-simple vertical-without-time vertical-timeline vertical-timeline--one-column" id="Notifications_section">
-                                                                                                                       
+                                                        <div class="vertical-time-simple vertical-without-time vertical-timeline vertical-timeline--one-column">
+                                                            <div class="vertical-timeline-item dot-danger vertical-timeline-element">
+                                                                <div><span class="vertical-timeline-element-icon bounce-in"></span>
+                                                                    <div class="vertical-timeline-element-content bounce-in">
+                                                                        <h4 class="timeline-title">All Hands Meeting</h4>
+                                                                        <span class="vertical-timeline-element-date"></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="vertical-timeline-item dot-warning vertical-timeline-element">
+                                                                <div>
+                                                                    <span class="vertical-timeline-element-icon bounce-in"></span>
+                                                                    <div class="vertical-timeline-element-content bounce-in">
+                                                                        <p>Yet another one, at <span class="text-success">15:00 PM</span></p>
+                                                                        <span class="vertical-timeline-element-date"></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="vertical-timeline-item dot-success vertical-timeline-element">
+                                                                <div>
+                                                                    <span class="vertical-timeline-element-icon bounce-in"></span>
+                                                                    <div class="vertical-timeline-element-content bounce-in">
+                                                                        <h4 class="timeline-title">Build the production release
+                                                                            <span class="badge badge-danger ml-2">NEW</span>
+                                                                        </h4>
+                                                                        <span class="vertical-timeline-element-date"></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="vertical-timeline-item dot-primary vertical-timeline-element">
+                                                                <div>
+                                                                    <span class="vertical-timeline-element-icon bounce-in"></span>
+                                                                    <div class="vertical-timeline-element-content bounce-in">
+                                                                        <h4 class="timeline-title">Something not important
+                                                                            <div class="avatar-wrapper mt-2 avatar-wrapper-overlap">
+                                                                                <div class="avatar-icon-wrapper avatar-icon-sm">
+                                                                                    <div class="avatar-icon">
+                                                                                        <img src="<?= $faculty_login['faculty_image'] ?>" alt="">
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="avatar-icon-wrapper avatar-icon-sm">
+                                                                                    <div class="avatar-icon">
+                                                                                        <img src="assets/images/avatars/2.jpg" alt="">
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="avatar-icon-wrapper avatar-icon-sm">
+                                                                                    <div class="avatar-icon">
+                                                                                        <img src="assets/images/avatars/3.jpg" alt="">
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="avatar-icon-wrapper avatar-icon-sm">
+                                                                                    <div class="avatar-icon">
+                                                                                        <img src="assets/images/avatars/4.jpg" alt="">
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="avatar-icon-wrapper avatar-icon-sm">
+                                                                                    <div class="avatar-icon">
+                                                                                        <img src="assets/images/avatars/5.jpg" alt="">
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="avatar-icon-wrapper avatar-icon-sm">
+                                                                                    <div class="avatar-icon">
+                                                                                        <img src="assets/images/avatars/9.jpg" alt="">
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="avatar-icon-wrapper avatar-icon-sm">
+                                                                                    <div class="avatar-icon">
+                                                                                        <img src="assets/images/avatars/7.jpg" alt="">
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="avatar-icon-wrapper avatar-icon-sm">
+                                                                                    <div class="avatar-icon">
+                                                                                        <img src="assets/images/avatars/8.jpg" alt="">
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="avatar-icon-wrapper avatar-icon-sm avatar-icon-add">
+                                                                                    <div class="avatar-icon"><i>+</i></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </h4>
+                                                                        <span class="vertical-timeline-element-date"></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="vertical-timeline-item dot-info vertical-timeline-element">
+                                                                <div>
+                                                                    <span class="vertical-timeline-element-icon bounce-in"></span>
+                                                                    <div class="vertical-timeline-element-content bounce-in">
+                                                                        <h4 class="timeline-title">This dot has an info state</h4>
+                                                                        <span class="vertical-timeline-element-date"></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="vertical-timeline-item dot-danger vertical-timeline-element">
+                                                                <div>
+                                                                    <span class="vertical-timeline-element-icon bounce-in"></span>
+                                                                    <div class="vertical-timeline-element-content bounce-in">
+                                                                        <h4 class="timeline-title">All Hands Meeting</h4>
+                                                                        <span class="vertical-timeline-element-date"></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="vertical-timeline-item dot-warning vertical-timeline-element">
+                                                                <div>
+                                                                    <span class="vertical-timeline-element-icon bounce-in"></span>
+                                                                    <div class="vertical-timeline-element-content bounce-in">
+                                                                        <p>Yet another one, at <span class="text-success">15:00 PM</span>
+                                                                        </p><span class="vertical-timeline-element-date"></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="vertical-timeline-item dot-success vertical-timeline-element">
+                                                                <div><span class="vertical-timeline-element-icon bounce-in"></span>
+                                                                    <div class="vertical-timeline-element-content bounce-in">
+                                                                        <h4 class="timeline-title">Build the production release
+                                                                            <span class="badge badge-danger ml-2">NEW</span>
+                                                                        </h4>
+                                                                        <span class="vertical-timeline-element-date"></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="vertical-timeline-item dot-dark vertical-timeline-element">
+                                                                <div><span class="vertical-timeline-element-icon bounce-in"></span>
+                                                                    <div class="vertical-timeline-element-content bounce-in">
+                                                                        <h4 class="timeline-title">This dot has a dark state</h4>
+                                                                        <span class="vertical-timeline-element-date"></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -161,7 +281,12 @@ if ($page_url == FRONT_SITE_PATH_STUDENT.'timetable.php') {
                                         </div>
                                     </div>
                                 </div>
-                                
+                                <ul class="nav flex-column">
+                                    <li class="nav-item-divider nav-item"></li>
+                                    <li class="nav-item-btn text-center nav-item">
+                                        <button class="btn-shadow btn-wide btn-pill btn btn-focus btn-sm">View Latest Changes</button>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                         
@@ -198,14 +323,15 @@ if ($page_url == FRONT_SITE_PATH_STUDENT.'timetable.php') {
                             </div>
                         </div>
                     </div>
-                    
+
+
                     <div class="header-btn-lg pr-0">
                         <div class="widget-content p-0">
                             <div class="widget-content-wrapper">
                                 <div class="widget-content-left">
                                     <div class="btn-group">
                                         <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="p-0 btn">
-                                            <img width="42" class="rounded-circle" src="<?= $student_login['picture_link'] ?>" alt="">
+                                            <img width="50px" height="45px" class="rounded-circle" src="<?= FRONT_SITE_IMAGE_ADMIN.'/'.$admin_login['admin_picture'] ?>" alt="">
                                             <i class="fa fa-angle-down ml-2 opacity-8"></i>
                                         </a>
                                         <div tabindex="-1" role="menu" aria-hidden="true" class="rm-pointers dropdown-menu-lg dropdown-menu dropdown-menu-right">
@@ -216,10 +342,10 @@ if ($page_url == FRONT_SITE_PATH_STUDENT.'timetable.php') {
                                                         <div class="widget-content p-0">
                                                             <div class="widget-content-wrapper">
                                                                 <div class="widget-content-left mr-3">
-                                                                    <img width="42" class="rounded-circle" src="<?= $student_login['picture_link'] ?>" alt="">
+                                                                    <img width="50px" height="45px" class="rounded-circle" src="<?= FRONT_SITE_IMAGE_ADMIN.'/'.$admin_login['admin_picture'] ?>" alt="">
                                                                 </div>
                                                                 <div class="widget-content-left">
-                                                                    <div class="widget-heading"><?= $full_name_student ?></div>
+                                                                    <div class="widget-heading"><?= $admin_login['fullname'] ?></div>
                                                                 </div>
                                                                 <div class="widget-content-right mr-2">
                                                                     <a href="<?= FRONT_SITE_PATH ?>logout.php"><button class="btn-pill btn-shadow btn-shine btn btn-focus">Logout</button></a>
@@ -239,7 +365,7 @@ if ($page_url == FRONT_SITE_PATH_STUDENT.'timetable.php') {
                                                             </a>
                                                         </li>
                                                          <li class="nav-item">
-                                                            <a href="change_password<?=PHP_EXT ?>?changepassword=<?= $student_login['student_email'] ?>" class="nav-link">Change Password</a>
+                                                            <a href="change_password<?=PHP_EXT ?>?changepassword=<?= $admin_login['admin_email'] ?>" class="nav-link">Change Password</a>
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -248,13 +374,12 @@ if ($page_url == FRONT_SITE_PATH_STUDENT.'timetable.php') {
                                     </div>
                                 </div>
                                 <div class="widget-content-left  ml-3 header-user-info">
-                                    <div class="widget-heading"> <?= $full_name_student ?></div>
-                                    <div class="widget-subheading"> <?= $student_login['branch_name']?></div>
-                                </div>
-                                <div class="widget-content-right header-user-info ml-3">
-                                    <button type="button" class="btn-shadow p-1 btn btn-primary btn-sm show-toastr-example">
-                                        <i class="fa text-white fa-calendar pr-1 pl-1"></i>
-                                    </button>
+                                    <div class="widget-heading"> <?= $admin_login['fullname'] ?></div>
+                                    <div class="widget-subheading"> <?php if ($admin_login['admin_last_login'] == '')  {
+                                        echo 'Login First Time';
+                                    }else {
+                                        echo "Last Login: ".times_ago($admin_login['admin_last_login']);
+                                    } ?></div>
                                 </div>
                             </div>
                         </div>
@@ -262,8 +387,8 @@ if ($page_url == FRONT_SITE_PATH_STUDENT.'timetable.php') {
                 </div>
             </div>
         </div>     
-          <div class="app-main" >
-            <div class="app-sidebar sidebar-shadow " style="<?= $chathide_component ?>"> <!-- bg-slick-carbon sidebar-text-light -->
+          <div class="app-main">
+            <div class="app-sidebar sidebar-shadow "> <!-- bg-slick-carbon sidebar-text-light -->
                 <div class="app-header__logo">
                     <div class="logo-src"></div>
                     <div class="header__pane ml-auto">
@@ -297,27 +422,26 @@ if ($page_url == FRONT_SITE_PATH_STUDENT.'timetable.php') {
                  <div class="scrollbar-sidebar">
                     <div class="app-sidebar__inner">
                         <ul class="vertical-nav-menu">
-                            <li class="app-sidebar__heading">Menu</li>
-                            <li  class="mt-3 <?= $dash_active ?>">
+                            <li  class="mt-3 mm-active">
                                 <a href="index"<?= PHP_EXT ?>>
                                     <i class="metismenu-icon pe-7s-rocket"></i>Dashboards
                                     <!-- <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i> -->
                                 </a>
                              </li>
 
-                             <li class="mt-3 <?= $open_menu ?>">
+                            <!--  <li class="mt-3">
                                 <a href="#">
                                     <i class="metismenu-icon pe-7s-study"></i>Student's
                                     <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
                                 </a>
                                  <ul>
-                                    <li class="<?= $active ?>">
+                                    <li>
                                         <a href="timetable"<?= PHP_EXT ?>  >
                                             <i class="metismenu-icon"></i>Time Table
                                         </a>
                                     </li>
-                                     <li class="<?= $noticeactive ?>">
-                                        <a href="notice"<?= PHP_EXT ?>   >
+                                     <li>
+                                        <a href="index.html"  >
                                             <i class="metismenu-icon"></i>Notice's
                                         </a>
                                     </li>
@@ -333,106 +457,13 @@ if ($page_url == FRONT_SITE_PATH_STUDENT.'timetable.php') {
                                         </a>
                                     </li>
                                 </ul>
-                            </li>  
+                            </li>  --> 
 
-                            <li class="mt-3">
-                                    <!-- Examination Section -->
-
-                                <a href="#">
-                                    <i class="metismenu-icon pe-7s-notebook"></i>Examination
-                                    <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
-                                </a>
-                                 <ul>
-                                    <li>
-                                        <a href="index.html"  >
-                                            <i class="metismenu-icon"></i>Exam Notice
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="dashboards-commerce.html" >
-                                            <i class="metismenu-icon"></i>Rules
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="dashboards-sales.html" >
-                                            <i class="metismenu-icon">
-                                            </i>Results
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-
-
-                            <li  class=" mt-3">
-                                <a href="#">
-                                    <i class="metismenu-icon pe-7s-date"></i>Events
-                                    <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
-                                </a>
-                                 <ul>
-                                    <li>
-                                        <a href="index.html"   >
-                                            <i class="metismenu-icon"></i>Seminar
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="dashboards-commerce.html"  >
-                                            <i class="metismenu-icon"></i>Workshop
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-
-
-                             <li  class="mt-3 <?= $chatactive ?>">
-                                <a href="chat<?= PHP_EXT ?>">
-                                    <i class="metismenu-icon pe-7s-chat"></i>Chats
-                                    <i class="metismenu-state-icon fa fa-circle " style="font-size: 10px;color: red;opacity: <?= $opacity ?>"></i>
-                                </a>
-                             </li>
-
-                             <li  class="mt-3">
-                                <a href="#">
-                                    <i class="metismenu-icon pe-7s-news-paper"></i>Blogs
-                                </a>
-                             </li>
-
-                             <li  class="mt-3">
-                                <a href="#">
-                                    <i class="metismenu-icon pe-7s-settings"></i>Setting
-                                </a>
-                             </li>
-
-                            </li>
                         </ul>
                     </div>
                 </div>
             </div>
 <script type="text/javascript">
-$(document).ready(()=>{
-            setInterval(()=>{
-                $.ajax({
-                    url:"ajax_request.php",
-                    method:"post",
-                    data:"notification",
-                    success:function(data) {
-                        var res = jQuery.parseJSON(data);
-                        $("#addindicator").html(res.indicator);
-                        $("#Notifications_section").html(res.data);
-                    }
-                })
-            },2000)
-
-            $("#ToggleNotification").click(()=>{
-               $.ajax({
-                    url:"ajax_request.php",
-                    method:"post",
-                    data:"notification_seen",
-                    success:function(data) {
-                        
-                    }
-                })     
-            })
-})
 function timeTo12HrFormat(time)
 {   // Take a time in 24 hour format and format it in 12 hour format
     var time_part_array = time.split(":");
@@ -469,6 +500,5 @@ function timeTo12HrFormat(time)
 
         $("#currentTime").html(timeTo12HrFormat(time)); 
     },1000);  
-
 
 </script>

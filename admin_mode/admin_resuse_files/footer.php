@@ -1,7 +1,7 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-<div class="app-wrapper-footer" style="<?= $chathide_component ?>">
-                    <div class="app-footer">
+<div class="app-wrapper-footer">
+                    <div class="app-footer ">
                         <div class="app-footer__inner">
                             <div class="app-footer-left">
                                 <div class="footer-dots">
@@ -552,6 +552,7 @@
         </div>
     
         
-    <!-- <div class="app-drawer-overlay d-none animated fadeIn"></div> --><script type="text/javascript" src="<?php echo FRONT_SITE_PATH ?>assets/js/main.d810cf0ae7f39f28f336.js"></script></body>
+    <!-- <div class="app-drawer-overlay d-none animated fadeIn"></div> -->
+    <script type="text/javascript" src="<?php echo FRONT_SITE_PATH ?>assets/js/main.d810cf0ae7f39f28f336.js"></script></body>
 
 </html>

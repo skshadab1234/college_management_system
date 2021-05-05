@@ -16,8 +16,6 @@
       $date2 = DateTime::createFromFormat('h:i a', $startTime);
       $date3 = DateTime::createFromFormat('h:i a', $EndTime);
       
-     
-      
       // prx($student_login);
       if ($date1 > $date2 && $date1 < $date3)
       {
@@ -175,9 +173,29 @@ echo $html;
 
  }elseif (isset($_POST['notification'])) {
       $notification =  array_filter(notification($student_login['Admission_NO'],'limit 5'));
-      $icon_color = array('success','danger','info','primary','secondary','dark');
       $html = '';
       $Admission_NO = $student_login['Admission_NO'];
+
+      $getNotice = array_filter(getNotice('1','ORDER by college_notice.id DESC LIMIT 5'));
+      foreach ($getNotice as $key => $notice) {
+        if ($notice['branch_id'] == $student_login['BRANCH']) {
+          $link =  $notice['college_notice_link'];
+          if ($link == '') {
+            $link = 'javascript:void(0)';
+          }
+          $html.=   '<div class="vertical-timeline-item dot-success vertical-timeline-element">
+                <div><span class="vertical-timeline-element-icon bounce-in"></span>
+                    <a href='.$link.'>
+                        <div class="vertical-timeline-element-content bounce-in">
+                            <h4 class="timeline-title">'.$notice['college_notice_title'].'</h4>
+                            <p>'.$notice['college_notice_short_desc'].' -- <span style="font-style:italic;opacity:0.8">'.times_ago($notice['college_notice_date']).'</span></p>
+                        </div>
+                    </a>
+                </div>
+            </div>';  
+        }
+      } 
+
 
       $sql = mysqli_query($con,"SELECT * FROM `notice_board` WHERE notice_admit_no='$Admission_NO' && notice_status=0");
       $row = mysqli_fetch_assoc($sql);
@@ -187,20 +205,25 @@ echo $html;
       }else{
         $add_indicator = '';
       }
+
+      $html .= '<h5 class="card-title mb-2" style="position: relative;background: #fff;"> Primary </h5>'; 
+
       foreach ($notification as $key => $value) {
+          $upload_date = $value['notice_date'].' '.$value['notice_time'];
         
-           $html.=   '<div class="vertical-timeline-item dot-'.$icon_color[$key].' vertical-timeline-element">
+           $html.=   '<div class="vertical-timeline-item dot-primary vertical-timeline-element">
                         <div><span class="vertical-timeline-element-icon bounce-in"></span>
                             <a href="'.$value['notice_links'].'">
                                 <div class="vertical-timeline-element-content bounce-in">
                                     <h4 class="timeline-title">'.$value['notice_title'].'</h4>
-                                    <p>'.$value['notice_short_desc'].'</p>
+                                    <p>'.$value['notice_short_desc'].' -- <span style="font-style:italic;opacity:0.8">'.times_ago($upload_date).'</span></p>
                                 </div>
                             </a>
                         </div>
                     </div>';
-      $arr = array('data'=>$html,'indicator'=>$add_indicator);
+      
       }
+      $arr = array('data'=>$html,'indicator'=>$add_indicator);
   echo json_encode($arr);
  }elseif (isset($_POST['notification_seen'])) {
   $Admission_NO = $student_login['Admission_NO'];

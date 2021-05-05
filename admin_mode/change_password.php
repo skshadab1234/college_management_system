@@ -1,20 +1,22 @@
 <?php
 require 'session.php';
-
+if (isset($_SESSION['ADMINID'])) {
+  header("location:index");
+}
 if (isset($_GET['email_id']) && isset($_GET['reset-code'])) {
-  $email_id = get_safe_value($_GET['email_id']);
-  $reset_code = get_safe_value($_GET['reset-code']);
+    $email_id = get_safe_value($_GET['email_id']);
+    $reset_code = get_safe_value($_GET['reset-code']);
 
-  $sql = "SELECT * FROM student_login where student_email = '$email_id' && reset_password_code  = '$reset_code'";
-  $res = mysqli_query($con,$sql);
-  $row = mysqli_fetch_asscoc($res);
-  }elseif (isset($_GET['changepassword']) && $_GET['changepassword'] != '' && $_GET['changepassword'] == $student_login['student_email']) {
+    $sql = "SELECT * FROM admin_mode where admin_email = '$email_id' && admin_reset_password_code  = '$reset_code'";
+    $res = mysqli_query($con,$sql);
+    $row = mysqli_fetch_assoc($res);
+  }
+  elseif (isset($_GET['changepassword']) && $_GET['changepassword'] != '' && $_GET['changepassword'] == $admin_login['admin_email']) {
     $email_id = get_safe_value($_GET['changepassword']);
   }
   else{
     header("location:login");
   }
-
 $res = mysqli_query($con,$sql);
 
 if (mysqli_num_rows($res)) {
@@ -45,15 +47,15 @@ Signup Form</div>
 <div class="form-inner">
   <form class="login" method="post" id="changepassword">
     <div class="field">
-      <input type="password" placeholder="New Password" name="newpass_student" id="newpass" required>
+      <input type="password" placeholder="New Password" name="newpass_admin" id="newpass" required>
     </div>
     <div class="field">
-      <input type="text" placeholder="Confirm Password" name="crmpass_student" id="crmpass" required>
+      <input type="text" placeholder="Confirm Password" name="crmpass_admin" id="crmpass" required>
     </div>
     <div class="field btn">
     <div class="btn-layer">
     </div>
-    <input type="hidden" name="email_id" value="<?= $email_id ?>">
+    <input type="hidden" name="email_id_admin" value="<?= $email_id ?>">
     <input type="submit" value="Send" id="changepassword_submit">
   </div>
   </form>

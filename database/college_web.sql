@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 29, 2021 at 06:25 PM
+-- Generation Time: May 05, 2021 at 03:24 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -25,6 +25,37 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `admin_mode`
+--
+
+CREATE TABLE `admin_mode` (
+  `id` int(11) NOT NULL,
+  `fullname` varchar(255) NOT NULL,
+  `admin_email` varchar(255) NOT NULL,
+  `admin_number` varchar(255) NOT NULL,
+  `admin_picture` varchar(255) NOT NULL,
+  `admin_login_id` varchar(10) NOT NULL,
+  `admin_password` varchar(255) NOT NULL,
+  `admin_address` text NOT NULL,
+  `admin_last_login` varchar(255) NOT NULL,
+  `admin_dob` date NOT NULL,
+  `admin_status` int(11) NOT NULL,
+  `admin_added_on` datetime NOT NULL,
+  `admin_retirement_date` varchar(50) NOT NULL,
+  `admin_reset_password_code` int(11) NOT NULL,
+  `new_login_admin` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `admin_mode`
+--
+
+INSERT INTO `admin_mode` (`id`, `fullname`, `admin_email`, `admin_number`, `admin_picture`, `admin_login_id`, `admin_password`, `admin_address`, `admin_last_login`, `admin_dob`, `admin_status`, `admin_added_on`, `admin_retirement_date`, `admin_reset_password_code`, `new_login_admin`) VALUES
+(1, 'Shadab MASTAN KHAN', 'ks615044@gmail.com', '9165452854', 'admin_profile.jpg', 'AD_121', '$2y$10$XzWjxL.SPfB0SyHN2ch6/OQEaxjW/XgAlHeeUGNgzh4iZ5Tu5BhE6', 'Sayedd manzil, abc 104, kajhh, kasss , Mumbra - 40061', '02-05-2021 10:40:45 am', '2021-05-04', 1, '2021-05-04 13:41:00', '', 1516003, 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `branch`
 --
 
@@ -42,6 +73,104 @@ INSERT INTO `branch` (`id`, `branch_name`, `status`) VALUES
 (1, 'Computer', 1),
 (2, 'Mechanical', 1),
 (3, 'Civil', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `chat_messages`
+--
+
+CREATE TABLE `chat_messages` (
+  `id` int(11) NOT NULL,
+  `incoming_id` varchar(50) NOT NULL,
+  `outgoing_id` varchar(50) NOT NULL,
+  `messages` varchar(500) NOT NULL,
+  `message_send_time` varchar(255) NOT NULL,
+  `messeage_seen_time` varchar(255) NOT NULL,
+  `status` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `chat_messages`
+--
+
+INSERT INTO `chat_messages` (`id`, `incoming_id`, `outgoing_id`, `messages`, `message_send_time`, `messeage_seen_time`, `status`) VALUES
+(1, '1994', '1993', 'Hey\r\n', '2021-05-05 03:26:15 pm', '2021-05-05 03:28:15 pm', 1),
+(2, '1993', '1994', 'Awesome\r\n', '2021-05-05 03:28:15 pm', '', 1),
+(3, '1994', '1993', 'How are you?', '2021-05-05 03:26:15 pm', '2021-05-05 03:28:15 pm', 1),
+(4, '1995', '1993', 'Fine', '2021-05-05 03:28:15 pm', '2021-05-05 03:28:15 pm', 1),
+(5, '1994', '1993', 'asass', '2021-05-05 05:23 pm', ' ', 1),
+(6, '1994', '1993', 'shada', '2021-05-05 05:27 pm', '', 1),
+(7, '1993', '1994', 'james bond', '2021-05-05 05:43 pm', '', 1),
+(8, '1995', '1993', 'hello', '2021-05-05 05:45 pm', '', 1),
+(9, '1995', '1993', 'hello', '2021-05-05 05:45 pm', '', 1),
+(10, '1995', '1993', 'nice', '2021-05-05 05:46 pm', '', 1),
+(11, '1995', '1993', 'nice', '2021-05-05 05:46 pm', '', 1),
+(12, '1995', '1993', 'hjot', '2021-05-05 05:46 pm', '', 1),
+(13, '1995', '1993', 'hello', '2021-05-05 05:50 pm', '', 1),
+(14, '1995', '1993', 'hello', '2021-05-05 05:50 pm', '', 1),
+(15, '1995', '1993', 'asa', '2021-05-05 05:50 pm', '', 1),
+(16, '1995', '1993', 'asa', '2021-05-05 05:50 pm', '', 1),
+(17, '1995', '1993', 'asasaadsdas', '2021-05-05 05:50 pm', '', 1),
+(18, '1995', '1993', 'asasaadsdas', '2021-05-05 05:50 pm', '', 1),
+(19, '1995', '1993', 'sdadasdsa', '2021-05-05 05:53 pm', '', 1),
+(20, '1995', '1993', 'sdsadas', '2021-05-05 06:00 pm', '', 1),
+(21, '1994', '1993', 'hello', '2021-05-05 06:03 pm', '', 1),
+(22, '1995', '1993', 'hee', '2021-05-05 06:23 pm', '', 1),
+(23, '1995', '1993', 'hee', '2021-05-05 06:23 pm', '', 1),
+(24, '1994', '1993', 'hell', '2021-05-05 06:24 pm', '', 1),
+(25, '1994', '1993', 'hey', '2021-05-05 06:24 pm', '', 1),
+(26, '1994', '1993', 'hey', '2021-05-05 06:24 pm', '', 1),
+(27, '1994', '1993', 'sasa', '2021-05-05 06:25 pm', '', 1),
+(28, '1994', '1993', 'sweet', '2021-05-05 06:25 pm', '', 1),
+(29, '1995', '1993', 'data', '2021-05-05 06:27 pm', '', 1),
+(30, '1994', '1993', 'fa', '2021-05-05 06:29 pm', '', 1),
+(31, '1994', '1993', 'dasdasdsa', '2021-05-05 06:29 pm', '', 1),
+(32, '1994', '1993', 'sadasfdfdf', '2021-05-05 06:29 pm', '', 1),
+(33, '1995', '1993', 'sdsadas', '2021-05-05 06:29 pm', '', 1),
+(34, '1994', '1993', 'asdasdsa', '2021-05-05 06:29 pm', '', 1),
+(35, '1994', '1993', 'dsdadsadsa', '2021-05-05 06:29 pm', '', 1),
+(36, '1995', '1993', 'sa', '2021-05-05 06:29 pm', '', 1),
+(37, '1995', '1993', 'sasasa', '2021-05-05 06:30 pm', '', 1),
+(38, '1995', '1993', 'asssalam', '2021-05-05 06:31 pm', '', 1),
+(39, '1995', '1993', 'hey allah', '2021-05-05 06:32 pm', '', 1),
+(40, '1995', '1993', 'dasdas', '2021-05-05 06:32 pm', '', 1),
+(41, '1995', '1993', 'sss', '2021-05-05 06:33 pm', '', 1),
+(42, '1994', '1993', 'aaaa', '2021-05-05 06:33 pm', '', 1),
+(43, '1994', '1993', 'hfdg', '2021-05-05 06:37 pm', '', 1),
+(44, '\'.$incoming_id.\'', '1993', 'hell', '2021-05-05 06:38 pm', '', 1),
+(45, '\'.$incoming_id.\'', '1993', 'saasasa', '2021-05-05 06:38 pm', '', 1),
+(46, '\'.$incoming_id.\'', '1993', 'asasasasa', '2021-05-05 06:38 pm', '', 1),
+(47, '\'.$incoming_id.\'', '1993', 'asasa', '2021-05-05 06:39 pm', '', 1),
+(48, '1994', '1993', 'saddas', '2021-05-05 06:45 pm', '', 1),
+(49, '1995', '1993', 'juliet', '2021-05-05 06:46 pm', '', 1),
+(50, '1993', '1995', 'hello', '2021-05-05 06:48 pm', '', 1),
+(51, '1995', '1993', 'how are you', '2021-05-05 06:49 pm', '', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `college_notice`
+--
+
+CREATE TABLE `college_notice` (
+  `id` int(11) NOT NULL,
+  `college_notice_title` varchar(255) NOT NULL,
+  `college_notice_short_desc` varchar(500) NOT NULL,
+  `college_notice_date` varchar(255) NOT NULL,
+  `college_notice_link` varchar(255) NOT NULL,
+  `branch_id` int(11) NOT NULL,
+  `send_to` varchar(255) NOT NULL,
+  `college_notice_status` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `college_notice`
+--
+
+INSERT INTO `college_notice` (`id`, `college_notice_title`, `college_notice_short_desc`, `college_notice_date`, `college_notice_link`, `branch_id`, `send_to`, `college_notice_status`) VALUES
+(1, 'Result Declare of Civil DSE 2020-2021 SEM III', 'result declare check it now on this link', '2021-04-10 10:10 am', 'http://localhost/shadab/college_project/Student', 3, 'all', 1),
+(2, 'Result Declare of Computer DSE 2020-2021 SEM IV', 'result declare check it now on this link', '2021-04-30 10:40 am', '', 1, 'all', 1);
 
 -- --------------------------------------------------------
 
@@ -76,9 +205,9 @@ CREATE TABLE `faculty_login` (
 --
 
 INSERT INTO `faculty_login` (`id`, `faculty_login_id`, `first_name`, `middle_name`, `last_name`, `faculty_alias`, `faculty_email`, `mb_number`, `faculty_image`, `password`, `dob`, `desgination`, `branch_id`, `salary`, `joining_date`, `leaving_date`, `reset_password_code_faculty`, `new_login_faculty`, `status`) VALUES
-(1, 'SK5252', 'Shadab', 'Alam', 'Khan', 'SK', 'KS579265@gmail.com', '9167582452', 'http://csmit.in/images/ce/faculty/1.jpg', '$2y$10$nO0t4uMMSehuov2zoQbUcOck146KYGQ8b4MX8A2g6oGf/.K3JJ.OO', '2017-02-07', 'Programmer', 1, 20000, '2021-04-09', '2021-04-23', 6701321, 1, 1),
-(2, 'SK5253', 'Mahesh', 'Thakur', '', 'MK', 'mahesh.csmit@gmail.com', '1234567890', 'http://csmit.in/images/ce/faculty/2.jpg', '$2y$10$J4OQxGoHqTLkRHwgdrbMDuk8uEVYpHMHYSSoP0Ggkqe5T0s/GboJS', '1991-03-08', 'Structure Exper Analysis', 1, 50000, '2021-04-19', '0000-00-00', 0, 1, 1),
-(3, 'SK5254', 'Gajana', 'Patel', 'Usman', 'GP', 'gajana@gmail.com', '5254526352', '', 'shadabkhan', '1992-04-19', 'Data Scientist', 1, 100000, '2021-04-19', '0000-00-00', 0, 0, 1);
+(1, 'SK5252', 'Shadab', 'Alam', 'Khan', 'SK', 'KS579265@gmail.com', '9167582452', 'teacher3.png', '$2y$10$nO0t4uMMSehuov2zoQbUcOck146KYGQ8b4MX8A2g6oGf/.K3JJ.OO', '2017-02-07', 'Programmer', 1, 20000, '2021-04-09', '2021-04-23', 6701321, 1, 1),
+(2, 'SK5253', 'Mahesh', 'Thakur', '', 'MK', 'mahesh.csmit@gmail.com', '1234567890', 'teacher1.png', '$2y$10$J4OQxGoHqTLkRHwgdrbMDuk8uEVYpHMHYSSoP0Ggkqe5T0s/GboJS', '1991-03-08', 'Structure Exper Analysis', 3, 50000, '2021-04-19', '0000-00-00', 0, 1, 1),
+(3, 'SK5254', 'Gajana', 'Patel', 'Usman', 'GP', 'gajana@gmail.com', '5254526352', 'teacher2.png', 'shadabkhan', '1992-04-19', 'Data Scientist', 1, 100000, '2021-04-19', '0000-00-00', 0, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -107,7 +236,10 @@ INSERT INTO `notice_board` (`id`, `notice_admit_no`, `notice_title`, `notice_sho
 (3, 1993, 'Requested to update a profle', 'We take upto 2 working days to update your profile.', ' ', '2021-04-29', '06:11 pm', 1),
 (4, 1993, 'Requested to update a profle', 'We take upto 2 working days to update your profile.', ' ', '2021-04-29', '06:12 pm', 1),
 (5, 1993, 'Requested to update a profle', 'We take upto 2 working days to update your profile. <br> Requested at 2021-04-29', ' ', '2021-04-29', '06:24 pm', 1),
-(6, 1993, 'Requested to update a profle', 'We take upto 2 working days to update your profile. <br> Requested at 2021-04-29', ' ', '2021-04-29', '06:35 pm', 1);
+(6, 1993, 'Requested to update a profle', 'We take upto 2 working days to update your profile. <br> Requested at 2021-04-29', ' ', '2021-04-29', '06:35 pm', 1),
+(7, 1993, 'Requested to update a profle', 'We take upto 2 working days to update your profile. <br> Requested at 2021-04-29', ' ', '2021-04-29', '10:02 pm', 1),
+(8, 1993, 'Requested to update a profle', 'We take upto 2 working days to update your profile. <br> Requested at 2021-05-01', ' ', '2021-05-01', '03:43 pm', 1),
+(9, 1994, 'Requested to update a profle', 'We take upto 2 working days to update your profile. <br> Requested at 2021-05-03', ' ', '2021-05-03', '10:40 pm', 1);
 
 -- --------------------------------------------------------
 
@@ -138,7 +270,10 @@ INSERT INTO `profle_update_request` (`id`, `admit_no`, `description`, `admin_res
 (6, 1993, 'hello sir my lastname is khan and firstname is Shadab Alam. Please Update it fast', '', '2021-04-29 06:22:00', '', 0),
 (7, 1993, 'hello sir my lastname is khan and firstname is Shadab Alam. Please Update it fast', '', '2021-04-29 06:23:00', '', 0),
 (8, 1993, 'hello sir my lastname is khan and firstname is Shadab Alam. Please Update it fast', '', '2021-04-29 06:24:00', '', 0),
-(9, 1993, 'If there is any mistake in your profile then only send message. Don\'t Send message without any issue Strickly Warning.', '', '2021-04-29 06:35:00', '', 0);
+(9, 1993, 'If there is any mistake in your profile then only send message. Don\'t Send message without any issue Strickly Warning.', '', '2021-04-29 06:35:00', '', 0),
+(10, 1993, 'Update My Name and set Shadab khan', '', '2021-04-29 10:02:00', '', 0),
+(11, 1993, 'Didn;t Reply what happen to my profile', '', '2021-05-01 03:43:00', '', 0),
+(12, 1994, 'Change Date Of Birth  to 29 Apr, 1998', '', '2021-05-03 10:40:00', '', 0);
 
 -- --------------------------------------------------------
 
@@ -290,13 +425,7 @@ CREATE TABLE `student_attendance` (
 --
 
 INSERT INTO `student_attendance` (`id`, `Students_Admit_No`, `Lecture_Date`, `Lecture_Time`, `Lecture_Name`, `Teacher_id`, `Status`, `Joining_Time`) VALUES
-(54, 1993, '2021-04-19', '10:00 - 10:45', '5', 'SK5252', 1, '2021-04-19 10:01:52'),
-(55, 1993, '2021-04-19', '11:30 - 12:15', '2', 'SK5252', 1, '2021-04-19 11:31:31'),
-(57, 1993, '2021-04-19', '12:15 - 01:00', '1', 'SK5252', 1, '2021-04-19 02:03:59'),
-(58, 1993, '2021-04-20', '12:15 - 01:00', '1', 'SK5252', 1, '2021-04-20 12:16:04'),
-(59, 1993, '2021-04-21', '09:15 - 10:00', '3', 'SK5252', 1, '2021-04-21 09:22:34'),
-(62, 1993, '2021-04-23', '09:15 - 10:00', '5', 'SK5252', 1, '2021-04-23 09:55:41'),
-(63, 1993, '2021-04-23', '10:00 - 10:45', '3', 'SK5252', 1, '2021-04-23 10:07:32');
+(1, 1993, '2021-05-05', '12:15 - 01:00', '3', 'SK5252', 1, '2021-05-05 12:17:20');
 
 -- --------------------------------------------------------
 
@@ -363,8 +492,9 @@ CREATE TABLE `student_login` (
 --
 
 INSERT INTO `student_login` (`id`, `Admission_NO`, `firstname`, `last_name`, `student_email`, `student_password`, `picture_link`, `STUDENT_DOB`, `student_phone`, `MOTHERNAME`, `PLACEOFBIRTH`, `GENDER`, `ADDRESS`, `FATHERMOBILEPHONE`, `MOTHERMOBILEPHONE`, `FATHERPROFESSION`, `MOTHERPROFESSION`, `FATHERNAME`, `enroll_no`, `DEPARTMENT`, `BRANCH`, `semester`, `reset_password_code`, `added_on`, `online_status`, `new_login`) VALUES
-(18, 1993, 'Khan', 'Shadab', 'ks615044@gmail.com', '$2y$10$slgMdmxOaQfXbO0bGxAPn.TiuEyMLyijHRLFOMvUIbIXWPWt80u0.', 'https://pbs.twimg.com/profile_images/932986247642939392/CDq_0Vcw_400x400.jpg', '2000-04-30', '9152458575', 'Jasimunnisa', 'Mumbai', 'Male', 'Sayeed Manzil, 104, KAUSA MUMBRA', '9175485871', '8545758545', 'businessman', 'housewife', 'Jamal Ahmed Khan', 'CSN1221', 'Computer Engineering', '1', 3, '4782026', '2021-04-14 00:00:00', '', 1),
-(19, 1994, 'Khan', 'Cruz', 'cruz.jk@gmail.com', '$2y$10$slgMdmxOaQfXbO0bGxAPn.TiuEyMLyijHRLFOMvUIbIXWPWt80u0.', 'https://teemusk.com/wp-content/uploads/2020/07/portrait.jpg', '1995-04-30', '8545758245', 'Jasimunnisa', 'Mumbai', 'Male', 'Sayeed Manzil, 104, KAUSA MUMBRA', '9175485871', '8545758545', 'businessman', 'housewife', 'Jamal Ahmed Khan', 'CSN1222', 'Mechanical Engineering', '2', 3, '2726136', '2021-04-12 09:00:00', '', 1);
+(18, 1993, 'Khan', 'Shadab', 'ks615044@gmail.com', '$2y$10$fehA1zWAKI19KEmSqc19aewSMEWa9.8f.Bwe8xZN4PWwGzsk19BN.', 'https://pbs.twimg.com/profile_images/932986247642939392/CDq_0Vcw_400x400.jpg', '2000-04-30', '9152458575', 'Jasimunnisa', 'Mumbai', 'Male', 'Sayeed Manzil, 104, KAUSA MUMBRA', '9175485871', '8545758545', 'businessman', 'housewife', 'Jamal Ahmed Khan', 'CSN1221', 'Computer Engineering', '1', 3, '4782026', '2021-04-14 00:00:00', '', 1),
+(19, 1994, 'Khan', 'Cruz', 'cruz.jk@gmail.com', '$2y$10$DR/iX00eIhUSdcpNsiV16OiHSLF5EIQIX43JC5G4gbRqh3KCqavyW', 'https://teemusk.com/wp-content/uploads/2020/07/portrait.jpg', '1995-04-30', '8545758245', 'Jasimunnisa', 'Mumbai', 'Male', 'Sayeed Manzil, 104, KAUSA MUMBRA', '9175485871', '8545758545', 'businessman', 'housewife', 'Jamal Ahmed Khan', 'CSN1222', 'Civil Engineering', '3', 3, '2726136', '2021-04-12 09:00:00', '', 1),
+(20, 1995, 'Sakil', 'Ahmed', 'shakil.jk@gmail.com', '$2y$10$DR/iX00eIhUSdcpNsiV16OiHSLF5EIQIX43JC5G4gbRqh3KCqavyW', 'https://pbs.twimg.com/profile_images/932986247642939392/CDq_0Vcw_400x400.jpg', '1995-04-30', '8545758245', 'Jasimunnisa', 'Mumbai', 'Male', 'Sayeed Manzil, 104, KAUSA MUMBRA', '9175485871', '8545758545', 'businessman', 'housewife', 'Jamal Ahmed Khan', 'CSN1223', 'Computer Engineering', '1', 3, '2726136', '2021-04-12 09:00:00', '', 1);
 
 -- --------------------------------------------------------
 
@@ -465,9 +595,27 @@ INSERT INTO `timetable_all_dept` (`id`, `Department_Name`, `Semester_No`, `Day_N
 --
 
 --
+-- Indexes for table `admin_mode`
+--
+ALTER TABLE `admin_mode`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `branch`
 --
 ALTER TABLE `branch`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `chat_messages`
+--
+ALTER TABLE `chat_messages`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `college_notice`
+--
+ALTER TABLE `college_notice`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -547,10 +695,28 @@ ALTER TABLE `timetable_all_dept`
 --
 
 --
+-- AUTO_INCREMENT for table `admin_mode`
+--
+ALTER TABLE `admin_mode`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `branch`
 --
 ALTER TABLE `branch`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `chat_messages`
+--
+ALTER TABLE `chat_messages`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+
+--
+-- AUTO_INCREMENT for table `college_notice`
+--
+ALTER TABLE `college_notice`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `faculty_login`
@@ -562,13 +728,13 @@ ALTER TABLE `faculty_login`
 -- AUTO_INCREMENT for table `notice_board`
 --
 ALTER TABLE `notice_board`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `profle_update_request`
 --
 ALTER TABLE `profle_update_request`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `quiz_choices`
@@ -592,7 +758,7 @@ ALTER TABLE `quiz_student_answer`
 -- AUTO_INCREMENT for table `student_attendance`
 --
 ALTER TABLE `student_attendance`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `student_fees_details`
@@ -604,7 +770,7 @@ ALTER TABLE `student_fees_details`
 -- AUTO_INCREMENT for table `student_login`
 --
 ALTER TABLE `student_login`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `subject`

@@ -1,6 +1,6 @@
 <?php
 require 'session.php';
-if (isset($_SESSION['STD_ID'])) {
+if (isset($_SESSION['ADMINID'])) {
   header("location:index");
 }
 ?>
@@ -20,22 +20,20 @@ if (isset($_SESSION['STD_ID'])) {
     <div class="wrapper">
       <div class="title-text">
         <div class="title login">
-Student Login</div>
-<div class="title signup">
-Signup Form</div>
+Admin Login</div>
 </div>
 <div class="form-container">
 
 <div class="form-inner">
   <form class="login" method="post" id="frmsubmit">
     <div class="field">
-      <input type="text" placeholder="Enrollment No." id="enroll_no" required>
+      <input type="text" placeholder="Admin Id No." id="AdminIdNo" required>
     </div>
     <div class="field">
       <input type="password" placeholder="Password" id="password" required>
     </div>
     <div class="pass-link">
-      <a href="forgot-password"<?= PHP_EXT ?>>Forgot password?</a></div>
+      <a href="forgot-password-admin"<?= PHP_EXT ?>>Forgot password?</a></div>
     <div class="field btn">
     <div class="btn-layer">
     </div>
@@ -56,7 +54,7 @@ Signup Form</div>
 
             jQuery('#submit_form').click(function(e){
           
-            var enroll_no = jQuery('#enroll_no').val();
+            var AdminIdNo = jQuery('#AdminIdNo').val();
             var password = jQuery('#password').val();
             
 
@@ -69,7 +67,7 @@ Signup Form</div>
                 url:"../verify.php",
                 type:"post",
                 data: {
-                    enroll_no:enroll_no,
+                    AdminIdNo:AdminIdNo,
                     password:password,
                 },
                 success:function(data){
