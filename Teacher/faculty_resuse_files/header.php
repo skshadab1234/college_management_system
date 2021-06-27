@@ -5,10 +5,26 @@ if (!isset($_SESSION['FAC_ID'])) {
 }
 $full_name_faculty = $faculty_login['first_name'].' '.$faculty_login['middle_name'].' '.$faculty_login['last_name'];
 
-
-if ($faculty_login['new_login_faculty'] == 0) {
+if ($faculty_login['new_login_faculty'] ==  0) {
     header("location:update_password.php");
 }
+
+
+
+$page_url =  'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
+
+if ($page_url == FRONT_SITE_PATH_TEACHER.'quiz_master.php') {
+    $title = 'Quiz Master';
+    $quiz_master_active = 'mm-active';
+}elseif ($page_url == FRONT_SITE_PATH_TEACHER.'index.php' ||  $page_url == FRONT_SITE_PATH_TEACHER) {
+    $dashboard_active = 'mm-active';
+    $title = 'Dashboard';
+}
+elseif ($page_url == FRONT_SITE_PATH_TEACHER.'quiz_response.php') {
+    $quiz_response_active = 'mm-active';
+    $title = 'Quiz Response';
+}
+
 ?>
 
 <!doctype html>
@@ -19,7 +35,7 @@ if ($faculty_login['new_login_faculty'] == 0) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="Content-Language" content="en">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Admin Dashboard</title>
+    <title><?= $title ?></title>
     <meta name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
     <meta name="description" content="This is an example dashboard created using build-in elements and components.">
@@ -49,7 +65,8 @@ if ($faculty_login['new_login_faculty'] == 0) {
         justify-content: center;
         align-items: center;
         font-size: 18px;
-        color: #007bff;
+        color: #fff;
+        text-transform: uppercase;
         font-weight: 700;
         font-family: sans-serif;
     }
@@ -59,11 +76,11 @@ if ($faculty_login['new_login_faculty'] == 0) {
 
 <body>
     <div class="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar fixed-footer">
-        <div class="app-header header-shadow "> <!-- bg-premium-dark header-text-light -->
+        <div class="app-header header-shadow  bg-premium-dark header-text-light"> <!-- bg-premium-dark header-text-light -->
              <div class="app-header__logo">
                 <!-- style="background:url(<?php echo FRONT_GLOBAL_IMAGE."logo.jpg"; ?>);background-size: cover;width: 43px;height: 50px" -->
                 <div class="logo-src" >
-                    <a href="index">Faculty</a>
+                    <a href="index">Faculty <sub style="font-size: 10px;text-transform: capitalize;font-style: italic;letter-spacing: 2px">panel</sub></a>
                 </div>
                 <div class="header__pane ml-auto">
                     <div>
@@ -107,7 +124,7 @@ if ($faculty_login['new_login_faculty'] == 0) {
                 <div class="app-header-right">
                     <div class="header-dots">
                     <div class="widget-content">
-                        <div class="widget-content-left  ml-3 header-user-info" style="color: #313131"> <!-- rgba(255,255,255,0.8) -->
+                        <div class="widget-content-left  ml-3 header-user-info" style="color: rgba(255,255,255,0.8)"> <!-- rgba(255,255,255,0.8) -->
                             <div class="widget-heading" > <?= date('M d,Y') ?></div>
                             <div class="widget-subheading" id="currentTime" ></div>
                         </div>      
@@ -332,7 +349,7 @@ if ($faculty_login['new_login_faculty'] == 0) {
                                 <div class="widget-content-left">
                                     <div class="btn-group">
                                         <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="p-0 btn">
-                                            <img width="42" class="rounded-circle" src="<?= $faculty_login['faculty_image'] ?>" alt="">
+                                            <img width="42" class="rounded-circle" src="<?= FRONT_SITE_IMAGE_TEACHER.'/'.$faculty_login['faculty_image'] ?>" alt="">
                                             <i class="fa fa-angle-down ml-2 opacity-8"></i>
                                         </a>
                                         <div tabindex="-1" role="menu" aria-hidden="true" class="rm-pointers dropdown-menu-lg dropdown-menu dropdown-menu-right">
@@ -343,7 +360,7 @@ if ($faculty_login['new_login_faculty'] == 0) {
                                                         <div class="widget-content p-0">
                                                             <div class="widget-content-wrapper">
                                                                 <div class="widget-content-left mr-3">
-                                                                    <img width="42" class="rounded-circle" src="<?= $faculty_login['faculty_image'] ?>" alt="">
+                                                                    <img width="42" class="rounded-circle" src="<?= FRONT_SITE_IMAGE_TEACHER.'/'.$faculty_login['faculty_image'] ?>" alt="">
                                                                 </div>
                                                                 <div class="widget-content-left">
                                                                     <div class="widget-heading"><?= $full_name_faculty ?></div>
@@ -356,60 +373,18 @@ if ($faculty_login['new_login_faculty'] == 0) {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="scroll-area-xs" style="height: 150px;">
+                                            <div class="scroll-area-xs" style="height: 100px;">
                                                 <div class="scrollbar-container ps">
                                                     <ul class="nav flex-column">
-                                                        <li class="nav-item-header nav-item">Activity</li>
                                                         <li class="nav-item">
-                                                            <a href="javascript:void(0);" class="nav-link">Chat
-                                                                <div class="ml-auto badge badge-pill badge-info">8</div>
-                                                            </a>
+                                                            <a href="change_password<?=  PHP_EXT ?>?email_id=<?= $faculty_login['faculty_email'] ?>&reset-code=<?= $faculty_login['reset_password_code_faculty'] ?>" class="nav-link">Recover Password</a>
                                                         </li>
-                                                        <li class="nav-item">
-                                                            <a href="javascript:void(0);" class="nav-link">Recover Password</a>
-                                                        </li>
-                                                        <li class="nav-item-header nav-item">My Account
-                                                        </li>
-                                                        <li class="nav-item">
-                                                            <a href="javascript:void(0);" class="nav-link">Settings
-                                                                <div class="ml-auto badge badge-success">New</div>
-                                                            </a>
-                                                        </li>
-                                                        <li class="nav-item">
-                                                            <a href="javascript:void(0);" class="nav-link">Messages
-                                                                <div class="ml-auto badge badge-warning">512</div>
-                                                            </a>
-                                                        </li>
-                                                        <li class="nav-item">
-                                                            <a href="javascript:void(0);" class="nav-link">Logs</a>
-                                                        </li>
+                                                       
                                                     </ul>
                                                 </div>
                                             </div>
                                             <ul class="nav flex-column">
                                                 <li class="nav-item-divider mb-0 nav-item"></li>
-                                            </ul>
-                                            <div class="grid-menu grid-menu-2col">
-                                                <div class="no-gutters row">
-                                                    <div class="col-sm-6">
-                                                        <button class="btn-icon-vertical btn-transition btn-transition-alt pt-2 pb-2 btn btn-outline-warning">
-                                                            <i class="pe-7s-chat icon-gradient bg-amy-crisp btn-icon-wrapper mb-2"></i> Message Inbox
-                                                        </button>
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                        <button class="btn-icon-vertical btn-transition btn-transition-alt pt-2 pb-2 btn btn-outline-danger">
-                                                            <i class="pe-7s-ticket icon-gradient bg-love-kiss btn-icon-wrapper mb-2"></i>
-                                                            <b>Support Tickets</b>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <ul class="nav flex-column">
-                                                <li class="nav-item-divider nav-item">
-                                                </li>
-                                                <li class="nav-item-btn text-center nav-item">
-                                                    <button class="btn-wide btn btn-primary btn-sm"> Open Messages </button>
-                                                </li>
                                             </ul>
                                         </div>
                                     </div>
@@ -430,7 +405,7 @@ if ($faculty_login['new_login_faculty'] == 0) {
             </div>
         </div>     
           <div class="app-main">
-            <div class="app-sidebar sidebar-shadow "> <!-- bg-slick-carbon sidebar-text-light -->
+            <div class="app-sidebar sidebar-shadow bg-slick-carbon sidebar-text-light"> <!-- bg-slick-carbon sidebar-text-light -->
                 <div class="app-header__logo">
                     <div class="logo-src"></div>
                     <div class="header__pane ml-auto">
@@ -465,9 +440,17 @@ if ($faculty_login['new_login_faculty'] == 0) {
                     <div class="app-sidebar__inner">
                         <ul class="vertical-nav-menu">
                             <li class="app-sidebar__heading">Menu</li>
-                            <li  class="mt-3 mm-active">
+                            <li  class="mt-3 <?= $dashboard_active ?>">
                                 <a href="index"<?= PHP_EXT ?>>
                                     <i class="metismenu-icon pe-7s-rocket"></i>Dashboards
+                                    <!-- <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i> -->
+                                </a>
+                             </li>
+
+
+                             <li  class="mt-3 <?= $quiz_master_active ?>">
+                                <a href="quiz_master<?= PHP_EXT ?>?action=viewall">
+                                    <i class="metismenu-icon pe-7s-study"></i> Quiz Master
                                     <!-- <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i> -->
                                 </a>
                              </li>

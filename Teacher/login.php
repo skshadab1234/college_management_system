@@ -10,6 +10,7 @@ if (isset($_SESSION['FAC_ID'])) {
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+    <title>Faculty - Login</title>
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.16.0/sweetalert2.min.css">
     <!-- <title>Login & Signup Form | CodingNepal</title> -->
     <link rel="stylesheet" href="assets/css/style.css">

@@ -7,10 +7,9 @@
 }
 
 :root{
---background-color:#0069d9;
---secondary-background-color:#fff;
---border:1px solid lightgrey;
-
+--background-color: #000;
+--secondary-background-color: #111;
+--border: 1px solid lightgrey;
 }
 
 [data-theme = 'dark']{
@@ -100,11 +99,11 @@ input[type="radio"]{
 }
 
 .login_head{
-	    color: var(--secondary-background-color);
+	    color: #fff;
         transform: translate(2%, -42%);
     display: flex;
     justify-content: center;
-    align-items: CENTER;
+    align-items: center;
     width: 200PX;
     height: 116PX
 }

@@ -6,8 +6,7 @@ if (isset($_GET['email_id']) && isset($_GET['reset-code'])) {
   $reset_code = get_safe_value($_GET['reset-code']);
 
   $sql = "SELECT * FROM student_login where student_email = '$email_id' && reset_password_code  = '$reset_code'";
-  $res = mysqli_query($con,$sql);
-  $row = mysqli_fetch_asscoc($res);
+
   }elseif (isset($_GET['changepassword']) && $_GET['changepassword'] != '' && $_GET['changepassword'] == $student_login['student_email']) {
     $email_id = get_safe_value($_GET['changepassword']);
   }

@@ -7,9 +7,9 @@
 }
 
 :root{
---linear-gradient-background-color:-webkit-linear-gradient(left, #a445b2, #fa4299);
---login-form-bg-color:#fff;
---text-color:#000;
+    --linear-gradient-background-color: -webkit-linear-gradient(left, #000000, #000000);
+    --login-form-bg-color: #fff;
+    --text-color: #000;
 }
 
 [data-theme = 'dark']{
@@ -25,26 +25,33 @@ html,body{
   place-items: center;
   background: var(--linear-gradient-background-color)
 }
+
 ::selection{
   background: #a445b2;
   color: #fff;
 }
 .wrapper{
-  overflow: hidden;
-  max-width: 390px;
-  background: var(--login-form-bg-color);
-  padding: 30px;
-  border-radius: 5px;
-  box-shadow: 0px 15px 20px rgba(0,0,0,0.1);
+    overflow: hidden;
+    max-width: 400px;
+    background: #111;
+    padding: 30px;
+    width: 400px;
+    border-radius: 5px;
+    box-shadow: 0px 15px 20px rgb(0 0 0 / 10%);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%)
 }
 .wrapper .title-text{
   display: flex;
   width: 200%;
 }
 .wrapper .title{
+  padding-bottom: 30px;
   width: 50%;
   font-size: 35px;
-  color: var(--text-color);
+  color: #fff;
   font-weight: 600;
   text-align: center;
   transition: all 0.6s cubic-bezier(0.68,-0.55,0.265,1.55);
@@ -64,18 +71,20 @@ html,body{
 .form-inner form .field{
   height: 50px;
   width: 100%;
-  margin-top: 20px;
+  margin-top: 30px;
 }
 .form-inner form .field input{
+  background: #504c4c;
   height: 100%;
   width: 100%;
   outline: none;
   padding-left: 15px;
   border-radius: 5px;
-  border: 1px solid lightgrey;
+  border: 1px solid pink;
   border-bottom-width: 2px;
   font-size: 17px;
   transition: all 0.3s ease;
+  color: #fff
 }
 .form-inner form .field input:focus{
   border-color: #fc83bb;
@@ -136,4 +145,11 @@ form .btn input[type="submit"]{
   font-size: 20px;
   font-weight: 500;
   cursor: pointer;
+}
+.swal2-container:not(.swal2-top):not(.swal2-top-start):not(.swal2-top-end):not(.swal2-top-left):not(.swal2-top-right):not(.swal2-center-start):not(.swal2-center-end):not(.swal2-center-left):not(.swal2-center-right):not(.swal2-bottom):not(.swal2-bottom-start):not(.swal2-bottom-end):not(.swal2-bottom-left):not(.swal2-bottom-right):not(.swal2-grow-fullscreen)>.swal2-modal{
+  background: #212121;
+}
+
+.swal2-popup .swal2-modal .swal2-icon-error .swal2-show .swal2-styled.swal2-confirm{
+  background-color: #121212;  
 }

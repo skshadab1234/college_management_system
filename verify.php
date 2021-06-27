@@ -464,7 +464,12 @@ elseif (isset($_POST['AdminIdNo']) && isset($_POST['password']))
         {
             if (password_verify($password, $row["admin_password"]))
             {
+
                 $_SESSION["ADMINID"] = $row['id'];
+
+                $current_time = date("Y-m-d h:i a");
+
+                $res =mysqli_query($con,"UPDATE admin_mode SET admin_last_login=now() WHERE id = '".$_SESSION['ADMINID']."'");
                 $arr = array(
                     'status' => 'success',
                     'msg' => 'Wait a minute....redirecting',

@@ -1,4 +1,4 @@
-
+	
 <?php
 
 require 'session.php';
@@ -73,14 +73,20 @@ if (isset($_POST['admit_no']) && $_POST['admit_no'] != '') {
                method:"post",
                data:send_message,
                success:function(data) {
+               	var data = $.parseJSON(data);
+               	var now = new Date(Date.now());
+               	var hours = now.getHours() % 12 || 12;  
+            	var formatted = moment().format('hh:mm A');
                   $("#add_msg").val('');
-                  $(".append_data").append('<div class="chat-msg owner"><div class="chat-msg-profile"><div class="chat-msg-date"><span style="margin-left:10px;">'+mark+'</span></div></div><div class="chat-msg-content"><div class="chat-msg-text">'+data+'</div></div></div> ');
+                  $(".append_data").append('<div class="chat-msg owner"><div class="chat-msg-profile"><div class="chat-msg-date"><span style="margin-left:10px;">'+formatted+'</span></div></div><div class="chat-msg-content"><div class="chat-msg-text">'+data.send_message+'</div></div></div> ');
                }
             })
 
             e.preventDefault();     
 
          })
+
+         
       });
    </script>
 
@@ -91,7 +97,8 @@ if (isset($_POST['admit_no']) && $_POST['admit_no'] != '') {
 
 	$res = mysqli_query($con,"INSERT INTO `chat_messages`(`incoming_id`, `outgoing_id`, `messages`, `message_send_time`,`status`) VALUES ('$incoming_id',".$student_login['Admission_NO'].",'$send_message','".date("Y-m-d h:i a")."',1)");
 
-	echo $send_message;
+	$arr = array('send_message'=>$send_message,'incoming_id'=>$incoming_id);
+	echo json_encode($arr);
 }
 
 

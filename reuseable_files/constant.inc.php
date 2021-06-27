@@ -12,11 +12,11 @@ define('SERVER_IMAGE_STUDENT',SERVER_IMAGE.'global_images/student_images');
 
 define('FRONT_SITE_PATH_TEACHER',FRONT_SITE_PATH.'Teacher/');
 define('FRONT_SITE_IMAGE_TEACHER',FRONT_SITE_PATH.'global_images/teacher_images');
-define('SERVER_IMAGE_TEACHER',SERVER_IMAGE.'global_images/teacher_images');
+define('SERVER_IMAGE_TEACHER',SERVER_IMAGE.'shadab/college_project/global_images/teacher_images/');
 
 define('FRONT_SITE_PATH_ADMIN',FRONT_SITE_PATH.'admin_mode/');
 define('FRONT_SITE_IMAGE_ADMIN',FRONT_SITE_PATH.'global_images/admin_images');
-define('SERVER_IMAGE_ADMIN',SERVER_IMAGE.'global_images/admin_images');
+define('SERVER_IMAGE_ADMIN',SERVER_IMAGE.'shadab/college_project/global_images/admin_images/');
 
 define('PHP_EXT','');
 

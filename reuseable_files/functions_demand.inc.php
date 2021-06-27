@@ -59,46 +59,49 @@ function send_email($email,$html,$subject,$user_msg){
      return $arr;
 }
 
-function student_fees_details($admission_no){
-	global $con;
-	$arr=array();
-	$res=mysqli_query($con,"select * from student_fees_details where Admission_No='$admission_no'");
-	while($row=mysqli_fetch_assoc($res)){
-		$arr[]=$row;
-		// total fees
-		$arr[0]['total_fees_percentage'] = '100%';
+// function student_fees_details($admission_no){
+// 	global $con;
+// 	$arr[]=array();
+// 	$res=mysqli_query($con,"select * from student_fees_details where Admission_No='$admission_no'");
+	
+// 	if (mysqli_num_rows($res)>0) {
+// 		while($row=mysqli_fetch_assoc($res)){
+// 			$arr[0]=$row;
+// 			// total fees
+// 			$arr[0]['total_fees_percentage'] = '100%';
 
-		// calculating percentage of remain fees from total fees
-		$total_fees = $row['Total_fees'];
-		$paid_fees = $row['Paid_Fees'];
+// 			// calculating percentage of remain fees from total fees
+// 			$total_fees = $row['Total_fees'];
+// 			$paid_fees = $row['Paid_Fees'];
 
-		$paid_percentage = ($total_fees - $paid_fees) / $total_fees * 100;
-		$arr[0]['remain_fees_percentage'] = number_format($paid_percentage);
+// 			$paid_percentage = ($total_fees - $paid_fees) / $total_fees * 100;
+// 			$arr[0]['remain_fees_percentage'] = number_format($paid_percentage);
 
-		if (number_format($paid_percentage) > 50) {
-			$arr[0]['paid_percentage_color_impression'] = 'danger';
-		}else{
-			$arr[0]['paid_percentage_color_impression'] = 'success';
-		}
+// 			if (number_format($paid_percentage) > 50) {
+// 				$arr[0]['paid_percentage_color_impression'] = 'danger';
+// 			}else{
+// 				$arr[0]['paid_percentage_color_impression'] = 'success';
+// 			}
 
-		// calculating paid fess percentage from total fees
-		$total_fees = $row['Total_fees'];
-		$remain_fees = $row['Balance_Fees'];
+// 			// calculating paid fess percentage from total fees
+// 			$total_fees = $row['Total_fees'];
+// 			$remain_fees = $row['Balance_Fees'];
 
-		$remain_percentage = ($total_fees - $remain_fees) / $total_fees * 100;
-		$arr[0]['paid_fees_percentage'] = number_format($remain_percentage);
+// 			$remain_percentage = ($total_fees - $remain_fees) / $total_fees * 100;
+// 			$arr[0]['paid_fees_percentage'] = number_format($remain_percentage);
 
-		if ( 50 < $remain_percentage) {
-			$arr[0]['remain_percentage_color_impression'] = 'success';
-		}else{
-			$arr[0]['remain_percentage_color_impression'] = 'danger';
-		}
+// 			if ( 50 < $remain_percentage) {
+// 				$arr[0]['remain_percentage_color_impression'] = 'success';
+// 			}else{
+// 				$arr[0]['remain_percentage_color_impression'] = 'danger';
+// 			}
 
 
 
-	}
-	return $arr;
-}
+// 		}
+// 	}
+// 	return $arr;
+// }
 
 
 function get_timetable_for_specific_department($branch,$semester,$day){
@@ -114,6 +117,34 @@ function get_timetable_for_specific_department($branch,$semester,$day){
 	return $arr;
 }
 
+
+function Subjects(){
+	global $con;
+	$arr[] = array();
+	$res=mysqli_query($con,"select * from subject");
+	while ($row = mysqli_fetch_assoc($res)) {
+		if (mysqli_num_rows($res) > 0)  {
+			$arr[] = $row;
+		}
+	}
+
+	return $arr;
+}
+
+
+
+function Branch(){
+	global $con;
+	$arr[] = array();
+	$res=mysqli_query($con,"select * from branch Where status=1");
+	while ($row = mysqli_fetch_assoc($res)) {
+		if (mysqli_num_rows($res) > 0)  {
+			$arr[] = $row;
+		}
+	}
+
+	return $arr;
+}
 
 function get_faculty_details($fid){
 	global $con;
@@ -136,7 +167,7 @@ function numberofStudentJoined($lectname,$lectDate,$lectTime){
 function SubjectQuzForToday($today_date,$branch_id){
 	global $con;
 	$arr[] = array();
-	$res=mysqli_query($con,"SELECT * FROM `quiz_question` LEFT JOIN faculty_login on quiz_question.faculty_created_id = faculty_login.faculty_login_id  where  quiz_date = '$today_date'  && quiz_branch_id = '$branch_id' && quiz_question.status = '1' GROUP BY subject_name");
+	$res=mysqli_query($con,"SELECT *,quiz_question.subject_name as sid,quiz_question.id as qid FROM `quiz_question` LEFT JOIN subject ON subject.id = quiz_question.subject_name LEFT JOIN faculty_login on quiz_question.faculty_created_id = faculty_login.faculty_login_id  where  quiz_date = '$today_date'  && quiz_branch_id = '$branch_id' && quiz_question.status = '1' GROUP BY quiz_topic");
 	while ($row = mysqli_fetch_assoc($res)) {
 			$arr[] = $row;
 	}
@@ -144,9 +175,9 @@ function SubjectQuzForToday($today_date,$branch_id){
 	return $arr;
 }
 
-function numberofquestonpersubjectQuiz($subject_name,$quiz_date){
+function numberofquestonpersubjectQuiz($subject_name,$quiz_date,$quiz_topic){
 	global $con;
-	$res = mysqli_query($con, "SELECT COUNT(*) AS numberofquestonpersubjectQuiz FROM `quiz_question` WHERE  subject_name = '$subject_name' && quiz_date = '$quiz_date'  && status = '1'");
+	$res = mysqli_query($con, "SELECT COUNT(*) AS numberofquestonpersubjectQuiz FROM `quiz_question` LEFT JOIN subject ON subject.id = quiz_question.subject_name WHERE subject.subject_name = '$subject_name' && quiz_date = '$quiz_date'  && status = '1' && quiz_topic='$quiz_topic'");
 	$row = mysqli_fetch_assoc($res);
 
 	return $row;
@@ -156,7 +187,7 @@ function getQuizQuestionBySubjectName($subject_name,$today_date){
 	global $con;
 	$arr[] = array();
 
-	$res=mysqli_query($con,"SELECT * FROM `quiz_question`  where subject_name = '$subject_name' && quiz_date = '$today_date' && quiz_question.status = '1'");
+	$res=mysqli_query($con,"SELECT * FROM `quiz_question` LEFT JOIN subject ON subject.id = quiz_question.subject_name   where subject.subject_name = '$subject_name' && quiz_date = '$today_date' && quiz_question.status = '1'");
 	while ($row = mysqli_fetch_assoc($res)) {
 			$arr[] = $row;
 	}
@@ -165,10 +196,10 @@ function getQuizQuestionBySubjectName($subject_name,$today_date){
 }
 
 
-function totalmarksQuestion($subject_name,$date){
+function totalmarksQuestion($subject_name,$date,$topic){
 	global $con;
 
-	$res = mysqli_query($con, "SELECT SUM(question_marks) as totalmarksQuestion FROM `quiz_question` WHERE subject_name ='$subject_name' && quiz_date = '$date'");
+	$res = mysqli_query($con, "SELECT SUM(question_marks) as totalmarksQuestion FROM `quiz_question`  LEFT JOIN subject ON subject.id = quiz_question.subject_name  WHERE subject.id ='$subject_name' && quiz_date = '$date' && quiz_topic='$topic'");
 	$row = mysqli_fetch_assoc($res);
 	return $row['totalmarksQuestion'];
 }
@@ -176,7 +207,7 @@ function totalmarksQuestion($subject_name,$date){
 function marks_get($student_id,$subject_name,$date){
 	global $con;
 $arr[] = array();
-	$res = mysqli_query($con, "SELECT SUM(marks_get) as marks_get FROM `quiz_student_answer` WHERE quiz_student_Admit_No  = ".$student_id." && subject_name ='$subject_name' && quiz_date = '$date'");
+	$res = mysqli_query($con, "SELECT SUM(marks_get) as marks_get FROM `quiz_student_answer`  WHERE quiz_student_Admit_No  = ".$student_id." && subject_name ='$subject_name' && quiz_date = '$date' ");
 	$row = mysqli_fetch_assoc($res);
 	if ($row['marks_get'] == Null) {
 		$arr['color'] = 'red';
@@ -202,7 +233,7 @@ function TimeTable($branch_id,$Semester_No,$lecture_start,$lecture_end)
 	global $con;
 	$arr[] = array();
 
-	$res=mysqli_query($con,"SELECT * FROM `timetable_all_dept` LEFT JOIN subject ON timetable_all_dept.Lecture_Name = subject.id WHERE Department_Name = '$branch_id' && Semester_No = '$Semester_No'  && Lecture_Start_at = '$lecture_start' && Lecture_end_at = '$lecture_end'");
+	$res=mysqli_query($con,"SELECT *,timetable_all_dept.id as tid FROM `timetable_all_dept` LEFT JOIN subject ON timetable_all_dept.Lecture_Name = subject.id WHERE Department_Name = '$branch_id' && Semester_No = '$Semester_No'  && Lecture_Start_at = '$lecture_start' && Lecture_end_at = '$lecture_end'");
 	
 	while ($row = mysqli_fetch_assoc($res)) {
 			$arr[] = $row;
@@ -344,4 +375,56 @@ function getNotice($status,$optional='')
 	}
 	return $arr;	
 
+}
+
+function TotalTeacher()
+{
+	global $con;
+	$res = mysqli_query($con,"select COUNT(*) as total FROM faculty_login WHERE status = 1");
+	$row = mysqli_fetch_assoc($res);
+
+	return $row['total'];
+}
+
+function TotalStudent()
+{
+	global $con;
+	$res = mysqli_query($con,"select COUNT(*) as total FROM student_login WHERE student_status = 1");
+	$row = mysqli_fetch_assoc($res);
+
+	return $row['total'];
+}
+
+
+function TotalCourses()
+{
+	global $con;
+	$res = mysqli_query($con,"select COUNT(*) as total FROM branch WHERE status = 1");
+	$row = mysqli_fetch_assoc($res);
+
+	return $row['total'];
+}
+
+function Subject_id($subject_name)
+{
+	global $con;
+	$res = mysqli_query($con,"select id FROM subject WHERE subject_name = '$subject_name'");
+	$row = mysqli_fetch_assoc($res);
+
+	return $row['id'];
+	
+}
+
+function quiz_topicCreatedByFaculty($quiz_topic,$quiz_date){
+	global $con;
+	$arr[] = array();
+	$res=mysqli_query($con,"SELECT * FROM `quiz_question` WHERE college_notice_status = '$status' $optional");
+	
+	if (mysqli_num_rows($res) > 0) {
+		while ($row = mysqli_fetch_assoc($res)) {
+				$arr[] = $row;
+		}
+
+	}
+	return $arr;
 }

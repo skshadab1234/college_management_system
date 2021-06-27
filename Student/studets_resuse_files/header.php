@@ -17,13 +17,17 @@ if ($page_url == FRONT_SITE_PATH_STUDENT.'timetable.php' || $page_url == FRONT_S
 
 if ($page_url == FRONT_SITE_PATH_STUDENT.'timetable.php') {
     $active = 'mm-active';
+    $title = 'TimeTable';
 }elseif ($page_url == FRONT_SITE_PATH_STUDENT || $page_url == FRONT_SITE_PATH_STUDENT.'index.php') {
+    $title = 'Dashboard';
       $dash_active = 'mm-active';
 }elseif ($page_url == FRONT_SITE_PATH_STUDENT.'notice.php') {
       $noticeactive = 'mm-active';
+      $title = 'Notice Board';
 }elseif ($page_url == FRONT_SITE_PATH_STUDENT.'chat.php') {
       $chatactive = 'mm-active';
       $opacity =  '1';
+      $title = 'Chat App';
       $chathide_component = 'display:none';
 }
 
@@ -37,7 +41,7 @@ if ($page_url == FRONT_SITE_PATH_STUDENT.'timetable.php') {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="Content-Language" content="en">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Admin Dashboard</title>
+    <title><?=  $title ?></title>
     <meta name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
     <meta name="description" content="This is an example dashboard created using build-in elements and components.">
@@ -68,7 +72,7 @@ if ($page_url == FRONT_SITE_PATH_STUDENT.'timetable.php') {
              <div class="app-header__logo">
                 <!-- style="background:url(<?php echo FRONT_GLOBAL_IMAGE."logo.jpg"; ?>);background-size: cover;width: 43px;height: 50px" -->
                 <div class="logo-src" >
-                    <a href="index">LOGO</a>
+                    <a href="index">Student <sub style="font-size: 10px;text-transform: capitalize;font-style: italic;letter-spacing: 2px">panel</sub></a>
                 </div>
                 <div class="header__pane ml-auto" style="<?= $chathide_component ?>">
                     <div>
@@ -205,7 +209,7 @@ if ($page_url == FRONT_SITE_PATH_STUDENT.'timetable.php') {
                                 <div class="widget-content-left">
                                     <div class="btn-group">
                                         <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="p-0 btn">
-                                            <img width="42" class="rounded-circle" src="<?= $student_login['picture_link'] ?>" alt="">
+                                            <img width="42" class="rounded-circle" src="<?= FRONT_SITE_IMAGE_STUDENT.'/'.$student_login['picture_link'] ?>" alt="">
                                             <i class="fa fa-angle-down ml-2 opacity-8"></i>
                                         </a>
                                         <div tabindex="-1" role="menu" aria-hidden="true" class="rm-pointers dropdown-menu-lg dropdown-menu dropdown-menu-right">
@@ -216,7 +220,7 @@ if ($page_url == FRONT_SITE_PATH_STUDENT.'timetable.php') {
                                                         <div class="widget-content p-0">
                                                             <div class="widget-content-wrapper">
                                                                 <div class="widget-content-left mr-3">
-                                                                    <img width="42" class="rounded-circle" src="<?= $student_login['picture_link'] ?>" alt="">
+                                                                    <img width="42" class="rounded-circle" src="<?= FRONT_SITE_IMAGE_STUDENT.'/'.$student_login['picture_link'] ?>" alt="">
                                                                 </div>
                                                                 <div class="widget-content-left">
                                                                     <div class="widget-heading"><?= $full_name_student ?></div>
@@ -321,7 +325,7 @@ if ($page_url == FRONT_SITE_PATH_STUDENT.'timetable.php') {
                                             <i class="metismenu-icon"></i>Notice's
                                         </a>
                                     </li>
-                                    <li>
+                                    <!-- <li>
                                         <a href="dashboards-commerce.html" >
                                             <i class="metismenu-icon"></i>Facilities
                                         </a>
@@ -331,14 +335,14 @@ if ($page_url == FRONT_SITE_PATH_STUDENT.'timetable.php') {
                                             <i class="metismenu-icon">
                                             </i>Training and Placements
                                         </a>
-                                    </li>
+                                    </li> -->
                                 </ul>
                             </li>  
 
-                            <li class="mt-3">
+                            <!-- <li class="mt-3"> -->
                                     <!-- Examination Section -->
 
-                                <a href="#">
+                                <!-- <a href="#">
                                     <i class="metismenu-icon pe-7s-notebook"></i>Examination
                                     <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
                                 </a>
@@ -361,9 +365,9 @@ if ($page_url == FRONT_SITE_PATH_STUDENT.'timetable.php') {
                                     </li>
                                 </ul>
                             </li>
+ -->
 
-
-                            <li  class=" mt-3">
+                         <!--    <li  class=" mt-3">
                                 <a href="#">
                                     <i class="metismenu-icon pe-7s-date"></i>Events
                                     <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
@@ -381,7 +385,7 @@ if ($page_url == FRONT_SITE_PATH_STUDENT.'timetable.php') {
                                     </li>
                                 </ul>
                             </li>
-
+ -->
 
                              <li  class="mt-3 <?= $chatactive ?>">
                                 <a href="chat<?= PHP_EXT ?>">
@@ -390,7 +394,7 @@ if ($page_url == FRONT_SITE_PATH_STUDENT.'timetable.php') {
                                 </a>
                              </li>
 
-                             <li  class="mt-3">
+                             <!-- <li  class="mt-3">
                                 <a href="#">
                                     <i class="metismenu-icon pe-7s-news-paper"></i>Blogs
                                 </a>
@@ -400,7 +404,7 @@ if ($page_url == FRONT_SITE_PATH_STUDENT.'timetable.php') {
                                 <a href="#">
                                     <i class="metismenu-icon pe-7s-settings"></i>Setting
                                 </a>
-                             </li>
+                             </li> -->
 
                             </li>
                         </ul>

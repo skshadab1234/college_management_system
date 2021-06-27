@@ -8,4 +8,3 @@ if(isset($_SESSION['STD_ID'])){
 	$res = mysqli_query($con,$sql);
 	$student_login = mysqli_fetch_assoc($res);
 }
-date_default_timezone_set("Asia/Calcutta");

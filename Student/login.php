@@ -20,10 +20,9 @@ if (isset($_SESSION['STD_ID'])) {
     <div class="wrapper">
       <div class="title-text">
         <div class="title login">
-Student Login</div>
-<div class="title signup">
-Signup Form</div>
-</div>
+            Student Login
+          </div>
+      </div>
 <div class="form-container">
 
 <div class="form-inner">

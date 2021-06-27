@@ -1,8 +1,6 @@
 <?php
 require 'session.php';
-if (isset($_SESSION['ADMINID'])) {
-  header("location:index");
-}
+
 if (isset($_GET['email_id']) && isset($_GET['reset-code'])) {
     $email_id = get_safe_value($_GET['email_id']);
     $reset_code = get_safe_value($_GET['reset-code']);
@@ -17,6 +15,7 @@ if (isset($_GET['email_id']) && isset($_GET['reset-code'])) {
   else{
     header("location:login");
   }
+
 $res = mysqli_query($con,$sql);
 
 if (mysqli_num_rows($res)) {

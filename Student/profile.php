@@ -1773,7 +1773,7 @@
                         <div class="col-lg-3 order-lg-2">
                            <div class="card-profile-image">
                               <a href="#">
-                              <img src="<?= $student_login['picture_link'] ?>" class="rounded-circle">
+                              <img src="<?= FRONT_SITE_IMAGE_STUDENT.'/'.$student_login['picture_link'] ?>" class="rounded-circle">
                               </a>
                            </div>
                         </div>

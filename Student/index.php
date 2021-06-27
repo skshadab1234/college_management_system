@@ -1,8 +1,7 @@
 <?php
    require 'studets_resuse_files/header.php';
-   $fees_details = student_fees_details($student_login['Admission_NO'])[0];
+   // $fees_details = student_fees_details($student_login['Admission_NO'])[0];
 
-    
    ?>
 
 <!-- main section -->
@@ -19,94 +18,63 @@
                <div class="page-title-subheading">This is your personal dashboard. No one can access your dashboard without login with legal credantials.</div>
             </div>
          </div>
-         <div class="page-title-actions">
-            <select class="select2 form-control">
-               <option value="" > Choose Academic Year</option>
-               <option value="2020 - 2021">2020 - 2021</option>
-               <option value="2021 - 2022">2021 - 2022</option>
-            </select>
-         </div>
+        
       </div>
    </div>
    <div class="tabs-animation">
-      <div class="row">
-         <div class="col-md-6 col-xl-4">
-            <div class="card-shadow-primary mb-3 widget-chart widget-chart2 text-left card">
-               <div class="widget-chat-wrapper-outer">
-                  <div class="widget-chart-content">
-                     <h6 class="widget-subheading">Total Fees</h6>
-                     <div class="widget-chart-flex">
-                        <div class="widget-numbers mb-0 w-100">
-                           <div class="widget-chart-flex">
-                              <div class="fsize-4">
-                                 <small class="opacity-5"><i class="fas fa-rupee-sign"></i></small>
-                                 <?= number_format($fees_details['Total_fees']) ?>
-                              </div>
-                              <div class="ml-auto">
-                                 <div class="widget-title ml-auto font-size-lg font-weight-normal text-muted">
-                                    <span class="text-success pl-2"><?= $fees_details['total_fees_percentage'] ?></span>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-         <div class="col-md-6 col-xl-4">
-            <div class="card-shadow-primary mb-3 widget-chart widget-chart2 text-left card">
-               <div class="widget-chat-wrapper-outer">
-                  <div class="widget-chart-content">
-                     <h6 class="widget-subheading">Paid Amount</h6>
-                     <div class="widget-chart-flex">
-                        <div class="widget-numbers mb-0 w-100">
-                           <div class="widget-chart-flex">
-                              <div class="fsize-4">
-                                 <small class="opacity-5"><i class="fas fa-rupee-sign"></i></small>
-                                 <?= number_format($fees_details['Paid_Fees']) ?>
-                              </div>
-                              <div class="ml-auto">
-                                 <div class="widget-title ml-auto font-size-lg font-weight-normal text-muted">
-                                    <span class="text-<?= $fees_details['paid_percentage_color_impression'] ?> pl-2"><?= $fees_details['paid_fees_percentage'] ?>%</span>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-         <div class="col-md-6 col-xl-4">
-            <div class="card-shadow-primary mb-3 widget-chart widget-chart2 text-left card">
-               <div class="widget-chat-wrapper-outer">
-                  <div class="widget-chart-content">
-                     <h6 class="widget-subheading">Balance Amount</h6>
-                     <div class="widget-chart-flex">
-                        <div class="widget-numbers mb-0 w-100">
-                           <div class="widget-chart-flex">
-                              <div class="fsize-4">
-                                 <small class="opacity-5"><i class="fas fa-rupee-sign"></i></small>
-                                 <?= number_format($fees_details['Balance_Fees']) ?>
-                              </div>
-                              <div class="ml-auto">
-                                 <div class="widget-title ml-auto font-size-lg font-weight-normal text-muted">
-                                    <span class="text-<?= $fees_details['remain_percentage_color_impression'] ?> pl-2"><?= $fees_details['remain_fees_percentage'] ?>%</span>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
+     <div class="main-card mb-3 card" >
+                            <div class="card-body">
+                                <table style="width: 100%;" class="table">
+                                  <tbody id="dump_courses_here">
+                      <tr>
+                      <td>
+                      <table style="width: 100%;" class="table text-center  table-bordered">
+                    <?php
+                      $fees_res=mysqli_query($con,"select * from student_fees_details where Admission_No=".$student_login['Admission_NO']."");
+
+                      if (mysqli_num_rows($fees_res)>0) {
+                        ?>
+                      <thead>
+                          <tr>
+                            <th>Installment No</th>
+                            <th>Total Amount Pay</th>
+                            <th>Amount Paid</th>
+                            <th>Balance Amount to pay</th>
+                            <th>Payment Mode</th>
+                            <th>Payment Status</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                        foreach ($fees_res as $key => $fees_row) {
+                        
+                      ?>
+                          <tr>
+                            <td><?= $key+=1 ?></td>
+                            <td><?= 'Rs '.number_format($fees_row['Total_fees']) ?></td>
+                            <td><?= 'Rs '.number_format($fees_row['Paid_Fees']) ?></td>
+                            <td><?= 'Rs '.number_format($fees_row['Balance_Fees']) ?></td>
+                            <td><img src="<?= FRONT_SITE_PATH.'/' ?>global_images/<?= $fees_row['payment_mode'].'.png' ?>" width="50px"></td>
+                            <td><?= $fees_row['Payment_Status']?></td>
+                          </tr>
+                                    <?php
+                                   }
+                                  }
+                                  ?>
+                          </tbody>
+                        </table>
+
+                </td>
+                </tr>
+                </tbody>
+                </table>
+                </div>
+               </div>                    
+              </div> 
       <div class="row">
         <?php
                 $dayOfWeek = date('l'); 
-                if($dayOfWeek == 'Saturday' || $dayOfWeek == 'Sunday') { 
+                if($dayOfWeek == '' || $dayOfWeek == '') { 
                     $display_none ='style="display:none"';    
                 }else{
                     $display_none = '';
@@ -206,11 +174,20 @@
                         <ul class="todo-list-wrapper list-group list-group-flush">
                               <?php
                                 $total_quiz_today = array_filter(SubjectQuzForToday(date('Y-m-d'),$student_login['BRANCH']));
-                                  
                                 if (count($total_quiz_today) > 0) {
                                   
                                 foreach ($total_quiz_today as $key => $value) {
-                                  $numberofquestonpersubjectQuiz =  numberofquestonpersubjectQuiz($value['subject_name'],date('Y-m-d'));
+                                  $quiz_sql = "SELECT * FROM `quiz_student_answer` WHERE quiz_student_Admit_No = " . $student_login['Admission_NO'] . "  && quiz_date = '".$value['quiz_date']."' && subject_name = '".$value['subject_name']."'";
+                                  $quiz_answer = mysqli_query($con, $quiz_sql);
+                                  $marks_get = marks_get($student_login['Admission_NO'], $value['subject_name'], $value['quiz_date']);
+
+                                  if (mysqli_num_rows($quiz_answer) > 0)
+                                  {
+                                      $score = '<div class=" mt-2 float-right btn-'.$marks_get['message_color'].' p-2 text-white">'.$marks_get['value'] . ' / ' . totalmarksQuestion(Subject_id($value['subject_name']) , $value['quiz_date'],$value['quiz_topic']).'</div>';
+                                  }else{
+                                    $score = '';
+                                  }  
+                        $numberofquestonpersubjectQuiz =  numberofquestonpersubjectQuiz($value['subject_name'],date('Y-m-d'),$value['quiz_topic']);
                                   ?>
                                   <li class="list-group-item">
                                     <div class="widget-content p-0">
@@ -219,15 +196,17 @@
                                             </div>
                                             <div class="widget-content-left mr-3">
                                                 <div class="widget-content-left">
-                                                    <img width="42" class="rounded" src="<?= $value['faculty_image'] ?>" alt="">
+                                                    <img width="42" class="rounded" src="<?= FRONT_SITE_IMAGE_TEACHER.'/'.$value['faculty_image'] ?>" alt="">
                                                 </div>
                                             </div>
                                             <div class="widget-content-left">
                                                 <div class="widget-heading"><?= $value['subject_name'].' - '.$numberofquestonpersubjectQuiz['numberofquestonpersubjectQuiz'].' Questions' ?></div>
-                                                <div class="widget-subheading"><?= $value['quiz_topic'] ?></div>
+                                                <div class=""><?= $value['quiz_topic'] ?><?= $score ?></div>
+                                                  
+
                                             </div>
                                             <div class="widget-content-right">
-                                                <a href="<?= FRONT_SITE_PATH_STUDENT.'quiz_today'.PHP_EXT.'?quiz_id='.urlencode($value['subject_name']).'&date='.$value['quiz_date'].'&topic='.urlencode($value['quiz_topic']).'&startTime='.$value['quiz_start_time'] ?>">
+                                                <a href="<?= FRONT_SITE_PATH_STUDENT.'quiz_today'.PHP_EXT.'?quiz_id='.urlencode($value['subject_name']).'&date='.$value['quiz_date'].'&topic='.urlencode($value['quiz_topic']).'&startTime='.$value['quiz_start_time'].'&question_id='.$value['qid']?>">
                                                   <button class="border-0 btn-transition btn btn-outline-primary ">
                                                       View
                                                   </button>

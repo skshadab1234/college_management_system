@@ -35,41 +35,27 @@ $listfaculty = mysqli_query($con,$sql);
    background-color: #a8bbbf;
    }
    :root {
-   --body-bg-color: #e5ecef;
-   --theme-bg-color: #fff;
-   --settings-icon-hover: #9fa7ac;
-   --developer-color: #f9fafb;
-   --input-bg: #f8f8fa;
-   --input-chat-color: #a2a2a2;
-   --border-color: #eef2f4;
-   --body-font: "Manrope", sans-serif;
-   --body-color: #273346;
-   --settings-icon-color: #c1c7cd;
-   --msg-message: #969eaa;
-   --chat-text-bg: #f1f2f6;
-   --theme-color: #0086ff;
-   --msg-date: #c0c7d2;
-   --button-bg-color: #f0f7ff;
-   --button-color: var(--theme-color);
-   --detail-font-color: #919ca2;
-   --msg-hover-bg: rgba(238, 242, 244, 0.4);
-   --active-conversation-bg: linear-gradient(
-   to right,
-   rgba(238, 242, 244, 0.4) 0%,
-   rgba(238, 242, 244, 0) 100%
-   );
-   --overlay-bg: linear-gradient(
-   to bottom,
-   rgba(255, 255, 255, 0) 0%,
-   rgba(255, 255, 255, 1) 65%,
-   rgba(255, 255, 255, 1) 100%
-   );
-   --chat-header-bg: linear-gradient(
-   to bottom,
-   rgba(255, 255, 255, 1) 0%,
-   rgba(255, 255, 255, 1) 78%,
-   rgba(255, 255, 255, 0) 100%
-   );
+       --body-bg-color: #e5ecef;
+    --theme-bg-color: #000;
+    --settings-icon-hover: #9fa7ac;
+    --developer-color: #f9fafb;
+    --input-bg: #111;
+    --input-chat-color: #a2a2a2;
+    --border-color: #313131;
+    --body-font: "Manrope", sans-serif;
+    --body-color: #;
+    --settings-icon-color: #c1c7cd;
+    --msg-message: #969eaa;
+    --chat-text-bg: #c1c1c1;
+    --theme-color: #0086ff;
+    --msg-date: #c0c7d2;
+    --button-bg-color: #f0f7ff;
+    --button-color: var(--theme-color);
+    --detail-font-color: #919ca2;
+    --msg-hover-bg: rgba(238, 242, 244, 0.4);
+    --active-conversation-bg: linear-gradient( to right, rgba(238, 242, 244, 0.4) 0%, rgba(238, 242, 244, 0) 100% );
+    --overlay-bg: linear-gradient( to bottom, rgba(255, 255, 255, ) 0%, rgba(255, 255, 255, 1) 65%, rgba(255, 255, 255, 1) 100% );
+    
    }
    [data-theme=purple] {
    --theme-color: #9f7aea;
@@ -215,7 +201,7 @@ $listfaculty = mysqli_query($con,$sql);
    }
    .logo {
    color: var(--theme-color);
-   width: 38px;
+   width: 200px;
    flex-shrink: 0;
    }
    .logo svg {
@@ -307,6 +293,7 @@ $listfaculty = mysqli_query($con,$sql);
    margin-bottom: 4px;
    font-weight: 600;
    font-size: 15px;
+   color: #ddd
    }
    .msg-detail {
    overflow: hidden;
@@ -374,7 +361,9 @@ $listfaculty = mysqli_query($con,$sql);
    align-items: center;
    justify-content: space-between;
    padding: 20px;
-   background: var(--chat-header-bg);
+   background: #000;
+   color: #fff;
+    margin-bottom: 10px;
    }
    .chat-area-profile {
    width: 32px;
@@ -481,14 +470,14 @@ $listfaculty = mysqli_query($con,$sql);
    margin-left: 12px;
    }
    .chat-area-footer input {
-   border: none;
-   color: var(--body-color);
-   background-color: var(--input-bg);
-   padding: 12px;
-   border-radius: 6px;
-   font-size: 15px;
-   margin: 0 12px;
-   width: 100%;
+    border: none;
+    color: #ddd;
+    background-color: var(--input-bg);
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 15px;
+    margin: 0 12px;
+    width: 100%;
    }
    .chat-area-footer input::placeholder {
    color: var(--input-chat-color);
@@ -749,13 +738,14 @@ $listfaculty = mysqli_query($con,$sql);
       transition: 0.5s ease-in-out
    }
 </style>
+<title>Chat- Student</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
 
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <div class="app">
    <div class="header">
-      <div class="logo">
-         LOGO
+      <div class="logo" style="font-style: italic;font-weight: 700;color: #ddd">
+         Student's <sub>Talks</sub>
       </div>
       <div class="search-bar">
          <input type="text" placeholder="Search..." />
@@ -772,7 +762,7 @@ $listfaculty = mysqli_query($con,$sql);
                <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z" />
             </svg>
          </div>
-         <img class="user-profile" src="<?= $student_login['picture_link'] ?>" alt="" class="account-profile" alt="">
+         <img class="user-profile" src="<?= FRONT_SITE_IMAGE_STUDENT.'/'.$student_login['picture_link'] ?>" alt="" class="account-profile" alt="">
       </div>
    </div>
    <div class="wrapper">
@@ -783,7 +773,6 @@ $listfaculty = mysqli_query($con,$sql);
             $last_message = "SELECT * FROM `chat_messages` WHERE incoming_id = ".$value['Admission_NO']." and outgoing_id = ".$student_login['Admission_NO']." UNION SELECT * FROM chat_messages WHERE incoming_id= ".$student_login['Admission_NO']." and outgoing_id=".$value['Admission_NO']." ORDER BY id  DESC LIMIT 1";
             $result = mysqli_query($con,$last_message);
             $lastmessage_row = mysqli_fetch_assoc($result);
-
             if ($lastmessage_row['outgoing_id'] == $student_login['Admission_NO']) {
                if ($lastmessage_row['messeage_seen_time'] == '') {
                   $lastmessage_row_Diplay =  '<i class="fas fa-check" ></i> '.$lastmessage_row['messages'];
@@ -797,12 +786,18 @@ $listfaculty = mysqli_query($con,$sql);
                ?>
                <a href="javascript:void(0)" id="user_card" onclick="active_card(<?= $value['Admission_NO'] ?>)">
                <div class="msg"> <!-- ONLINE ACTIVE -->
-                  <img class="msg-profile" src="<?= $value['picture_link'] ?>" alt="" />
+                  <img class="msg-profile" src="<?= FRONT_SITE_IMAGE_STUDENT.'/'.$value['picture_link'] ?>" alt="" />
                   <div class="msg-detail">
                      <div class="msg-username"><?= $value['firstname'].' '.$value['last_name'] ?></div>
                      <div class="msg-content">
                         <span class="msg-message"><?= $lastmessage_row_Diplay ?></span>
-                        <span class="msg-date">20m</span>
+                        <span class="msg-date"><?php 
+                        if (date('Y-m-d',strtotime($lastmessage_row['message_send_time'])) == date('Y-m-d')) {
+                           echo date('h:i a',strtotime($lastmessage_row['message_send_time']));              
+                        }else{
+                           echo times_ago($lastmessage_row['message_send_time']);
+                        }           
+                            ?></span>
                      </div>
                   </div>
                </div>
@@ -816,10 +811,14 @@ $listfaculty = mysqli_query($con,$sql);
          <div class="overlay"></div>
       </div>
       <div class="chat-area">
+         <div class="append_my_data">
+            </div>
          <div class="chat-area-main">
+            
          </div>
       </div>
-
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
+   
 <script>
    function active_card(admit_no) {
       var admit_no = admit_no

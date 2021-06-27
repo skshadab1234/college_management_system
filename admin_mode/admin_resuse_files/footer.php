@@ -554,5 +554,6 @@
         
     <!-- <div class="app-drawer-overlay d-none animated fadeIn"></div> -->
     <script type="text/javascript" src="<?php echo FRONT_SITE_PATH ?>assets/js/main.d810cf0ae7f39f28f336.js"></script></body>
-
+    <script src="<?= FRONT_SITE_PATH.'reuseable_files/jquery.validate.min.js' ?>"></script>
+    <script src="<?= FRONT_SITE_PATH.'reuseable_files/additional-methods.min.js' ?>"></script>
 </html>

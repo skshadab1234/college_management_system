@@ -1,9 +1,9 @@
 <?php
    require 'session.php';
-   if (!isset($_SESSION['STD_ID'])) {
+   if (!isset($_SESSION['ADMINID'])) {
      header("location:login");
    }
-  $full_name_student = $student_login['firstname'].' '.$student_login['last_name'];
+  
    ?>
 <!doctype html>
 <html lang="en">
@@ -1751,29 +1751,28 @@
 
          </nav>
          <!-- Header -->
-         <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="min-height: 600px; background-image: url(<?= $student_login['picture_link'] ?>); background-size: cover; background-position: center top;">
+         <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="min-height: 600px; background-image: url(<?= FRONT_SITE_IMAGE_ADMIN.'/'.$admin_login['admin_picture'] ?>); background-size: cover; background-position: center top;">
             <!-- Mask -->
             <span class="mask bg-gradient-default opacity-8"></span>
             <!-- Header container -->
             <div class="container-fluid d-flex align-items-center">
                <div class="row">
                   <div class="col-lg-7 col-md-10">
-                     <h1 class="display-2 text-white">Hello <?= $full_name_student ?></h1>
-                     <p class="text-white mt-0 mb-5">This is your profile page. You can see the progress you've made with your work and manage your projects or assigned tasks</p>
+                     <h1 class="display-2 text-white">Hello, Admin <?= $admin_login['fullname'] ?></h1>
                   </div>
                </div>
             </div>
          </div>
          <!-- Page content -->
-         <div class="container-fluid mt--7">
+         <div class="container-fluid ">
             <div class="row">
-               <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
+               <div class="col-lg-12" style="width: 100%;margin-bottom: 20px">
                   <div class="card card-profile shadow">
                      <div class="row justify-content-center">
-                        <div class="col-lg-3 order-lg-2">
+                        <div class="col-lg-12" style="width: 100%">
                            <div class="card-profile-image">
                               <a href="#">
-                              <img src="<?= $student_login['picture_link'] ?>" class="rounded-circle">
+                              <img src="<?= FRONT_SITE_IMAGE_ADMIN.'/'.$admin_login['admin_picture'] ?>" class="rounded-circle">
                               </a>
                            </div>
                         </div>
@@ -1801,15 +1800,12 @@
                               </div>
                            </div>
                         </div>
-                        <div class="text-center">
+                        <div class="text-center" style="margin-top: 40px">
                            <h3>
-                              <?= $full_name_student ?><span class="font-weight-light">, <?= ageCalculator($student_login['STUDENT_DOB']) ?>Yr</span>
+                              <?= $admin_login['fullname'] ?><span class="font-weight-light">, <?= ageCalculator($admin_login['admin_dob']) ?>Yr</span>
                            </h3>
                            <div class="h5 font-weight-300">
-                              <i class="ni location_pin mr-2"></i><?= $student_login['ADDRESS'] ?>
-                           </div>
-                           <div class="h5 mt-4">
-                              <i class="fa fa-mark mr-2"></i><?= $student_login['DEPARTMENT'] ?> - SEM <?= $student_login['semester'] ?>
+                              <i class="ni location_pin mr-2"></i><?= $admin_login['admin_address'] ?>
                            </div>
                            <div>
                              
@@ -1818,274 +1814,14 @@
 
                      </div>
                   </div>
-                <div class="card-header border-0 pb-0 pb-md-4 mt-4">
-                        
-                        <div class="card-body pt-0 ">
-                           <h6 class="heading-small text-muted mb-4">Send Request to Update Profile</h6>
-                           <div class="">
-                              <div class="form-group focused">
-                                 <label class="form-control-label" for="input-description">Explain in short what wrong in profile.</label>
-                                 <textarea rows="4" class="form-control form-control-alternative" placeholder="A few words ..." required="" value="" id="input-description" ></textarea>
-                              </div>
 
-                              <div class="form-group focused">
-                                <button type="submit" id="submit_grevieance" class="form-control form-control-alternative bg-gradient-default">Send</button>
-                              </div>
-                           </div>
-                           <h5 class="mb-5"><strong>Note:</strong> If there is any mistake in your profile then   only send message. Don't Send message without any issue Strickly Warning. </h5>
-                        </div>
-                  </div>
                </div>
 
 
-               <div class="col-xl-8 order-xl-1">
-                  <div class="card bg-secondary shadow">
-                     <div class="card-header bg-white border-0">
-                        <div class="row align-items-center">
-                           <div class="col-8">
-                              <h3 class="mb-0">My account</h3>
-                           </div>
-                           
-                        </div>
-                     </div>
-                     <div class="card-body">
-                        <form>
-                           <h6 class="heading-small text-muted mb-4">Student information</h6>
-                           <div class="pl-lg-4">
-                               <div class="row">
-                                 <div class="col-lg-6">
-                                    <div class="form-group focused">
-                                       <label class="form-control-label" for="input-first-name">First name</label>
-                                       <input type="text" id="input-first-name" class="form-control form-control-alternative" placeholder="First name" value="<?= $student_login['firstname'] ?>" >
-                                    </div>
-                                 </div>
-                                 <div class="col-lg-6">
-                                    <div class="form-group focused">
-                                       <label class="form-control-label" for="input-last-name">Last name</label>
-                                       <input type="text" id="input-last-name" class="form-control form-control-alternative" placeholder="Last name" value="<?= $student_login['last_name'] ?>" >
-                                    </div>
-                                 </div>
-                              </div>
-                              <div class="row">
-                                 <div class="col-lg-6">
-                                    <div class="form-group focused">
-                                       <label class="form-control-label" for="input-admitno">Admission No</label>
-                                       <input type="text" id="input-admitno" class="form-control form-control-alternative" value="<?= $student_login['Admission_NO'] ?>" >
-                                    </div>
-                                 </div>
-
-                                 <div class="col-lg-6">
-                                    <div class="form-group focused">
-                                       <label class="form-control-label" for="input-admitno">Admission Date</label>
-                                       <input type="text" id="input-admitno" class="form-control form-control-alternative" value="<?= date('d M, Y', strtotime($student_login['added_on'])) ?>" >
-                                    </div>
-                                 </div>
-
-                                 <div class="col-lg-6">
-                                    <div class="form-group">
-                                       <label class="form-control-label" for="input-email">Email address</label>
-                                       <input type="email" id="input-email" class="form-control form-control-alternative" placeholder="jesse@example.com" value="<?= $student_login['student_email'] ?>" >
-                                    </div>
-                                 </div>
-
-                                 <div class="col-lg-6">
-                                    <div class="form-group">
-                                       <label class="form-control-label" for="input-dob">Date of Birth</label>
-                                       <input type="text" id="input-dob" class="form-control form-control-alternative" placeholder="jesse@example.com" value="<?= date('d M, Y', strtotime($student_login['STUDENT_DOB'])) ?>" >
-                                    </div>
-                                 </div>
-
-                                 <div class="col-lg-6">
-                                    <div class="form-group">
-                                       <label class="form-control-label" for="input-pob">Place of Birth</label>
-                                       <input type="text" id="input-pob" class="form-control form-control-alternative"  value="<?= $student_login['PLACEOFBIRTH'] ?>" >
-                                    </div>
-                                 </div>
-
-                                 <div class="col-lg-6">
-                                    <div class="form-group">
-                                       <label class="form-control-label" for="input-gender">Gender</label>
-                                       <input type="text" id="input-gender" class="form-control form-control-alternative"  value="<?= $student_login['GENDER'] ?>" >
-                                    </div>
-                                 </div>
-
-
-                              </div>
-
-
-
-                              <div class="row">
-                                 <div class="col-lg-6">
-                                    <div class="form-group focused">
-                                       <label class="form-control-label" for="input-dept">Department Name</label>
-                                       <input type="text" id="input-dept" class="form-control form-control-alternative" value="<?= $student_login['DEPARTMENT'] ?>" >
-                                    </div>
-                                 </div>
-                                 <div class="col-lg-6">
-                                    <div class="form-group">
-                                       <label class="form-control-label" for="input-bname">Branch Name</label>
-                                       <input type="text" id="input-bname" class="form-control form-control-alternative" value="<?= $student_login['branch_name'] ?>" >
-                                    </div>
-                                 </div>
-
-                                 <div class="col-lg-6">
-                                    <div class="form-group">
-                                       <label class="form-control-label" for="input-enroll">Enroll Number</label>
-                                       <input type="text" id="input-enroll" class="form-control form-control-alternative"  value="<?= $student_login['enroll_no'] ?>" >
-                                    </div>
-                                 </div>
-
-                                 <div class="col-lg-6">
-                                    <div class="form-group">
-                                       <label class="form-control-label" for="input-semester">Pursuing Semester</label>
-                                       <input type="text" id="input-semester" class="form-control form-control-alternative"  value="<?= $student_login['semester'] ?>" >
-                                    </div>
-                                 </div>
-                              </div>
-                             
-                           </div>
-                           <hr class="my-4">
-                           <!-- Address -->
-                           <h6 class="heading-small text-muted mb-4">Contact information</h6>
-                           <div class="pl-lg-4">
-                              <div class="row">
-                                 <div class="col-md-12">
-                                    <div class="form-group focused">
-                                       <label class="form-control-label" for="input-address">Address</label>
-                                       <input id="input-address" class="form-control form-control-alternative" placeholder="Home Address" value="<?= $student_login['ADDRESS'] ?>" type="text">
-                                    </div>
-                                 </div>
-                              </div>
-                              <div class="row">
-                                 <div class="col-lg-4">
-                                    <div class="form-group focused">
-                                       <label class="form-control-label" for="input-number">Phone Number</label>
-                                       <input type="text" id="input-number" class="form-control form-control-alternative" placeholder="Phone Number" value="<?= $student_login['student_phone'] ?>">
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-
-                           <hr class="my-4">
-                           <!-- FAMILY DETAILS -->
-                           <h6 class="heading-small text-muted mb-4">Family information</h6>
-                           <div class="pl-lg-4">
-                              <div class="row">
-                                 <div class="col-lg-6">
-                                    <div class="form-group focused">
-                                       <label class="form-control-label" for="input-FATHERNAME">Father Name</label>
-                                       <input type="text" id="input-FATHERNAME" class="form-control form-control-alternative" value="<?= $student_login['FATHERNAME'] ?>" >
-                                    </div>
-                                 </div>
-                                 <div class="col-lg-6">
-                                    <div class="form-group">
-                                       <label class="form-control-label" for="input-fnumber">Father Mobile Number</label>
-                                       <input type="email" id="input-fnumber" class="form-control form-control-alternative" placeholder="7854859645" value="<?= $student_login['FATHERMOBILEPHONE'] ?>" >
-                                    </div>
-                                 </div>
-
-                                  <div class="col-lg-6">
-                                    <div class="form-group">
-                                       <label class="form-control-label" for="input-foccup">Father Occupation</label>
-                                       <input type="text" id="input-foccup" class="form-control form-control-alternative" placeholder="Soldier" value="<?= $student_login['FATHERPROFESSION'] ?>" >
-                                    </div>
-                                 </div>
-
-                                 <div class="col-lg-6">
-                                    <div class="form-group focused">
-                                       <label class="form-control-label" for="input-FATHERNAME">Mother Name</label>
-                                       <input type="text" id="input-FATHERNAME" class="form-control form-control-alternative" value="<?= $student_login['MOTHERNAME'] ?>" >
-                                    </div>
-                                 </div>
-                                 <div class="col-lg-6">
-                                    <div class="form-group">
-                                       <label class="form-control-label" for="input-fnumber">Mother Mobile Number</label>
-                                       <input type="email" id="input-fnumber" class="form-control form-control-alternative" placeholder="7854859645" value="<?= $student_login['MOTHERMOBILEPHONE'] ?>" >
-                                    </div>
-                                 </div>
-
-                                 <div class="col-lg-6">
-                                    <div class="form-group">
-                                       <label class="form-control-label" for="input-foccup">Mother Occupation</label>
-                                       <input type="text" id="input-foccup" class="form-control form-control-alternative" placeholder="Housewife" value="<?= $student_login['MOTHERPROFESSION'] ?>" >
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-
-                           <!-- Description -->
-                          <!--  <h6 class="heading-small text-muted mb-4"></h6>
-                           <div class="pl-lg-4">
-                              <div class="form-group focused">
-                                 <label>About Me</label>
-                                 <textarea rows="4" class="form-control form-control-alternative" placeholder="A few words about you ...">A beautiful Dashboard for Bootstrap 4. It is Free and Open Source.</textarea>
-                              </div>
-                           </div> -->
-                        </form>
-                     </div>
-                  </div>
-               </div>
             </div>
          </div>
       </div>
 
-<?php
-$profilerequestByadmitno =  array_filter(profilerequestByadmitno($student_login['Admission_NO']));
-$count = count($profilerequestByadmitno);
-if ($count > 0) {
-   ?>
-      <div class="request_profile">
-         <hr class="my-4">
-            <h6 class="heading-small text-muted mt-4 mb-4 ml-2">Requested To Update Profile</h6>
-             <div class="main-card mb-3 card" style="overflow-x: scroll;margin-bottom: 10px;">
-                      <div class="card-body">
-                          <table style="width: 100%;" id="example" class="table table-hover table-striped table-bordered">
-                              <thead>
-                              <tr>
-                                  <th>Sr.No</th>
-                                  <th>Message</th>
-                                  <th>Admin Message</th>
-                                  <th>Requested Time</th>
-                                  <th>Update Time</th>
-                                  <th>Status</th>
-                              </tr>
-                              </thead>
-                              <tbody>
-                             <?php
-                             foreach ($profilerequestByadmitno as $key => $value) {
-                                ?>
-
-                                  <tr>
-                                     <td><?= $key ?></td>
-                                     <td><?= $value['description'] ?></td>
-                                     <td><?= $value['admin_response'] ?></td>
-                                     <td><?= date('d M, Y h:i a', strtotime($value['request_added_on'])) ?></td>
-                                     <td><?= $value['request_updated_on']  ?></td>
-                                     <td><?php
-
-                                     if ($value['status'] == '1') {
-                                        echo "Closed";
-                                     }else{
-                                       echo "Open";
-                                     }
-                                     ?></td>
-                                 </tr>
-                                <?php
-                             }
-                             ?>
-
-                              </tbody>
-                          </table>
-                      </div>
-                  </div>
-              </div>
-      </div>
-   <?php
-}
-?>
-      
-               
-      <input type="hidden" value="<?= $full_name_student ?>" id="full_name_student">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.16.0/sweetalert2.all.min.js"></script>
 
       <script>

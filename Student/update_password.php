@@ -68,7 +68,6 @@ Change Password</div>
                 type:"post",
                 data: data,
                 success:function(data){
-                	alert(data)
                     var result = jQuery.parseJSON(data);
                    if (result.status == 'success') {
                       Swal.fire({
