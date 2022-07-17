@@ -107,9 +107,9 @@ function send_email($email,$html,$subject,$user_msg){
 function get_timetable_for_specific_department($branch,$semester,$day){
 	global $con;
 	$arr[] = array();
-	$res=mysqli_query($con,"select * from timetable_all_dept LEFT JOIN subject on timetable_all_dept.Lecture_Name = subject.id where Department_Name='$branch' && Semester_No='$semester' && Day_Name = '$day' && status = 1");
+	$res=mysqli_query($con,"select * from timetable_all_dept LEFT JOIN subject on timetable_all_dept.Lecture_Name = subject.id where Department_Name='$branch' && Semester_No='$semester' && Day_Name = '".$day."' && status = 1");
 	while ($row = mysqli_fetch_assoc($res)) {
-		if (mysqli_num_rows($res) > 1)  {
+		if (mysqli_num_rows($res) > 0)  {
 			$arr[] = $row;
 		}
 	}

@@ -73,14 +73,16 @@
               </div> 
       <div class="row">
         <?php
-                $dayOfWeek = date('l'); 
-                if($dayOfWeek == '' || $dayOfWeek == '') { 
+                $dayOfWeek = date('1'); 
+                
+                if($dayOfWeek == '') { 
                     $display_none ='style="display:none"';    
                 }else{
                     $display_none = '';
                 }   
+
             ?>
-         <div class="col-12 col-sm-12 col-lg-6" <?= $display_none ?> >
+         <div class="col-12 col-sm-12 col-lg-6" <?= $display_none ?>>
             
             <div class="main-card mb-3 card" >
                <div class="card-body">
@@ -91,7 +93,7 @@
                       <div class="col-sm-6">
                          <h5 class="card-title text-right" style="font-size: 18px;position: relative;top: -10px"><?= date('M d, Y') ?></h5>
                          <?php
-                         $dayOfWeek = date('l'); 
+                         $dayOfWeek = date('1'); 
                          if($dayOfWeek == 'Saturday' || $dayOfWeek == 'Sunday') { 
                             }
                             ?>
@@ -100,6 +102,7 @@
                   <div class="scroll-area">
                      <div class="scrollbar-container ps ps--active-y">
                         <div class="vertical-timeline vertical-timeline--animate vertical-timeline--one-column" id="today_time_table">
+                            
                         </div>
                      </div>
                   </div>

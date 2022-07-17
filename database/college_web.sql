@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 27, 2021 at 05:50 PM
+-- Generation Time: Jul 17, 2022 at 08:34 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -51,7 +51,7 @@ CREATE TABLE `admin_mode` (
 --
 
 INSERT INTO `admin_mode` (`id`, `fullname`, `admin_email`, `admin_number`, `admin_picture`, `admin_login_id`, `admin_password`, `admin_address`, `admin_last_login`, `admin_dob`, `admin_status`, `admin_added_on`, `admin_retirement_date`, `admin_reset_password_code`, `new_login_admin`) VALUES
-(1, 'Shadab MASTAN KHAN', 'ks615044@gmail.com', '9165452854', 'admin_profile.jpg', 'AD_121', '$2y$10$JVSclNRLjucwLSPFSbu9j.MxtGI4BLnZJRes0LSlb9RBo8IocBs/2', 'Sayedd manzil, abc 104, kajhh, kasss , Mumbra - 40061', '2021-05-24 15:00:53', '1990-05-04', 1, '2021-05-04 13:41:00', '', 3806536, 1);
+(1, 'Khan Shadab Alam', 'ks615044@gmail.com', '9165452854', 'admin_profile.jpg', 'AD_121', '$2y$10$JVSclNRLjucwLSPFSbu9j.MxtGI4BLnZJRes0LSlb9RBo8IocBs/2', 'Sayedd manzil, abc 104, kajhh, kasss , Mumbra - 40061', '2022-06-13 17:58:28', '1990-05-04', 1, '2021-05-04 13:41:00', '', 3806536, 1);
 
 -- --------------------------------------------------------
 
@@ -104,7 +104,25 @@ INSERT INTO `chat_messages` (`id`, `incoming_id`, `outgoing_id`, `messages`, `me
 (3, '2', '1', 'hello', '2021-05-24 02:56 pm', '', 1),
 (4, '2', '1', 'hey', '2021-05-25 09:31 pm', '', 1),
 (5, '2', '1', 'hello', '2021-06-07 09:01 pm', '', 1),
-(6, '2', '1', 'hey', '2021-06-22 11:32 am', '', 1);
+(6, '2', '1', 'hey', '2021-06-22 11:32 am', '', 1),
+(7, '2', '1', 'hey', '2022-04-25 11:58 am', '', 1),
+(8, '2', '1', 'nice', '2022-04-25 11:59 am', '', 1),
+(9, '1', '2', 'how are you', '2022-04-25 12:07 pm', '', 1),
+(10, '1', '2', 'today is my mini project 2B Submission.', '2022-04-25 12:08 pm', '', 1),
+(11, '2', '1', 'Ohh. Best of Luck..', '2022-04-25 12:08 pm', '', 1),
+(12, '1', '2', 'hey bro', '2022-06-01 09:24 pm', '', 1),
+(13, '3', '2', '1', '2022-06-01 09:26 pm', '', 1),
+(14, '3', '2', 'hEY', '2022-06-13 10:07 pm', '', 1),
+(15, '3', '2', 'ASASA', '2022-06-13 10:07 pm', '', 1),
+(16, '3', '2', 'AS', '2022-06-13 10:07 pm', '', 1),
+(17, '3', '2', 'S', '2022-06-13 10:07 pm', '', 1),
+(18, '3', '2', 'SADSA', '2022-06-13 10:07 pm', '', 1),
+(19, '3', '2', 'D', '2022-06-13 10:07 pm', '', 1),
+(20, '3', '2', 'D', '2022-06-13 10:07 pm', '', 1),
+(21, '3', '2', 'AS', '2022-06-13 10:07 pm', '', 1),
+(22, '3', '2', 'AS', '2022-06-13 10:07 pm', '', 1),
+(23, '3', '2', 'D', '2022-06-13 10:07 pm', '', 1),
+(24, '3', '2', 'AS', '2022-06-13 10:07 pm', '', 1);
 
 -- --------------------------------------------------------
 
@@ -164,7 +182,7 @@ CREATE TABLE `faculty_login` (
 --
 
 INSERT INTO `faculty_login` (`id`, `faculty_login_id`, `first_name`, `middle_name`, `last_name`, `faculty_alias`, `faculty_email`, `mb_number`, `faculty_image`, `password`, `dob`, `desgination`, `branch_id`, `salary`, `joining_date`, `leaving_date`, `reset_password_code_faculty`, `new_login_faculty`, `status`) VALUES
-(3, 'SK6247', 'Shadab', 'Khan', 'Alam', 'Mk', 'ks615044@gmail.com', '2545857585', '2021-05-12_030514_passport_photo_2f02bea3.jpg', '$2y$10$gss8Mv/RjscT.fG/DoHB9.D32alX0Q8QqpPQF77b87IoybCg5VEvm', '1998-02-25', 'Developer', 1, 250000, '2021-02-08', '', 1589355, 1, 1),
+(3, 'SK6247', 'CSMIT', 'Panvel', 'Alam', 'Mk', 'ks615044@gmail.com', '2545857585', '2021-05-12_030514_passport_photo_2f02bea3.jpg', '$2y$10$gss8Mv/RjscT.fG/DoHB9.D32alX0Q8QqpPQF77b87IoybCg5VEvm', '1998-02-25', 'Developer', 1, 250000, '2021-02-08', '', 1589355, 1, 1),
 (5, 'SK7571', 'Sakiru', 'Khan', 'Shaikh', 'SS', 'shadaikh@gmail.com', '5252458565', '2021-05-12_031753_anydesk00000.png', '$2y$10$YAGR.a1uMciODDOeCgU3WOIaPiTeSClOsk8ZQbrDJmKzeuwrPBmGy', '1998-02-15', 'Developer', 1, 5000, '2020-02-25', '', 0, 0, 1);
 
 -- --------------------------------------------------------
@@ -257,9 +275,17 @@ CREATE TABLE `quiz_choices` (
 --
 
 INSERT INTO `quiz_choices` (`id`, `question_id`, `correct_answer`, `choices`) VALUES
-(27, 5, 'Dev', 'Dev'),
-(28, 5, 'Dev', 'sk'),
-(29, 5, 'Dev', 'mk');
+(27, 5, 'Dev', 'Data Structure'),
+(28, 5, 'Dev', 'Data Science'),
+(29, 5, 'Dev', 'Data Scientist'),
+(30, 6, 'WHO', 'World Health Organization'),
+(31, 6, 'WHO', 'World Health origin'),
+(32, 6, 'WHO', '221'),
+(33, 6, 'WHO', '121'),
+(34, 7, 'HEY', 'HEY'),
+(35, 7, 'HEY', 'ASDAS'),
+(36, 7, 'HEY', 'ASDASD'),
+(37, 7, 'HEY', 'ASDSA');
 
 -- --------------------------------------------------------
 
@@ -286,7 +312,9 @@ CREATE TABLE `quiz_question` (
 --
 
 INSERT INTO `quiz_question` (`id`, `quiz_question_id`, `question_name`, `faculty_created_id`, `subject_name`, `quiz_branch_id`, `quiz_topic`, `question_marks`, `quiz_date`, `quiz_start_time`, `status`) VALUES
-(5, 1, 'Shadab Kon Hai?', 'SK6247', '1', 1, 'Basic GK', 2, '2021-05-28', '2021-05-28 6:00 pm', 1);
+(5, 1, 'What is full of DS?', 'SK6247', '1', 1, 'Basic GK', 2, '2022-04-25', '2022-04-25 6:00 pm', 1),
+(6, 1, 'WHO?', 'SK6247', '6', 1, 'GN', 2, '2022-06-01', '10:00 PM', 1),
+(7, 1, 'sadsadsa', 'SK6247', '6', 1, 'GN', 2, '2022-06-01', '10:00 PM', 1);
 
 -- --------------------------------------------------------
 
@@ -303,6 +331,15 @@ CREATE TABLE `quiz_student_answer` (
   `quiz_date` date NOT NULL,
   `subject_name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `quiz_student_answer`
+--
+
+INSERT INTO `quiz_student_answer` (`id`, `quiz_student_Admit_No`, `quiz_question_id`, `quiz_student_answer`, `marks_get`, `quiz_date`, `subject_name`) VALUES
+(1, 1, 5, 'Data Scientist', 0, '2022-04-25', 'Data Structure'),
+(2, 2, 6, 'World Health Organization', 0, '2022-06-01', 'Math III (Probability & Statistics)'),
+(3, 2, 7, 'ASDAS', 0, '2022-06-01', 'Math III (Probability & Statistics)');
 
 -- --------------------------------------------------------
 
@@ -327,7 +364,8 @@ CREATE TABLE `student_attendance` (
 
 INSERT INTO `student_attendance` (`id`, `Students_Admit_No`, `Lecture_Date`, `Lecture_Time`, `Lecture_Name`, `Teacher_id`, `Status`, `Joining_Time`) VALUES
 (1, 1, '2021-05-23', '12:15 - 01:00', '3', 'SK5252', 1, '2021-05-05 12:17:20'),
-(2, 1, '2021-05-24', '12:15 - 06:00', '4', '', 1, '2021-05-24 12:19:13');
+(2, 1, '2021-05-24', '12:15 - 06:00', '4', '', 1, '2021-05-24 12:19:13'),
+(3, 2, '2022-06-13', '12:15 - 01:00', '4', '', 1, '2022-06-13 05:42:14');
 
 -- --------------------------------------------------------
 
@@ -397,8 +435,9 @@ CREATE TABLE `student_login` (
 --
 
 INSERT INTO `student_login` (`id`, `Admission_NO`, `firstname`, `last_name`, `student_email`, `student_password`, `picture_link`, `STUDENT_DOB`, `student_phone`, `MOTHERNAME`, `PLACEOFBIRTH`, `GENDER`, `ADDRESS`, `FATHERMOBILEPHONE`, `MOTHERMOBILEPHONE`, `FATHERPROFESSION`, `MOTHERPROFESSION`, `FATHERNAME`, `enroll_no`, `DEPARTMENT`, `BRANCH`, `semester`, `reset_password_code`, `added_on`, `online_status`, `new_login`, `student_status`) VALUES
-(22, 1, 'Khan', 'Shadab Alam', 'ks615044@gmail.com', '$2y$10$0yzkOWMnsbsS8oqR5ZtoceaeOAYfsdcXYXz1cTC60profpmyxaaqi', '2021-05-13_112624_Lighthouse.jpg', '1998-02-28', '9452458548', 'Jasimunnisa', 'Mumbai', 'Male', 'Sayeed Manzil, Opp, Irani Petrol Pump', '8575485263', '85889966552', 'Bottle Supp', 'HouseWife', 'Jamal Ahmed Khan', 'CSN5727', 'Computer Engineering', '1', 3, '1881413', '2021-05-13 11:26:24', '', 1, 1),
-(23, 2, 'Khan ', 'Mehatb', 'skshadabkhojo@gmail.com', '$2y$10$mcooS2YwGniTa3N7XW0E.uCVhGo.VmL53y46FGm/3ePHd1.zE6lEe', '2021-05-18_082332_Desert.jpg', '1999-02-25', '9167263576', 'Jascimunasuyt', 'Mumbai', 'Male', 'Sayeed Manzil, asasasasas', '4585754585', '8575485754', 'Job Helper', 'Housewife', 'Khan', 'CSN6970', 'Computer Engineering', '1', 3, '', '2021-05-18 08:23:32', '', 1, 1);
+(22, 1, 'Harshita', 'Chawhan', 'harshitachawhan221@gmail.com', '$2y$10$0yzkOWMnsbsS8oqR5ZtoceaeOAYfsdcXYXz1cTC60profpmyxaaqi', '2021-05-13_112624_Lighthouse.jpg', '1998-02-28', '9452458548', 'wuv', 'Mumbai', 'Male', 'Sayeed Manzil, Opp, Irani Petrol Pump', '8575485263', '85889966552', 'Bottle Supp', 'HouseWife', 'xyz', 'CSN5727', 'Computer Engineering', '1', 3, '1881413', '2021-05-13 11:26:24', '', 1, 1),
+(23, 2, 'Khan ', 'Shadab', 'skshadabkhojo@gmail.com', '$2y$10$mcooS2YwGniTa3N7XW0E.uCVhGo.VmL53y46FGm/3ePHd1.zE6lEe', '2021-05-18_082332_Desert.jpg', '1999-02-25', '9167263576', 'Jascimunasuyt', 'Mumbai', 'Male', 'Sayeed Manzil, asasasasas', '4585754585', '8575485754', 'Job Helper', 'Housewife', 'Khan', 'CSN6970', 'Computer Engineering', '1', 3, '', '2021-05-18 08:23:32', '', 1, 1),
+(24, 3, 'Sahail', 'Chawhan', 'harshitachawhan221@gmail.com', '$2y$10$0yzkOWMnsbsS8oqR5ZtoceaeOAYfsdcXYXz1cTC60profpmyxaaqi', '2021-05-13_112624_Lighthouse.jpg', '1998-02-28', '9452458548', 'wuv', 'Mumbai', 'Male', 'Sayeed Manzil, Opp, Irani Petrol Pump', '8575485263', '85889966552', 'Bottle Supp', 'HouseWife', 'xyz', 'CSN5728', 'Computer Engineering', '1', 3, '1881412', '2021-05-13 11:26:24', '', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -428,8 +467,7 @@ INSERT INTO `subject` (`id`, `subject_name`, `subject_alias`, `semester`, `branc
 (2, 'Maths - III', 'EM-III', 3, 1, 'CSC302', 'Core', 'I', 80, 20),
 (3, 'Discrete Structure & Graph Theory', 'DSGT', 3, 1, 'CSC303', 'Core', 'C', 80, 20),
 (4, 'Digital Logic & Communication Application', 'DLCA', 3, 1, 'CSC304', 'Core', 'C', 80, 20),
-(6, 'Math III (Probability & Statistics)', 'EM-III', 3, 2, 'MSC301', 'Core', 'A', 80, 20),
-(8, 'Data management', 'DMS', 4, 1, 'DMS2134', 'Core', 'I', 50, 25);
+(6, 'Math III (Probability & Statistics)', 'EM-III', 3, 2, 'MSC301', 'Core', 'A', 80, 20);
 
 -- --------------------------------------------------------
 
@@ -472,7 +510,7 @@ INSERT INTO `timetable_all_dept` (`id`, `Department_Name`, `Semester_No`, `Day_N
 (2, '1', 3, 'Monday', '10:00 am', '10:45 am', '2', 'SK5253', '', 1),
 (3, '1', 3, 'Monday', '10:45 am', '11:30 am', '3', 'SK5254', '', 1),
 (4, '1', 3, 'Monday', '11:30 am', '12:15 pm', '6', 'SK5252', '', 1),
-(5, '1', 3, 'Monday', '12:15 pm', '6:00 pm', '4', 'SK5252', 'https://meet.google.com/hxw-ydid-qat', 1),
+(5, '1', 3, 'Monday', '12:15 pm', '1:00 pm', '2', 'SK5252', 'https://meet.google.com/hxw-ydid-qat', 1),
 (6, '1', 3, 'Tuesday', '9:15 am', '10:00 am', '1', 'SK5252', '', 1),
 (7, '1', 3, 'Tuesday', '10:00 am', '10:45 am', '6', 'SK5252', '', 1),
 (8, '1', 3, 'Tuesday', '10:45 am', '11:30 am', '3', 'SK5252', '', 1),
@@ -616,7 +654,7 @@ ALTER TABLE `branch`
 -- AUTO_INCREMENT for table `chat_messages`
 --
 ALTER TABLE `chat_messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `college_notice`
@@ -646,25 +684,25 @@ ALTER TABLE `profle_update_request`
 -- AUTO_INCREMENT for table `quiz_choices`
 --
 ALTER TABLE `quiz_choices`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `quiz_question`
 --
 ALTER TABLE `quiz_question`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `quiz_student_answer`
 --
 ALTER TABLE `quiz_student_answer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `student_attendance`
 --
 ALTER TABLE `student_attendance`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `student_fees_details`
@@ -676,13 +714,13 @@ ALTER TABLE `student_fees_details`
 -- AUTO_INCREMENT for table `student_login`
 --
 ALTER TABLE `student_login`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `subject`
 --
 ALTER TABLE `subject`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `subject_assign_faculty`

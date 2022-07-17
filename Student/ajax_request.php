@@ -4,9 +4,10 @@
   require 'session.php';                           
  if (isset($_POST['timetable'])) {
   
-   $student_timetable = array_filter(get_timetable_for_specific_department($student_login['BRANCH'],$student_login['semester'],date("l")));
+  $student_timetable = array_filter(get_timetable_for_specific_department($student_login['BRANCH'],$student_login['semester'],date("2")));
 
   foreach ($student_timetable as $key => $value) {
+
       $current_time = date('h:i a');
       $startTime = $value['Lecture_Start_at'];
       $EndTime = $value['Lecture_end_at'];

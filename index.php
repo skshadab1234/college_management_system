@@ -8,7 +8,7 @@
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Etrain</title>
+<title>College System</title>
 <link rel="icon" href="global_images/xfavicon.png.pagespeed.ic.2-YSz7DYbm.webp">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.min.css">
 <link rel="stylesheet" href="assets/css/A.bootstrap.min.css+animate.css+owl.carousel.min.css+themify-icons.css+flaticon.css+magnific-popup.css+slick.css,Mcc.cumd4WexDy.css.pagespeed.cf.P9fOwQ_VlG.css" />

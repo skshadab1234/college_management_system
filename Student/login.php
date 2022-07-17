@@ -6,7 +6,6 @@ if (isset($_SESSION['STD_ID'])) {
 ?>
 <!DOCTYPE html>
 
-<!-- Created By CodingNepal -->
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
@@ -14,6 +13,7 @@ if (isset($_SESSION['STD_ID'])) {
     <!-- <title>Login & Signup Form | CodingNepal</title> -->
     <link rel="stylesheet" href="assets/css/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Login</title>
   </head>
   <body>
     
